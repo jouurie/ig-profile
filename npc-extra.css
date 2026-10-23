@@ -19,13 +19,14 @@
 @media(max-width:700px){.npc-photo-slot{height:160px}}
 @media(max-width:430px){.npc-photo{padding:4px}.npc-photo-slot{height:140px}#npc-detail .npc-name{font-size:15px}.npc-original{padding:5px 8px}.npc-note{padding:8px}.npc-trait{padding:2px 5px}}
 
-/* One folder silhouette for every position and selected state. */
-.page-npc .npc-folders{gap:18px 14px;align-items:stretch}
-.page-npc .npc-folder{position:relative;isolation:isolate;display:flex;align-items:center;min-height:46px;height:46px;margin-top:10px;padding:10px 13px;border:1px solid var(--ink);border-radius:0 4px 4px 4px;background:var(--blue);color:var(--ink);font-size:12px;line-height:1.5;text-align:left;box-shadow:none;overflow:visible}
-.page-npc .npc-folder::before{content:"";position:absolute;box-sizing:border-box;left:-1px;top:-10px;width:42%;max-width:100px;height:10px;margin:0;border:1px solid var(--ink);border-bottom:0;border-radius:5px 5px 0 0;background:inherit;box-shadow:none;pointer-events:none}
-.page-npc .npc-folder[aria-pressed=true],.page-npc .npc-folder[aria-pressed=true]::before{background:var(--pink)}
+/* A continuous folder outline keeps the tab and body joined at every width. */
+.page-npc .npc-folders{gap:14px;align-items:stretch}
+.page-npc .npc-folder{position:relative;isolation:isolate;display:flex;align-items:center;min-height:68px;height:68px;margin-top:0;padding:18px 13px 10px;border:0;border-radius:6px;background:transparent;color:var(--ink);font-size:12px;line-height:1.5;text-align:left;box-shadow:none;overflow:visible}
+.page-npc .npc-folder::before{content:"";position:absolute;inset:0;width:100%;max-width:none;height:100%;margin:0;border:0;border-radius:0;background:transparent url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20280%2068%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M6%20.5H82Q87%20.5%2090%205L96%2014H274Q279.5%2014%20279.5%2020V62Q279.5%2067.5%20273.5%2067.5H6Q.5%2067.5%20.5%2062V6Q.5%20.5%206%20.5Z%22%20fill%3D%22%23bdd5ff%22%20stroke%3D%22%2320152f%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat;box-shadow:none;pointer-events:none;z-index:-1}
+.page-npc .npc-folder[aria-pressed=true]{background:transparent;color:var(--ink)}
+.page-npc .npc-folder[aria-pressed=true]::before{background-color:transparent;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20280%2068%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M6%20.5H82Q87%20.5%2090%205L96%2014H274Q279.5%2014%20279.5%2020V62Q279.5%2067.5%20273.5%2067.5H6Q.5%2067.5%20.5%2062V6Q.5%20.5%206%20.5Z%22%20fill%3D%22%23ffb7d4%22%20stroke%3D%22%2320152f%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E")}
 .page-npc .npc-folder:hover,.page-npc .npc-folder:active{color:var(--ink)}
-@media(max-width:700px){.page-npc .npc-folders{gap:16px 9px}.page-npc .npc-folder{padding:9px 8px;font-size:11px}.page-npc .npc-folder::before{width:45%;max-width:72px}}
+@media(max-width:700px){.page-npc .npc-folders{gap:12px 9px}.page-npc .npc-folder{padding:18px 8px 10px;font-size:11px}}
 
 /* Keep the portrait beside the name; give the mobile biography the full reading width. */
 @media(max-width:430px){.page-npc .npc-intro{display:contents}.page-npc .npc-photo{grid-column:1;grid-row:1/3}.page-npc #npc-detail .npc-name{grid-column:2;grid-row:1;align-self:end;width:fit-content;margin:0}.page-npc .npc-traits{grid-column:2;grid-row:2;align-self:start;margin:0}.page-npc .npc-original,.page-npc .npc-notes{grid-column:1/-1}.page-npc .npc-notes{margin-top:0}}

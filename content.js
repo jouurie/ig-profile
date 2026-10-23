@@ -101,9 +101,9 @@ window.IG_CONTENT = {
       "icon": "▱"
     },
     {
-      "name": "술자리 뒤",
+      "name": "술자리 뒤 🔞",
       "description": "🔞술자리 뒤 잠든 당신 곁에서 이결이 욕망을 참지 못해 바지 위로 자위하려다 멈칫합니다.",
-      "hint": "🔞 잠든 당신 곁에서",
+      "hint": "잠든 당신 곁에서",
       "icon": "♧"
     },
     {
@@ -128,6 +128,7 @@ window.IG_CONTENT = {
   "npcs": [
     {
       "name": "한민경",
+      "image": "https://cdn.imgchest.com/files/b3881fa692f2.png",
       "lines": [
         "이결의 어머니입니다. 다정한 사과로 가족의 잘못을 덮으려 합니다.",
         "부드럽고 값비싼 옷을 입으며, 손짓은 흐트러지지 않고 표정은 연습한 듯합니다."
@@ -135,6 +136,7 @@ window.IG_CONTENT = {
     },
     {
       "name": "한도윤",
+      "image": "https://cdn.imgchest.com/files/1b4a6a30ba9c.png",
       "lines": [
         "이결의 아버지이자 집안의 결정권자입니다.",
         "전화 한 통으로 결제를 막고, 서류 한 장으로 귀가를 명령합니다."
@@ -142,6 +144,7 @@ window.IG_CONTENT = {
     },
     {
       "name": "서태경",
+      "image": "https://cdn.imgchest.com/files/bd4005fbdd9b.png",
       "lines": [
         "아버지의 지시를 서류와 일정으로 전달하는 집안 실무자입니다.",
         "정장 차림으로 봉투를 건네며 출입과 약속을 정합니다. 이결이 거절하면 예약과 결제를 막습니다."
@@ -149,6 +152,7 @@ window.IG_CONTENT = {
     },
     {
       "name": "박무진",
+      "image": "https://cdn.imgchest.com/files/5f27406629b7.png",
       "lines": [
         "이결을 본가로 데려오라는 지시를 받는 운전기사 겸 수행원입니다.",
         "거절해도 재촉 없이 엘리베이터 앞 같은 자리를 지킵니다."
@@ -156,6 +160,7 @@ window.IG_CONTENT = {
     },
     {
       "name": "강서율",
+      "image": "https://cdn.imgchest.com/files/cd6cf4759f1a.png",
       "lines": [
         "이결의 사촌이자 집안이 후계자로 대우하는 인물입니다.",
         "가족 식사나 호텔 연회에서 부드럽게 호칭을 바로잡습니다. 공개된 자리에서는 웃음을 잃지 않습니다."
@@ -163,6 +168,7 @@ window.IG_CONTENT = {
     },
     {
       "name": "윤채린",
+      "image": "https://cdn.imgchest.com/files/425e50a67c31.png",
       "lines": [
         "집안이 정한 이결의 혼처입니다. 연애 관계가 아닌 집안끼리의 계약입니다.",
         "채린에게는 따로 사귀는 남자친구가 있습니다.",
