@@ -43,7 +43,7 @@
       const blocks = source(name).split('\n\n');
       blocks.forEach(block => { const lines = block.split('\n'); if (lines[0].length < 14 && lines.length > 1 && !/[.!?。]$/.test(lines[0])) article.append(make('h4', '', lines.shift())); paragraphs(article, lines.join('\n')); }); grid.append(article);
     }); world.append(grid);
-    const ideas = make('section', 'world-ideas'); ideas.append(make('h3', '', '이야기가 시작되는 곳'));
+    const ideas = make('section', 'world-ideas'); ideas.append(make('h3', '', '진행 소재'));
     const ideasGrid = make('div', 'world-idea-grid'); source('진행 소재').split('\n\n').forEach(block => { const lines = block.split('\n'), item = disclosure(lines.shift()); paragraphs(item.body, lines.join('\n')); ideasGrid.append(item.node); }); ideas.append(ideasGrid); world.append(ideas);
   }
 
