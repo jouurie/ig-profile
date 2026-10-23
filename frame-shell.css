@@ -7,9 +7,9 @@ html.ig-frame-shell,html.ig-frame-shell body{height:100%;overflow:hidden;scrollb
 .ig-frame-content .site-shell>main{display:block}
 
 /* Two native pixel cursors keep the visible tip in both frames. */
-html,body{cursor:url("cursor-default.svg") 2 2,auto}
+html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 :is(button,a[href],summary,[role="button"],[role="tab"],input[type="range"]),img[data-ig-zoom]{cursor:url("cursor-action.svg") 10 2,pointer!important}
-:is(button:disabled,[aria-disabled="true"]){cursor:url("cursor-default.svg") 2 2,default!important}
+:is(button:disabled,[aria-disabled="true"]){cursor:url("cursor-default.svg?v=20261023q") 2 2,default!important}
 
 /* The full image opens above both frames and keeps the original proportions. */
 .ig-image-viewer{width:fit-content;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);margin:auto;padding:42px 12px 12px;border:1px solid var(--blue);border-radius:5px;background:var(--bg);overflow:auto;color:var(--ink)}
