@@ -1,0 +1,184 @@
+/* Retro desktop motion. Load after styles.css; no script or routing changes.
+   Timing vocabulary: short fades, tactile folder/tada responses, slow prop loops.
+   Only existing normal-theme tokens are used. StatePop stays outside this scope. */
+
+@keyframes ig-window-enter {
+  from { opacity: .3; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ig-panel-enter {
+  from { opacity: .35; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ig-heartbeat {
+  0%, 30%, 60%, 100% { transform: scale(1); }
+  40% { transform: scale(1.14); }
+  49% { transform: scale(1.04); }
+  53% { transform: scale(1.1); }
+}
+@keyframes ig-notebook-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-4px) rotate(-.5deg); }
+}
+@keyframes ig-cassette-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+}
+@keyframes ig-tada {
+  0%, 100% { rotate: 0deg; }
+  24% { rotate: -2deg; }
+  48% { rotate: 2deg; }
+  72% { rotate: -1deg; }
+}
+@keyframes ig-tab-seat {
+  from { transform: translateY(3px); }
+  to { transform: translateY(0); }
+}
+@keyframes ig-record-front {
+  from { opacity: .3; transform: perspective(480px) rotateY(34deg); }
+  to { opacity: 1; transform: perspective(480px) rotateY(0); }
+}
+@keyframes ig-record-back {
+  from { opacity: .3; transform: perspective(480px) rotateY(-34deg); }
+  to { opacity: 1; transform: perspective(480px) rotateY(0); }
+}
+@keyframes ig-bar-shimmer {
+  0%, 15%, 100% { background-position: 0% 50%; }
+  60%, 75% { background-position: 100% 50%; }
+}
+@keyframes ig-spark-turn {
+  to { transform: rotate(360deg); }
+}
+@keyframes ig-track-beat {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-2px); }
+  70% { transform: translateY(1px); }
+}
+
+/* Real HTML page navigation remains intact; unsupported browsers use the
+   ordinary document load plus the same local entrance animations. */
+/* File previews use the local entrance animations below. */
+
+.site-shell > header {
+  animation: ig-window-enter 360ms cubic-bezier(.2,.7,.3,1) both;
+}
+.page-masthead,
+.page-index .hero,
+.page-index #profile > .section-heading,
+.page-index .profile-window,
+.page-world .world-lead,
+.page-starts .film,
+.page-npc #npc,
+.page-music .music-layout {
+  animation: ig-window-enter 480ms cubic-bezier(.2,.7,.3,1) both;
+}
+.page-masthead { animation-delay: 40ms; }
+.page-index .hero { animation-delay: 70ms; }
+.page-index .profile-window { animation-delay: 140ms; }
+.world-grid > .world-card {
+  animation: ig-panel-enter 420ms ease-out both;
+}
+.world-grid > .world-card:nth-child(2) { animation-delay: 65ms; }
+.world-grid > .world-card:nth-child(3) { animation-delay: 130ms; }
+.world-grid > .world-card:nth-child(4) { animation-delay: 195ms; }
+
+.brand-heart,
+.notebook figcaption > span {
+  display: inline-block;
+  transform-origin: center;
+  animation: ig-heartbeat 3s ease-in-out infinite;
+}
+.notebook figcaption > span { animation-delay: 700ms; }
+.titlebar {
+  background-image: linear-gradient(105deg,var(--blue) 25%,var(--pink) 50%,var(--blue) 75%);
+  background-size: 220% 100%;
+  animation: ig-bar-shimmer 9s ease-in-out infinite;
+}
+.titlebar > span:last-child {
+  display: inline-block;
+  transition: transform 180ms ease-out;
+}
+.titlebar:hover > span:last-child { transform: translateY(-1px); }
+
+/* Modest movement keeps click targets and the surrounding layout stable. */
+.site-shell nav a,
+.site-shell button:not(:disabled),
+.site-shell .guide-link {
+  transition: background-color 180ms ease, border-color 180ms ease,
+    box-shadow 180ms ease, translate 180ms ease;
+}
+.site-shell nav a[aria-current="page"],
+.tabs button[aria-selected="true"] {
+  animation: ig-tab-seat 240ms cubic-bezier(.2,.7,.3,1) both;
+}
+.site-shell button:not(:disabled):active,
+.site-shell nav a:active,
+.site-shell .guide-link:active { translate: 0 1px; }
+.tabs button[aria-selected="true"] { background-color: var(--pink); }
+
+/* Child nodes are recreated by the existing tab renderers, so these replay
+   on every real menu selection without observers or event interception. */
+#profile-panel > *,
+#guide-panel > *,
+.npc-preview,
+.guide-disclosure[open] > .disclosure-body,
+.intro-toolbar details[open] > :not(summary) {
+  animation: ig-panel-enter 300ms cubic-bezier(.2,.7,.3,1) both;
+}
+#guide-panel > :nth-child(2) { animation-delay: 40ms; }
+#guide-panel > :nth-child(3) { animation-delay: 70ms; }
+
+.npc-folder::before {
+  background: inherit;
+  transform-origin: left bottom;
+  transition: transform 260ms cubic-bezier(.2,.7,.3,1), background-color 180ms ease;
+}
+.npc-folder[aria-pressed="true"] {
+  background-color: var(--pink);
+  animation: ig-tada 400ms ease-out;
+}
+.npc-folder[aria-pressed="true"]::before { transform: skewX(-12deg) translateY(-1px); }
+.record-front { animation: ig-record-front 350ms ease-out; }
+.record-back { animation: ig-record-back 350ms ease-out; }
+.record-front,
+.record-back { transform-origin: center; backface-visibility: hidden; }
+.opening-card[aria-pressed="true"] { animation: ig-tada 400ms ease-out; }
+
+.notebook > figure { animation: ig-notebook-float 6s ease-in-out infinite; }
+.player > img { animation: ig-cassette-float 5.5s ease-in-out infinite; }
+.track-button[aria-pressed="true"]::before {
+  display: inline-block;
+  animation: ig-track-beat 1.8s ease-in-out infinite;
+}
+.page-masthead > span::after {
+  content: " \2726";
+  display: inline-block;
+  color: var(--pink);
+  animation: ig-spark-turn 12s linear infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-shell nav a:hover,
+  .site-shell .guide-link:hover { translate: 0 -1px; }
+  .hero-copy button:hover,
+  .player-controls button:hover { animation: ig-tada 450ms ease-out; }
+  .notebook > figure:hover,
+  .player > img:hover { animation-play-state: paused; }
+  .record-toggle:hover { box-shadow: 2px 2px 0 var(--blue); }
+}
+
+/* No dimensions, font sizes, iframe selectors or ancestor transforms touch
+   the original StatePop. Reduced motion removes every local animation. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .site-shell,
+  .site-shell *,
+  .site-shell *::before,
+  .site-shell *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(root) { animation: none !important; }
+}

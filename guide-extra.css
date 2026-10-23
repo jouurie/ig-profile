@@ -1,0 +1,72 @@
+/* Guide-only refinements; load after styles.css. */
+.page-guide #guide-panel{white-space:normal;padding:2px 0 13px}
+.page-guide .guide-card:has(>.copy-button)>h3{padding-right:84px;min-height:28px}
+.page-guide .copy-content{background:#f7f4ff;tab-size:2}
+.page-guide .guide-disclosure{background:#f7f4ff;scroll-margin-top:20px}
+.page-guide .setting-metric,.page-guide .command-explainer code,.page-guide .guide-link{background:#f7f4ff}
+.page-guide .guide-inline-link{color:#20152f;text-decoration-color:#75698c;text-underline-offset:3px;font-weight:700}
+.page-guide .guide-inline-link:hover{background:#ffb7d4}
+.page-guide .guide-inline-link:focus-visible,.page-guide summary:focus-visible{outline:2px solid #20152f;outline-offset:3px}
+.page-guide .guide-list li,.page-guide .guide-table td{overflow-wrap:anywhere}
+.page-guide .guide-table th{overflow-wrap:anywhere}
+.page-guide .guide-table td>div{white-space:pre-line}
+.page-guide .state-section,.page-guide #state-frame{width:380px;max-width:100%}
+.page-guide .settings-platform-badge{display:inline-block;margin-left:7px;padding:1px 6px;border:1px solid #75698c;border-radius:3px;background:#eef6ff;font-size:10px;line-height:1.5}
+.page-guide .settings-platforms{display:flex;gap:8px;margin:0 0 20px;padding:0}
+.page-guide .settings-platforms a{display:inline-block;min-width:76px;padding:7px 16px;border:1px solid #bdd5ff;background:#eef6ff;text-align:center;text-decoration:none;font-size:12px}
+.page-guide .settings-platforms a[aria-current=page]{background:#ffb7d4;border-color:#20152f;box-shadow:0 2px 0 #20152f}
+.page-guide .settings-platform-title{margin:0 0 16px;font-size:16px}
+.page-guide .settings-empty{min-height:100px;background:#eef6ff}
+/* Pink section headers / blue inner headings / white editable-copy surfaces. */
+.page-guide #guide-panel{color:#75698c;line-height:1.85}
+.page-guide #guide-panel h3{color:#23172f;font-size:15px;line-height:1.5;margin:0 0 12px}
+.page-guide .guide-card{padding:20px;color:#75698c}
+.page-guide .guide-disclosure{margin:18px 0;background:white}
+.page-guide #guide-panel>.guide-disclosure>summary{padding:16px 18px;font-size:16px;line-height:1.5;color:#20152f;background:#fff0f7}
+.page-guide #guide-panel>.guide-disclosure[open]>summary{border-bottom-color:#ffb7d4;background:#ffb7d4}
+.page-guide .guide-disclosure>summary::marker{color:#75698c}
+.page-guide .disclosure-body{padding:22px}
+.page-guide .disclosure-body>.guide-disclosure{border-color:#bdd5ff;margin:12px 0}
+.page-guide .disclosure-body>.guide-disclosure>summary{padding:12px 14px;font-size:13px;color:#23172f;background:#eef6ff}
+.page-guide .disclosure-body>.guide-disclosure[open]>summary{background:#bdd5ff;border-bottom-color:#bdd5ff}
+.page-guide .guide-table th{color:#23172f;background:#eef6ff;font-size:12px}
+.page-guide .guide-table td{color:#23172f;background:white;font-size:12px}
+.page-guide .guide-table small{color:#75698c;font-size:11px;line-height:1.8;margin-top:8px}
+.page-guide .guide-table th,.page-guide .guide-table td{padding:12px 14px}
+.page-guide .settings-platform-title,.page-guide .setting-metric strong{color:#23172f}
+.page-guide .settings-platforms,.page-guide .settings-platform-badge{color:#23172f}
+.page-guide .guide-instructions{margin:18px 0 22px;padding-left:14px;border-left:3px solid #ffb7d4}
+.page-guide .guide-instructions p{margin:5px 0;color:#75698c;font-size:12px;word-break:keep-all}
+.page-guide .settings-path{display:flex;flex-wrap:wrap;gap:8px 0;list-style:none;margin:0 0 20px;padding:12px 14px;border:1px solid #bdd5ff;background:#eef6ff;color:#23172f}
+.page-guide .settings-path li{display:flex;align-items:center;font-size:11px;font-weight:700;line-height:1.8}
+.page-guide .settings-path li+li::before{content:'\203A';color:#75698c;font-size:17px;font-weight:400;margin:0 10px}
+.page-guide .settings-path li:last-child{color:#20152f}
+.page-guide .guidance-code-grid{gap:18px}
+.page-guide .copy-card{padding:18px;background:white;border-color:#bdd5ff}
+.page-guide .copy-card:nth-child(even){background:white}
+.page-guide .copy-card-header{display:flex;align-items:center;gap:12px;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid #bdd5ff}
+.page-guide .copy-card-name{min-width:0;flex:1}
+.page-guide #guide-panel .copy-card-name h3{margin:3px 0 0;padding:0;min-height:0;font-size:15px;color:#23172f}
+.page-guide .copy-field-label{display:block;color:#75698c;font-size:10px;line-height:1.6;font-weight:700}
+.page-guide .copy-card-badge{display:grid;place-items:center;flex-shrink:0;min-width:30px;height:30px;border:1px solid #bdd5ff;border-radius:4px;background:#eef6ff;color:#23172f;font:700 13px/1 Consolas,monospace}
+.page-guide .copy-card-badge.is-optional{min-width:40px;padding:0 7px;border-color:#ffb7d4;background:#fff0f7;font-family:inherit;font-size:11px}
+.page-guide .copy-card .copy-button{position:static;flex-shrink:0;min-height:34px;padding:5px 11px;border-color:#7eb3ff;background:#bdd5ff;color:#20152f;font-size:11px;font-weight:700;white-space:nowrap}
+.page-guide .copy-card .copy-button:hover{background:#eef6ff;color:#23172f;border-color:#20152f}
+.page-guide .copy-card .copy-button:focus-visible{outline:2px solid #20152f;outline-offset:3px}
+.page-guide .copy-content-label{margin-bottom:7px}
+.page-guide .copy-content{margin:0;padding:15px 16px;border:1px solid #bdd5ff;border-left:3px solid #7eb3ff;background:#f7f4ff;color:#23172f;font:12px/1.95 Consolas,monospace;max-height:340px;overflow-wrap:anywhere}
+.page-guide .guide-list li::marker,.page-guide .play-ideas li::marker{color:#75698c}
+@media(max-width:430px){
+  .page-guide .guide-topic-tabs{display:grid;grid-template-columns:1fr 1fr}
+  .page-guide .guide-topic-tabs button{width:100%;min-height:38px}
+  .page-guide .command-explainer{align-items:flex-start}
+  .page-guide .command-explainer span{min-width:0}
+  .page-guide #guide-panel>.guide-disclosure>summary{padding:14px;font-size:15px}
+  .page-guide .disclosure-body{padding:14px}
+  .page-guide .guide-card{padding:15px}
+  .page-guide .copy-card-header{flex-wrap:wrap;gap:9px;margin-bottom:14px}
+  .page-guide .copy-card-name{flex-basis:calc(100% - 52px)}
+  .page-guide .copy-card .copy-button{margin-left:auto}
+  .page-guide .copy-content{padding:12px;font-size:11px}
+  .page-guide .guide-table th,.page-guide .guide-table td{padding:10px 8px;font-size:11px}
+}

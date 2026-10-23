@@ -1,0 +1,16 @@
+/* NPC-only refinements; keep the shared pastel palette and photo dimensions. */
+.npc-folder[aria-pressed=true]::before{background:var(--pink)}
+.npc-photo{background:var(--white);border-color:var(--blue);border-radius:3px;box-shadow:3px 3px 0 var(--pink);padding:5px}
+.npc-photo-button{position:relative;border:1px solid var(--blue);border-radius:2px}
+.npc-photo-button:hover{box-shadow:none;transform:none}
+.npc-photo-placeholder{display:grid;justify-items:center;gap:8px;padding:10px;color:var(--muted)}
+.npc-photo-placeholder::before{content:'＋';display:grid;place-items:center;width:34px;height:34px;border:1px dashed var(--blue);border-radius:50%;font-size:22px;line-height:1;background:var(--white)}
+.npc-photo-button[aria-haspopup=dialog]::after{content:'↗';position:absolute;right:5px;bottom:5px;padding:0 5px;border:1px solid var(--blue);border-radius:2px;background:var(--white);color:var(--ink);font-size:12px}
+.npc-photo-change{min-height:28px;font-size:10px}
+.npc-photo-change[hidden]{display:none}
+#npc-detail .npc-photo-status{font-size:10px;margin-top:13px;color:var(--muted)}
+.npc-lightbox{width:max-content;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:45px 12px 12px;overflow:auto;border-color:var(--ink);box-shadow:5px 5px 0 var(--pink)}
+.npc-lightbox .npc-photo-title{position:absolute;left:12px;top:9px;right:85px;margin:0;font-size:13px;line-height:25px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.npc-lightbox img{max-width:min(760px,calc(100vw - 52px));max-height:calc(100dvh - 90px);width:auto;height:auto;object-fit:contain}
+.npc-lightbox .photo-close{top:9px;background:var(--pinkpaper)}
+@media(max-width:430px){.npc-photo{padding:4px}.npc-photo-placeholder{padding:6px}.npc-photo-change{font-size:9px}}
