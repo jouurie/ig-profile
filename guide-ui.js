@@ -6,6 +6,7 @@
   const source = name => extra.find(x => x.name === name).text.replace(/\r/g, '');
   const guide = name => d.guides.find(x => x.name === name).lines;
   function labeledText(host, text) {
+    text = text.replace(/^\s*(?:\[추천\]|추천\s*:)\s*/, '');
     const label = text.match(/^([^:\n]{1,32}:)(\s*)/);
     if (label && !/^https?:$/i.test(label[1])) { host.append(make('strong', 'guide-copy-label', label[1]), document.createTextNode(text.slice(label[1].length))); }
     else host.append(document.createTextNode(text));

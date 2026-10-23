@@ -1,127 +1,21 @@
-/* Decorative overlay only. No existing component receives geometry or motion. */
-.ig-delight-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  pointer-events: none;
-  overflow: hidden;
-  contain: strict;
-  user-select: none;
-  color: var(--pink);
-}
-.ig-delight-layer *, .ig-delight-layer *::before, .ig-delight-layer *::after {
-  pointer-events: none;
-  box-sizing: border-box;
-}
-.ig-delight-anchor {
-  position: absolute;
-  width: 82px;
-  height: 66px;
-  overflow: hidden;
-}
-.ig-delight-charm, .ig-delight-particle, .ig-delight-glint {
-  position: absolute;
-  display: block;
-  margin: 0;
-  padding: 0;
-  font-family: Georgia, serif;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-}
-.ig-delight-charm {
-  width: 26px;
-  height: 26px;
-  left: 28px;
-  top: 20px;
-  font-size: 24px;
-  color: var(--pink);
-  text-shadow: 1px 1px 0 var(--ink);
-  animation: ig-delight-bob 4.8s ease-in-out infinite;
-  animation-delay: var(--delay);
-}
-.ig-delight-charm--star {
-  left: 5px;
-  top: 9px;
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
-  color: var(--blue);
-  animation: ig-delight-turn 9s linear infinite, ig-delight-twinkle 3.6s ease-in-out infinite;
-  animation-delay: var(--delay);
-}
-.ig-delight-charm--tiny {
-  left: 59px;
-  top: 39px;
-  width: 13px;
-  height: 13px;
-  font-size: 13px;
-  color: var(--muted);
-  text-shadow: none;
-  animation: ig-delight-twinkle 4.4s ease-in-out infinite;
-  animation-delay: var(--delay);
-}
-.ig-delight-particle {
-  width: 28px;
-  height: 28px;
-  font-size: var(--size);
-  color: var(--tone);
-  text-shadow: 1px 1px 0 var(--ink);
-  animation: ig-delight-burst var(--life) cubic-bezier(.17,.65,.32,1) both;
-}
-.ig-delight-particle--trail {
-  text-shadow: none;
-  animation-name: ig-delight-trail;
-}
-.ig-delight-glint {
-  overflow: hidden;
-  border-radius: 3px;
-  border: 1px solid var(--pink);
-  box-shadow: inset 0 0 0 1px var(--blue), 0 0 9px var(--pink);
-  animation: ig-delight-frame 600ms ease-out both;
-}
-.ig-delight-glint::before {
-  content: '';
-  position: absolute;
-  inset: -50% auto -50% -50%;
-  width: 24%;
-  background: var(--pinkpaper);
-  opacity: .65;
-  transform: skewX(-25deg);
-  animation: ig-delight-sheen 570ms ease-out both;
-}
-@keyframes ig-delight-bob {
-  0%,100% { transform: translateY(3px) rotate(-13deg) scale(.92); }
-  45% { transform: translateY(-5px) rotate(12deg) scale(1.07); }
-  65% { transform: translateY(-2px) rotate(3deg) scale(1); }
-}
-@keyframes ig-delight-turn { to { transform: rotate(360deg); } }
-@keyframes ig-delight-twinkle {
-  0%,100% { opacity: .26; }
-  48% { opacity: .9; }
-  70% { opacity: .4; }
-}
-@keyframes ig-delight-burst {
-  0% { opacity: 0; transform: translate(-50%,-50%) scale(.3) rotate(0deg); }
-  16% { opacity: .95; }
-  70% { opacity: .8; }
-  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.65) rotate(var(--spin)); }
-}
-@keyframes ig-delight-trail {
-  0% { opacity: .8; transform: translate(-50%,-50%) scale(.8) rotate(0deg); }
-  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.2) rotate(var(--spin)); }
-}
-@keyframes ig-delight-frame {
-  0%,100% { opacity: 0; }
-  18%,45% { opacity: .85; }
-}
-@keyframes ig-delight-sheen { to { left: 130%; } }
-@media (max-width: 600px) {
-  .ig-delight-charm { font-size: 20px; }
-  .ig-delight-charm--star { font-size: 14px; }
-  .ig-delight-charm--tiny { font-size: 11px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ig-delight-layer { display: none !important; }
-  .ig-delight-layer * { animation: none !important; }
+/* Symbols are clipped to this strip, never layered over content. */
+.ig-delight-ribbon { height: 8px; overflow: hidden; background: linear-gradient(90deg,var(--blue),var(--pink)); pointer-events: none; user-select: none; }
+.ig-ribbon-track { display: flex; width: max-content; color: var(--muted); opacity: .65; font: 8px/8px Georgia,serif; letter-spacing: 10px; white-space: nowrap; animation: ig-ribbon-drift 42s linear infinite; }
+.ig-ribbon-track > span { flex: none; }
+@keyframes ig-ribbon-drift { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ig-ribbon-track { animation: none; } }
+
+/* Pointer feedback stays within the existing object; no extra frame or shadow. */
+@media (hover: hover) and (pointer: fine) {
+  .site-shell [data-ig-hover="content"] { color: var(--muted); }
+  .site-shell [data-ig-hover="content"][data-ig-tone="ink"] { color: var(--ink); }
+  .site-shell :is(button,summary,[role="button"],[role="tab"])[data-ig-hover="control"] {
+    background-color: var(--pinkpaper);
+    color: var(--ink);
+  }
+  .site-shell :is(button,summary,[role="button"],[role="tab"])[data-ig-hover="control"][data-ig-fill="blue"] { background-color: var(--bluepaper); }
+  .site-shell a[data-ig-hover="control"] { color: var(--muted); }
+  .site-shell img[data-ig-hover] { filter: brightness(1.06) saturate(1.08); }
+  .site-shell .npc-folder[data-ig-hover="control"] { background: transparent; color: var(--muted); }
+  .site-shell .npc-folder[data-ig-hover]::before { filter: brightness(1.08); }
 }
