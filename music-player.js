@@ -4,7 +4,8 @@
   // Resolved from the original twelve h1.nu links, in their approved order.
   const videoIds = ['G6Kspj3OO0s', 'wUL8NklXDsw', '6uEZjKtv_i8', 'MjQjaB-HedA', 'p3NZn0mA_XI', '5soixb2U6xM', '4YR_Mft7yIM', 'oZF3Z7oj1eQ', 'XfMBdq5iFnw', 'CKI8iQTgZKU', 'WPpDyIJdasg', '6cucosmPj-A'];
   const $ = id => document.getElementById(id);
-  const play = $('track-play'), seek = $('track-seek'), volume = $('track-volume');
+  const play = $('track-play'), seek = $('track-seek'), volume = $('track-volume'), mute = $('track-mute');
+  let lastAudibleVolume = Number(volume.value) || 70, pendingVolume = null;
   let selected = 0, widget, ready = false, playing = false, duration = 0, repeatOne = false, failed = false, dead = false;
   let loadTimer, requestTimer;
   const setStatus = text => { $('player-status').textContent = text; };
@@ -29,6 +30,7 @@
   function controls() {
     play.disabled = !ready;
     volume.disabled = !ready;
+    mute.disabled = !ready;
     seek.disabled = !ready || !duration;
   }
   function clearTimers() {
@@ -107,11 +109,34 @@
       progress(position);
     }
   });
-  volume.addEventListener('input', () => {
-    if (widget && ready) widget.setVolume(Number(volume.value));
-    $('track-volume-value').textContent = volume.value + '%';
-    volume.style.setProperty('--volume', volume.value + '%');
-  });
+  const clampVolume = value => Math.max(0, Math.min(100, Math.round(Number(value) || 0)));
+  function renderVolume(value, muted) {
+    value = clampVolume(value);
+    if (value > 0) lastAudibleVolume = value;
+    const silent = muted || value === 0, shown = silent ? 0 : value;
+    volume.value = String(shown);
+    volume.style.setProperty('--volume', shown + '%');
+    volume.setAttribute('aria-valuetext', silent ? '음소거' : shown + '%');
+    $('track-volume-value').textContent = shown + '%';
+    mute.setAttribute('aria-pressed', String(silent));
+    mute.setAttribute('aria-label', silent ? '음소거 해제' : '음소거');
+  }
+  function setVolume(value) {
+    if (!widget || !ready) return;
+    value = clampVolume(value);
+    pendingVolume = { value, muted: value === 0, until: performance.now() + 1200 };
+    widget.setVolume(value);
+    widget.setMuted(value === 0);
+    renderVolume(value, value === 0);
+  }
+  volume.addEventListener('input', () => setVolume(volume.value));
+  mute.addEventListener('click', () => setVolume(mute.getAttribute('aria-pressed') === 'true' ? lastAudibleVolume : 0));
+  volume.closest('.track-volume').addEventListener('wheel', event => {
+    if (volume.disabled || event.ctrlKey || !event.deltaY) return;
+    event.preventDefault();
+    setVolume(Number(volume.value) + (event.deltaY < 0 ? 5 : -5));
+  }, { passive: false });
+  renderVolume(volume.value, Number(volume.value) === 0);
   $('track-repeat').addEventListener('click', () => {
     repeatOne = !repeatOne;
     $('track-repeat').setAttribute('aria-pressed', String(repeatOne));
@@ -130,13 +155,20 @@
           window.clearTimeout(loadTimer);
           ready = true;
           failed = false;
-          widget.setVolume(Number(volume.value));
+          setVolume(Number(volume.value));
           widget.load(currentURL(), { auto_play: false });
           controls();
           setStatus('재생 버튼을 눌러 주세요.');
         },
         play() { if (dead) return; failed = false; window.clearTimeout(requestTimer); playbackState(true); setStatus('재생 중'); },
         pause() { if (dead) return; playbackState(false); if (!failed) setStatus('일시정지'); },
+        volume(value, muted) {
+          if (dead) return;
+          const level = clampVolume(value);
+          if (pendingVolume && performance.now() < pendingVolume.until && (level !== pendingVolume.value || muted !== pendingVolume.muted)) return;
+          pendingVolume = null;
+          renderVolume(level, muted);
+        },
         progress(position, total) { if (dead || failed) return; duration = total; progress(position); },
         finish() {
           if (dead) return;

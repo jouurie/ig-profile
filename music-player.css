@@ -39,3 +39,10 @@
 .page-music #track-volume::-webkit-slider-runnable-track{background:linear-gradient(to right,var(--pink) 0 var(--volume,70%),var(--blue) var(--volume,70%) 100%)}
 .page-music #track-volume::-moz-range-track{background:linear-gradient(to right,var(--pink) 0 var(--volume,70%),var(--blue) var(--volume,70%) 100%)}
 .page-music .player-controls button:hover,.page-music .player-controls button:active{animation:none;transform:none;translate:none;rotate:none}
+
+/* The fixed-size volume icon toggles mute without shifting the slider. */
+.page-music #track-mute{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:4px;border:0;background:transparent;color:var(--ink);box-shadow:none}
+.page-music #track-mute svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.page-music #track-mute .track-sound-off,.page-music #track-mute[aria-pressed=true] .track-sound-waves{display:none}
+.page-music #track-mute[aria-pressed=true] .track-sound-off{display:block}
+.page-music #track-mute:hover{background:var(--pinkpaper)}

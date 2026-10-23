@@ -1,4 +1,4 @@
-/* Kenney CC0 UI sounds. The persistent outer frame owns both audio voices. */
+/* Short synthesized mechanical clicks. The persistent outer frame owns both audio voices. */
 (() => {
   'use strict';
   const inContent = window.IG_FRAME_CONTENT === true;
@@ -11,8 +11,8 @@
     let enabled = true, unlocked = false, lastHoverAt = -Infinity, lastClickAt = -Infinity;
     try { enabled = localStorage.getItem(key) !== 'false'; } catch {}
     const voices = {};
-    for (const [kind, rate, volume] of [['click', 1.2, .26], ['hover', 1.28, .15]]) {
-      const audio = new Audio(new URL('ui-menu-' + kind + '.wav?v=20261024a', document.baseURI).href);
+    for (const [kind, rate, volume] of [['click', 1, .20], ['hover', 1, .09]]) {
+      const audio = new Audio(new URL('ui-menu-' + kind + '.wav?v=20261024c', document.baseURI).href);
       audio.preload = 'auto';
       audio.hidden = true;
       audio.setAttribute('aria-hidden', 'true');

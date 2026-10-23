@@ -1,3 +1,10 @@
+Current menu interaction sounds
+ui-menu-click.wav and ui-menu-hover.wav were synthesized for this site on 2026-10-24.
+They use short filtered-noise contacts and damped high-frequency resonances.
+No external recording is included in the current files.
+
+Previous sound package information (replaced files; retained for provenance):
+
 Menu interaction sounds
 Author: Kenney (https://kenney.nl)
 Pack: UI Audio / 51 UI sound effects (buttons, switches and clicks)

@@ -54,7 +54,7 @@
       width:200,height:200,videoId:videoId(url),
       playerVars:{playsinline:1,autoplay:0,controls:1,origin:window.location.origin},
       events:{
-        onReady:()=>{if(dead)return;hooks.ready();timer=setInterval(()=>{if(!dead)hooks.progress(player.getCurrentTime()*1000,player.getDuration()*1000);},500);},
+        onReady:()=>{if(dead)return;hooks.ready();timer=setInterval(()=>{if(!dead){hooks.progress(player.getCurrentTime()*1000,player.getDuration()*1000);hooks.volume?.(player.getVolume(),player.isMuted());}},500);},
         onStateChange:event=>{if(dead)return;if(event.data===1)hooks.play();else if(event.data===2||event.data===5)hooks.pause();else if(event.data===0)hooks.finish();},
         onError:event=>{if(dead)return;hooks.pause();hooks.error(event.data);},
         onAutoplayBlocked:()=>{if(!dead){hooks.pause();hooks.blocked();}}
@@ -65,6 +65,7 @@
       play(){if(!dead)player.playVideo();},pause(){if(!dead&&player.pauseVideo)player.pauseVideo();},
       toggle(){if(dead)return;if(player.getPlayerState()===1)player.pauseVideo();else player.playVideo();},
       setVolume(value){if(!dead)player.setVolume(value);},
+      setMuted(value){if(!dead){if(value)player.mute();else player.unMute();}},
       seekTo(ms){if(!dead)player.seekTo(ms/1000,true);},
       getDuration(callback){callback(dead?0:player.getDuration()*1000);},
       isPaused(callback){callback(dead||player.getPlayerState()!==1);},
