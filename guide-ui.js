@@ -36,7 +36,7 @@
     const ul = make('ul', 'guide-list');
     items.forEach(raw => {
       const note = /^\s*↳/.test(raw), line = raw.replace(/^\s*↳[\s\u00a0]*/, ''), item = make(note ? 'p' : 'li', note ? 'guide-subnote' : '');
-      if (line.includes('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.')) { labeledText(item, line.replace('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.', '')); item.append(disclosureLink('출력 가이던스 설정 열기', 'guide-output')); }
+      if (line.includes('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.')) { labeledText(item, line.replace('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.', '')); item.append(disclosureLink('출력 가이던스', 'guide-output')); }
       else if (line.includes('하단 [ ⭐ 모델 추천 ]을 참고하세요.')) { labeledText(item, line.replace('하단 [ ⭐ 모델 추천 ]을 참고하세요.', '')); item.append(disclosureLink('모델 선택과 추론 조절 열기', 'guide-models')); }
       else labeledText(item, line);
       if (note && ul.lastElementChild) ul.lastElementChild.append(item); else ul.append(item);
@@ -48,20 +48,32 @@
     lines.forEach(line => { if (!line.trim()) return; if (line.startsWith('↳')) { if (rows.length) rows[rows.length - 1].notes.push(line.slice(1).trim()); return; } const at = line.indexOf(':'); rows.push({ label: at >= 0 ? line.slice(0, at) : '', value: at >= 0 ? line.slice(at + 1).trim() : line, notes: [] }); });
     return rows;
   }
+  function recommendedModelText(tag, className, text) {
+    const node = make(tag, className), pattern = /3\.8 Flash|4 Argon|Opus|GPT 5\.6 Sol/g;
+    let end = 0;
+    for (const match of text.matchAll(pattern)) {
+      node.append(document.createTextNode(text.slice(end, match.index)));
+      node.append(make('mark', 'model-recommended', match[0]));
+      end = match.index + match[0].length;
+    }
+    node.append(document.createTextNode(text.slice(end)));
+    return node;
+  }
+
   function modelValue(value) {
     const separateAt = value.indexOf('별도 선택:');
     if (separateAt >= 0) {
       const group = make('div', 'model-value'), regular = value.slice(0, separateAt).replace(/\s*\/\s*$/, '').trim();
       if (regular) group.append(modelValue(regular));
-      group.append(make('div', 'model-separate-choice', value.slice(separateAt).trim()));
+      group.append(recommendedModelText('div', 'model-separate-choice', value.slice(separateAt).trim()));
       return group;
     }
-    if (!value.includes('↔')) return make('div', '', value);
+    if (!value.includes('↔')) return recommendedModelText('div', '', value);
     const flow = make('div', 'model-flow');
-    value.split('↔').forEach((part, i) => { if (i) flow.append(make('span', 'model-flow-arrow', ' ↔ ')); flow.append(make('span', 'model-flow-chip', part.trim())); });
+    value.split('↔').forEach((part, i) => { if (i) flow.append(make('span', 'model-flow-arrow', ' ↔ ')); flow.append(recommendedModelText('span', 'model-flow-chip', part.trim())); });
     return flow;
   }
-  function tableBlock(block) { const title = block.split('\n')[0], section = make('section', 'guide-model-section'), table = make('table', 'guide-table'), body = make('tbody'); section.append(make('h3', '', title)); rowsFromBlock(block).forEach(row => { const tr = make('tr'), th = make('th', '', row.label), td = make('td'); th.scope = 'row'; td.append(modelValue(row.value)); row.notes.forEach(n => td.append(make('small', '', n))); tr.append(th, td); body.append(tr); }); table.append(body); section.append(table); return section; }
+  function tableBlock(block) { const title = block.split('\n')[0], section = make('section', 'guide-model-section'), table = make('table', 'guide-table'), body = make('tbody'); section.append(make('h3', '', title)); rowsFromBlock(block).forEach(row => { const tr = make('tr'), th = recommendedModelText('th', '', row.label), td = make('td'); th.scope = 'row'; td.append(modelValue(row.value)); row.notes.forEach(n => td.append(make('small', '', n))); tr.append(th, td); body.append(tr); }); table.append(body); section.append(table); return section; }
 
   const world = $('#world-content');
   if (world) {
