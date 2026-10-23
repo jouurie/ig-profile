@@ -35,8 +35,8 @@
     const ul = make('ul', 'guide-list');
     items.forEach(raw => {
       const note = /^\s*↳/.test(raw), line = raw.replace(/^\s*↳[\s\u00a0]*/, ''), item = make(note ? 'p' : 'li', note ? 'guide-subnote' : '');
-      if (line.includes('하단 [ ⭐ 출력 가이던스 ] 참조')) { labeledText(item, line.replace('하단 [ ⭐ 출력 가이던스 ] 참조', '')); item.append(disclosureLink('출력 가이던스 설정 열기', 'guide-output')); }
-      else if (line.includes('하단 [ ⭐ 모델 추천 ] 참고.')) { labeledText(item, line.replace('하단 [ ⭐ 모델 추천 ] 참고.', '')); item.append(disclosureLink('모델 선택과 추론 조절 열기', 'guide-models')); }
+      if (line.includes('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.')) { labeledText(item, line.replace('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.', '')); item.append(disclosureLink('출력 가이던스 설정 열기', 'guide-output')); }
+      else if (line.includes('하단 [ ⭐ 모델 추천 ]을 참고하세요.')) { labeledText(item, line.replace('하단 [ ⭐ 모델 추천 ]을 참고하세요.', '')); item.append(disclosureLink('모델 선택과 추론 조절 열기', 'guide-models')); }
       else labeledText(item, line);
       if (note && ul.lastElementChild) ul.lastElementChild.append(item); else ul.append(item);
     });
@@ -65,7 +65,7 @@
       blocks.forEach(block => { const lines = block.split('\n'); if (lines[0].length < 14 && lines.length > 1 && !/[.!?。]$/.test(lines[0])) article.append(make('h4', '', lines.shift())); paragraphs(article, lines.join('\n')); }); grid.append(article);
     }); world.append(grid);
     const ideas = make('section', 'world-ideas'); ideas.append(make('h3', '', '진행 소재'));
-    const ideasGrid = make('div', 'world-idea-grid'); source('진행 소재').split('\n\n').forEach(block => { const lines = block.split('\n'), item = disclosure(lines.shift()); paragraphs(item.body, lines.join('\n')); ideasGrid.append(item.node); }); ideas.append(ideasGrid); world.append(ideas);
+    const ideasGrid = make('div', 'world-idea-grid'); source('진행 소재').split('\n\n').forEach(block => { const lines = block.split('\n'), item = make('article', 'world-idea-card'); item.append(make('h4', '', lines.shift())); paragraphs(item, lines.join('\n')); ideasGrid.append(item); }); ideas.append(ideasGrid); world.append(ideas);
   }
 
   const panel = $('#guide-panel'), tabBar = $('#guide-tabs');
@@ -113,13 +113,13 @@
     commands() {
       const intro = card('상태창 읽는 법'); list(intro, guide('상태창 안내').concat(guide('명령어'))); panel.append(intro);
       const groups = [ ['장면 이어가기', ['!이어서', '!잠시후', '!사건', '!이벤트']], ['분위기 조절', ['!장면고조', '!장면완화', '!회복', '!스킵']], ['기록과 시간', ['!엿보기', '!기억조각', '!다음날', '!다음달']] ];
-      const grid = make('div', 'command-guide-grid'); groups.forEach(([title, names]) => { const c = card(title); names.forEach(name => { const command = d.commands.find(x => x.command === name), row = make('div', 'command-explainer'); row.append(make('code', '', command.command), make('span', '', command.description)); c.append(row); }); grid.append(c); }); panel.append(grid, make('p', 'guide-note', '실제 채팅에서는 클릭 시 1턴이 소모됩니다. 직접 입력도 가능합니다.'));
+      const grid = make('div', 'command-guide-grid'); groups.forEach(([title, names]) => { const c = card(title); names.forEach(name => { const command = d.commands.find(x => x.command === name), row = make('div', 'command-explainer'); const variants = make('div', 'command-variants'); [['엘린', command.command], ['노디', '/' + command.command.slice(1)]].forEach(([platform, value]) => { const pair = make('div', 'command-platform-pair'); pair.append(make('span', 'command-platform-label', platform), make('code', '', value)); variants.append(pair); }); row.append(variants, make('span', 'command-description', command.description)); c.append(row); }); grid.append(c); }); panel.append(grid, make('p', 'guide-note', '실제 채팅에서는 클릭 시 1턴이 소모됩니다. 직접 입력도 가능합니다.'));
     },
     recovery() {
       if (!platformSection('recovery', '복원·이전')) return;
       const grid = make('div', 'guide-card-grid');
-      const restore = card('상태창이 어긋났을 때'); restore.append(make('p', 'guide-note', '이럴 때 복원하세요')); list(restore, guide('상태창 복원').filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '사용 시점')); externalLink(restore, '상태창 복원 지침 열기', guide('상태창 복원').find(x => x.startsWith('http'))); grid.append(restore);
-      const move = card('새 채팅방으로 이어갈 때'), text = source('채팅방 이전 안내').split('\n').filter(Boolean); list(move, text.filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '이전 시점' && !x.startsWith('↳'))); move.append(make('p', 'guide-note', '새 채팅방으로 옮겨 이어가기')); externalLink(move, 'RP 인계 방법과 지침 열기', text.find(x => x.startsWith('http'))); grid.append(move); panel.append(grid);
+      const restore = card('상태창이 어긋났을 때'); restore.append(make('p', 'guide-note', '이럴 때 복원하세요.')); list(restore, guide('상태창 복원').filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '사용 시점')); externalLink(restore, '상태창 복원 지침 열기', guide('상태창 복원').find(x => x.startsWith('http'))); grid.append(restore);
+      const move = card('새 채팅방으로 이어갈 때'), text = source('채팅방 이전 안내').split('\n').filter(Boolean); list(move, text.filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '이전 시점' && !x.startsWith('↳'))); move.append(make('p', 'guide-note', '새 채팅방으로 옮겨 이어가세요.')); externalLink(move, 'RP 인계 방법과 지침 열기', text.find(x => x.startsWith('http'))); grid.append(move); panel.append(grid);
     }
   };
   const choices = [['play', '플레이 방법'], ['settings', '시작 전 설정'], ['commands', '명령어·상태창'], ['recovery', '복원·이전']];

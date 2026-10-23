@@ -86,3 +86,13 @@
 
 .page-guide .guide-copy-label{font-weight:800;color:#23172f}
 .page-guide .guide-list .guide-subnote,.page-guide p.guide-subnote{margin:6px 0 0 12px;padding:0;font-size:11px;line-height:1.8;color:#75698c;list-style:none}
+
+/* Label both platform commands together and select the matching native preview. */
+.page-guide .command-explainer{flex-direction:column;align-items:stretch;gap:7px}
+.page-guide .command-variants{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.page-guide .command-platform-pair{display:inline-flex;gap:4px;align-items:center;white-space:nowrap}
+.page-guide .command-platform-label{padding:2px 5px;border:1px solid #bdd5ff;border-radius:3px;background:#eef6ff;color:#23172f;font-size:10px;font-weight:700;line-height:1.5}
+.page-guide .command-platform-pair:nth-child(2) .command-platform-label{border-color:#ffb7d4;background:#fff0f7}
+.page-guide .command-description{display:block}
+.page-guide .state-platforms{margin:12px 0 10px}
+.page-guide #state-frame[hidden],.page-guide #command-feedback[hidden],.page-guide #state-placeholder[hidden]{display:none}

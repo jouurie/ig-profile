@@ -17,3 +17,11 @@
 #npc-detail .npc-note p{margin:5px 0 0;font-size:11px;line-height:1.8}
 @media(max-width:700px){.npc-photo-slot{height:160px}}
 @media(max-width:430px){.npc-photo{padding:4px}.npc-photo-slot{height:140px}#npc-detail .npc-name{font-size:15px}.npc-original{padding:5px 8px}.npc-note{padding:8px}.npc-trait{padding:2px 5px}}
+
+/* One folder silhouette for every position and selected state. */
+.page-npc .npc-folders{gap:18px 14px;align-items:stretch}
+.page-npc .npc-folder{position:relative;isolation:isolate;display:flex;align-items:center;min-height:46px;height:46px;margin-top:10px;padding:10px 13px;border:1px solid var(--ink);border-radius:0 4px 4px 4px;background:var(--blue);color:var(--ink);font-size:12px;line-height:1.5;text-align:left;box-shadow:none;overflow:visible}
+.page-npc .npc-folder::before{content:"";position:absolute;box-sizing:border-box;left:-1px;top:-10px;width:42%;max-width:100px;height:10px;margin:0;border:1px solid var(--ink);border-bottom:0;border-radius:5px 5px 0 0;background:inherit;box-shadow:none;pointer-events:none}
+.page-npc .npc-folder[aria-pressed=true],.page-npc .npc-folder[aria-pressed=true]::before{background:var(--pink)}
+.page-npc .npc-folder:hover,.page-npc .npc-folder:active{color:var(--ink)}
+@media(max-width:700px){.page-npc .npc-folders{gap:16px 9px}.page-npc .npc-folder{padding:9px 8px;font-size:11px}.page-npc .npc-folder::before{width:45%;max-width:72px}}
