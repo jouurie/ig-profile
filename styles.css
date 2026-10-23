@@ -130,3 +130,13 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
 .page-index :is(#intro-copy,#tw-copy){text-align:center}
 
 .record-back{white-space:pre-line;word-break:keep-all;overflow-wrap:normal}
+
+/* Profile categories stay on one row, including narrow mobile screens. */
+#profile-tabs{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden}
+#profile-tabs button{flex:0 0 auto;white-space:nowrap}
+@media(max-width:550px){#profile-tabs button{padding-inline:4px}}
+
+/* Every page starts at the same distance below the shared navigation. */
+:root{--ig-page-start-gap:8px}
+.page-masthead{margin-top:var(--ig-page-start-gap)}
+.page-index main{padding-top:var(--ig-page-start-gap)}
