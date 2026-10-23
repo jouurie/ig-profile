@@ -3,12 +3,12 @@
    Only existing normal-theme tokens are used. StatePop stays outside this scope. */
 
 @keyframes ig-window-enter {
-  from { opacity: .3; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: .3; }
+  to { opacity: 1; }
 }
 @keyframes ig-panel-enter {
-  from { opacity: .35; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: .35; }
+  to { opacity: 1; }
 }
 @keyframes ig-heartbeat {
   0%, 30%, 60%, 100% { transform: scale(1); }
@@ -100,15 +100,12 @@
 .site-shell button:not(:disabled),
 .site-shell .guide-link {
   transition: background-color 180ms ease, border-color 180ms ease,
-    box-shadow 180ms ease, translate 180ms ease;
+    box-shadow 180ms ease;
 }
-.site-shell nav a[aria-current="page"],
-.tabs button[aria-selected="true"] {
-  animation: ig-tab-seat 240ms cubic-bezier(.2,.7,.3,1) both;
-}
+
 .site-shell button:not(:disabled):active,
 .site-shell nav a:active,
-.site-shell .guide-link:active { translate: 0 1px; }
+.site-shell .guide-link:active { translate: none; }
 .tabs button[aria-selected="true"] { background-color: var(--pink); }
 
 /* Child nodes are recreated by the existing tab renderers, so these replay
@@ -122,21 +119,14 @@
 #guide-panel > :nth-child(2) { animation-delay: 40ms; }
 #guide-panel > :nth-child(3) { animation-delay: 70ms; }
 
-.npc-folder::before {
-  background: inherit;
-  transform-origin: left bottom;
-  transition: transform 260ms cubic-bezier(.2,.7,.3,1), background-color 180ms ease;
-}
-.npc-folder[aria-pressed="true"] {
-  background-color: var(--pink);
-  animation: ig-tada 400ms ease-out;
-}
-.npc-folder[aria-pressed="true"]::before { transform: skewX(-12deg) translateY(-1px); }
+.npc-folder,.npc-folder::before{animation:none;transform:none;translate:none;rotate:none;transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease}
+.npc-folder[aria-pressed="true"]{background-color:var(--pink)}
+.npc-folder[aria-pressed="true"]::before{background-color:var(--pink)}
 .record-front { animation: ig-record-front 350ms ease-out; }
 .record-back { animation: ig-record-back 350ms ease-out; }
 .record-front,
 .record-back { transform-origin: center; backface-visibility: hidden; }
-.opening-card[aria-pressed="true"] { animation: ig-tada 400ms ease-out; }
+.opening-card[aria-pressed="true"] { animation: none; }
 
 .player > img { animation: ig-cassette-float 5.5s ease-in-out infinite; }
 .track-button[aria-pressed="true"]::before {
@@ -152,7 +142,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .site-shell nav a:hover,
-  .site-shell .guide-link:hover { translate: 0 -1px; }
+  .site-shell .guide-link:hover { translate: none; }
   .hero-copy button:hover,
   .player-controls button:hover { animation: ig-tada 450ms ease-out; }
   .notebook > figure:hover,

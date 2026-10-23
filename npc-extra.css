@@ -1,16 +1,19 @@
-/* NPC-only refinements; keep the shared pastel palette and photo dimensions. */
-.npc-folder[aria-pressed=true]::before{background:var(--pink)}
-.npc-photo{background:var(--white);border-color:var(--blue);border-radius:3px;box-shadow:3px 3px 0 var(--pink);padding:5px}
-.npc-photo-button{position:relative;border:1px solid var(--blue);border-radius:2px}
-.npc-photo-button:hover{box-shadow:none;transform:none}
-.npc-photo-placeholder{display:grid;justify-items:center;gap:8px;padding:10px;color:var(--muted)}
-.npc-photo-placeholder::before{content:'＋';display:grid;place-items:center;width:34px;height:34px;border:1px dashed var(--blue);border-radius:50%;font-size:22px;line-height:1;background:var(--white)}
-.npc-photo-button[aria-haspopup=dialog]::after{content:'↗';position:absolute;right:5px;bottom:5px;padding:0 5px;border:1px solid var(--blue);border-radius:2px;background:var(--white);color:var(--ink);font-size:12px}
-.npc-photo-change{min-height:28px;font-size:10px}
-.npc-photo-change[hidden]{display:none}
-#npc-detail .npc-photo-status{font-size:10px;margin-top:13px;color:var(--muted)}
-.npc-lightbox{width:max-content;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:45px 12px 12px;overflow:auto;border-color:var(--ink);box-shadow:5px 5px 0 var(--pink)}
-.npc-lightbox .npc-photo-title{position:absolute;left:12px;top:9px;right:85px;margin:0;font-size:13px;line-height:25px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.npc-lightbox img{max-width:min(760px,calc(100vw - 52px));max-height:calc(100dvh - 90px);width:auto;height:auto;object-fit:contain}
-.npc-lightbox .photo-close{top:9px;background:var(--pinkpaper)}
-@media(max-width:430px){.npc-photo{padding:4px}.npc-photo-placeholder{padding:6px}.npc-photo-change{font-size:9px}}
+/* NPC presentation: the selected folder changes color, never shape or position. */
+.npc-folder,.npc-folder::before,.npc-folder:hover,.npc-folder:active,.npc-folder[aria-pressed=true]{transform:none;translate:none;rotate:none;animation:none}
+.npc-folder[aria-pressed=true]::before{background:var(--pink);transform:none}
+.npc-photo{background:var(--white);border-color:var(--blue);border-radius:3px;box-shadow:3px 3px 0 var(--pink);padding:5px;transform:none}
+.npc-photo-slot{display:block;width:100%;height:225px;background:var(--white);border:1px solid var(--blue);border-radius:2px;overflow:hidden}
+.npc-photo-slot img{display:block;width:100%;height:100%;object-fit:cover}
+#npc-detail .npc-name{display:inline-block;font-size:17px;line-height:1.4;border-bottom:5px solid var(--pink);padding:0 2px 3px;margin:0 0 10px}
+.npc-traits{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 13px}
+.npc-trait{display:inline-block;padding:2px 7px;border:1px solid var(--blue);border-radius:3px;background:var(--white);font-size:10px;line-height:1.6;color:var(--ink)}
+.npc-trait:nth-child(even){border-color:var(--pink);background:var(--pinkpaper)}
+.npc-original{padding:6px 11px;background:var(--white);border-left:3px solid var(--blue);border-radius:2px}
+.npc-notes{display:grid;gap:9px;margin-top:12px}
+.npc-note{padding:9px 11px;border:1px solid var(--pink);border-radius:4px;background:var(--pinkpaper)}
+.npc-note:nth-child(even){border-color:var(--blue);background:var(--white)}
+.npc-note-label{display:inline-block;font-size:10px;line-height:1.4;font-weight:700;padding:2px 6px;background:var(--pink);border-radius:2px}
+.npc-note:nth-child(even) .npc-note-label{background:var(--blue)}
+#npc-detail .npc-note p{margin:5px 0 0;font-size:11px;line-height:1.8}
+@media(max-width:700px){.npc-photo-slot{height:160px}}
+@media(max-width:430px){.npc-photo{padding:4px}.npc-photo-slot{height:140px}#npc-detail .npc-name{font-size:15px}.npc-original{padding:5px 8px}.npc-note{padding:8px}.npc-trait{padding:2px 5px}}

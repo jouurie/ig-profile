@@ -51,21 +51,17 @@ let opening=0;const openings=d.openings.map((x,i)=>{const b=el('button','opening
 }
 
 if($("#npc-list")){
-const npcPhotos=new Map();let activeNPC=-1;
-const photoDialog=el('dialog','photo-lightbox npc-lightbox'),photoImage=el('img'),photoTitle=el('h2','npc-photo-title'),photoClose=el('button','photo-close','닫기 ×');let photoTrigger;
-photoTitle.id='npc-photo-title';photoDialog.setAttribute('aria-labelledby',photoTitle.id);photoClose.type='button';photoClose.autofocus=true;photoClose.addEventListener('click',()=>photoDialog.close());photoDialog.append(photoTitle,photoClose,photoImage);document.body.append(photoDialog);
-photoDialog.addEventListener('click',e=>{if(e.target===photoDialog){const r=photoDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)photoDialog.close()}});
-photoDialog.addEventListener('close',()=>{photoImage.removeAttribute('src');if(photoTrigger&&photoTrigger.isConnected)photoTrigger.focus()});
-function readNPCPhoto(npc){if(npcPhotos.has(npc.name))return npcPhotos.get(npc.name);try{const stored=localStorage.getItem('ig-page-npc-photo:'+npc.name);if(stored)return stored}catch{}return npc.image||''}
+let activeNPC=-1;
 function renderNPC(npc){
-const panel=$('#npc-detail');panel.replaceChildren();const layout=el('div','npc-preview'),figure=el('figure','npc-photo'),photo=el('button','npc-photo-button'),placeholder=el('span','npc-photo-placeholder','사진 추가'),img=el('img'),input=el('input'),status=el('p','npc-photo-status muted','사진은 이 브라우저에만 저장됩니다.');
-photo.type='button';img.alt=npc.name+' 사진';input.type='file';input.accept='image/*';input.hidden=true;status.setAttribute('role','status');
-const change=el('button','npc-photo-change','사진 변경');change.type='button';change.setAttribute('aria-label',npc.name+' 사진 변경');change.addEventListener('click',()=>input.click());
-const update=src=>{img.hidden=!src;placeholder.hidden=!!src;change.hidden=!src;photo.setAttribute('aria-label',npc.name+(src?' 사진 크게 보기':' 사진 추가'));if(src){photo.setAttribute('aria-haspopup','dialog');img.src=src}else{photo.removeAttribute('aria-haspopup');img.removeAttribute('src')}};
-img.addEventListener('error',()=>{npcPhotos.set(npc.name,'');update('');status.textContent='사진을 불러오지 못했습니다. 다른 사진을 선택해 주세요.'});update(readNPCPhoto(npc));photo.append(img,placeholder);
-photo.addEventListener('click',()=>{const src=readNPCPhoto(npc);if(src){photoTrigger=photo;photoImage.src=src;photoImage.alt=npc.name+' 사진 확대';photoTitle.textContent=npc.name+' 사진';photoDialog.showModal()}else input.click()});
-input.addEventListener('change',()=>{const file=input.files&&input.files[0];input.value='';if(!file)return;if(!file.type.startsWith('image/')){status.textContent='이미지 파일을 선택해 주세요.';return}const reader=new FileReader();reader.addEventListener('error',()=>{status.textContent='사진을 읽지 못했습니다. 다시 선택해 주세요.'});reader.addEventListener('load',()=>{const src=String(reader.result),probe=new Image();probe.onload=()=>{npcPhotos.set(npc.name,src);update(src);try{localStorage.setItem('ig-page-npc-photo:'+npc.name,src);status.textContent='이 브라우저에 저장했습니다. 사진을 누르면 크게 볼 수 있습니다.'}catch{status.textContent='사진을 표시했습니다. 저장 공간 부족으로 새로고침하면 사라집니다.'}};probe.onerror=()=>{status.textContent='열 수 없는 이미지입니다. 다른 사진을 선택해 주세요.'};probe.src=src});reader.readAsDataURL(file)});
-figure.append(photo,change,input);const copy=el('div','npc-intro');copy.append(el('h3','',npc.name));npc.lines.filter(x=>x!=='·  ·  ·  ·').forEach(x=>copy.append(el('p','',x)));layout.append(figure,copy);panel.append(layout,status)
+const panel=$('#npc-detail');panel.replaceChildren();const layout=el('div','npc-preview'),figure=el('figure','npc-photo'),slot=el('div','npc-photo-slot');
+slot.setAttribute('role','img');slot.setAttribute('aria-label',npc.name+' 사진 자리');
+if(npc.image){const img=el('img');img.src=npc.image;img.alt=npc.name+' 사진';slot.removeAttribute('role');slot.removeAttribute('aria-label');slot.append(img)}
+figure.append(slot);const copy=el('div','npc-intro');copy.append(el('h3','npc-name',npc.name));
+const extra=window.IG_NPC_DETAILS&&window.IG_NPC_DETAILS[npc.name];
+if(extra&&extra.tags){const tags=el('div','npc-traits');extra.tags.forEach(tag=>tags.append(el('span','npc-trait',tag)));copy.append(tags)}
+const original=el('div','npc-original');npc.lines.filter(x=>x!=='·  ·  ·  ·').forEach(x=>original.append(el('p','',x)));copy.append(original);
+if(extra){const notes=el('div','npc-notes');[['고집',extra.stubborn],['관계의 면모',extra.detail]].forEach(([label,text])=>{if(!text)return;const note=el('div','npc-note');note.append(el('span','npc-note-label',label),el('p','',text));notes.append(note)});copy.append(notes)}
+layout.append(figure,copy);panel.append(layout)
 }
 const npcs=d.npcs.map((npc,i)=>{const b=el('button','npc-folder',npc.name);b.type='button';b.setAttribute('aria-pressed','false');b.setAttribute('aria-controls','npc-detail');b.addEventListener('click',()=>{activeNPC=activeNPC===i?-1:i;npcs.forEach((x,j)=>x.setAttribute('aria-pressed',String(activeNPC===j)));if(activeNPC<0){$('#npc-detail').replaceChildren(el('p','muted','폴더를 선택하면 사진과 인물 소개를 확인할 수 있습니다.'));return}renderNPC(npc)});$('#npc-list').append(b);return b});
 $('#npc-list').addEventListener('keydown',e=>{const i=npcs.indexOf(document.activeElement);if(i<0)return;let j=i;if(e.key==='ArrowRight'||e.key==='ArrowDown')j=(i+1)%npcs.length;else if(e.key==='ArrowLeft'||e.key==='ArrowUp')j=(i+npcs.length-1)%npcs.length;else if(e.key==='Home')j=0;else if(e.key==='End')j=npcs.length-1;else return;e.preventDefault();npcs[j].focus()});
