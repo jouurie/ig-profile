@@ -141,8 +141,8 @@
       const impersonation = card('사칭 플레이 (/이어서, *이어서* 위주)'); settingsList(impersonation, ['내 캐릭터 대신 하기 (사칭): 기본 살짝', '적극적인 사칭 플레이: 적극']);
       options.append(prevention, impersonation); panel.append(options);
       panel.append(settingsPath('채팅방 설정 → 대화'));
-      panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
-      panel.append(tableBlock("응답 품질 조절\n일상: 낮음 - 보통\n심화: 보통 - 높음\n갈등: 높음"));
+      panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 아래 모델별 권장값 적용\n로어북 예산: 50,000자\n출력 속도: 즉시"));
+      panel.append(tableBlock("모델별 응답 품질\nGemini 3.8 Flash / Gemini 3 Flash: 높음\nGemini 4 Argon: 보통\nGemini 3.1 Pro: 낮음\nGLM 5.3: 보통\nOpus 5.5 / Sonnet 5: 보통\nGPT-6.1 Sol (SFW): 보통\nDeepSeek Flash / Kimi 3: 보통"));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n문체: 노디 기본\n지문 별표 쓰기: 끔"));
       const guidance = card('출력 가이던스'); settingsList(guidance, ['역할극 유지: 적용', '관계 진행: 적용']); guidance.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
