@@ -11,6 +11,8 @@
 @media(prefers-reduced-motion:reduce){.ig-click-hearts{display:none!important}}
 
 /* Pointer feedback stays within the existing object; no extra frame or shadow. */
+.tags > .tag-muted { color: var(--muted); }
+
 @media (hover: hover) and (pointer: fine) {
   .site-shell [data-ig-hover="content"] { color: var(--muted); }
   .site-shell [data-ig-hover="content"][data-ig-tone="ink"] { color: var(--ink); }
