@@ -1,7 +1,24 @@
 (()=>{'use strict';const d=window.IG_CONTENT,$=s=>document.querySelector(s),el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};function lines(host,copy){const ul=el('ul','lines');copy.forEach(x=>ul.append(el('li','',x)));host.append(ul)}function tabs(host,items,panel,prefix,render){let current=0;const buttons=items.map((item,i)=>{const b=el('button','',item.name);b.type='button';b.id=prefix+i;b.setAttribute('role','tab');b.setAttribute('aria-controls',panel.id);b.addEventListener('click',()=>select(i));host.append(b);return b});function select(i,focus=false){current=i;buttons.forEach((b,j)=>{b.setAttribute('aria-selected',String(i===j));b.tabIndex=i===j?0:-1});panel.setAttribute('aria-labelledby',buttons[i].id);panel.replaceChildren();render(items[i],i);if(focus)buttons[i].focus()}host.addEventListener('keydown',e=>{let next=current;if(e.key==='ArrowRight'||e.key==='ArrowDown')next=(current+1)%items.length;else if(e.key==='ArrowLeft'||e.key==='ArrowUp')next=(current+items.length-1)%items.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=items.length-1;else return;e.preventDefault();select(next,true)});select(0)}
 
 if($("#intro-copy")){
-d.intro.slice(1).forEach(x=>$('#intro-copy').append(el('p','',x)));$('#tw-copy').textContent=d.tw;const introToggles=[$('#intro-toggle'),$('#tw-toggle')];introToggles.forEach(button=>button.addEventListener('click',()=>{const opening=button.getAttribute('aria-expanded')!=='true';introToggles.forEach(item=>{const expanded=item===button&&opening;item.setAttribute('aria-expanded',String(expanded));document.getElementById(item.getAttribute('aria-controls')).hidden=!expanded;});}));const platformDialog=$('#platform-dialog'),doorButton=$('#door-open');doorButton.addEventListener('click',()=>platformDialog.showModal());$('#platform-close').addEventListener('click',()=>platformDialog.close());platformDialog.addEventListener('click',event=>{if(event.target===platformDialog){const r=platformDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)platformDialog.close()}});platformDialog.addEventListener('close',()=>doorButton.focus({preventScroll:true}));
+d.intro.slice(1).forEach(x=>$('#intro-copy').append(el('p','',x)));$('#tw-copy').textContent=d.tw;const introToggles=[$('#intro-toggle'),$('#tw-toggle')];introToggles.forEach(button=>button.addEventListener('click',()=>{const opening=button.getAttribute('aria-expanded')!=='true';introToggles.forEach(item=>{const expanded=item===button&&opening;item.setAttribute('aria-expanded',String(expanded));document.getElementById(item.getAttribute('aria-controls')).hidden=!expanded;});}));const doorButton=$('#door-open'),platformChoices=$('#platform-choices'),entrance=$('#intro'),entranceClose=$('#entrance-close');
+function setEntrance(open,returnFocus=false){
+  doorButton.setAttribute('aria-expanded',String(open));
+  platformChoices.setAttribute('aria-hidden',String(!open));
+  platformChoices.inert=!open;
+  entrance.classList.toggle('is-choosing',open);
+  const label=open?'플랫폼 선택 접기':'현관 창 반응 보기';
+  entranceClose.setAttribute('aria-label',label);entranceClose.title=label;
+  if(returnFocus)doorButton.focus({preventScroll:true});
+}
+doorButton.addEventListener('click',()=>setEntrance(doorButton.getAttribute('aria-expanded')!=='true'));
+entrance.addEventListener('keydown',event=>{if(event.key==='Escape'&&doorButton.getAttribute('aria-expanded')==='true'){event.preventDefault();setEntrance(false,true)}});
+entranceClose.addEventListener('click',()=>{if(doorButton.getAttribute('aria-expanded')==='true')setEntrance(false,true)});
+document.querySelectorAll('.window-close').forEach(button=>button.addEventListener('click',()=>{
+  button.classList.remove('is-reacting');void button.offsetWidth;button.classList.add('is-reacting');
+}));
+document.querySelectorAll('.window-close').forEach(button=>button.addEventListener('animationend',()=>button.classList.remove('is-reacting')));
+
 
 }
 
