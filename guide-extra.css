@@ -11,10 +11,10 @@
 .page-guide .guide-table th{overflow-wrap:anywhere}
 .page-guide .guide-table td>div{white-space:pre-line}
 .page-guide .state-section,.page-guide #state-frame{width:380px;max-width:100%}
-.page-guide .settings-platform-badge{display:inline-block;margin-left:7px;padding:1px 6px;border:1px solid #75698c;border-radius:3px;background:#eef6ff;font-size:10px;line-height:1.5}
+.page-guide .settings-platform-badge{display:inline-block;width:36px;text-align:center;margin-left:7px;padding:1px 6px;border:1px solid #75698c;border-radius:3px;background:#eef6ff;font-size:10px;line-height:1.5}
 .page-guide .settings-platforms{display:flex;gap:8px;margin:0 0 20px;padding:0}
-.page-guide .settings-platforms a{display:inline-block;min-width:76px;padding:7px 16px;border:1px solid #bdd5ff;background:#eef6ff;text-align:center;text-decoration:none;font-size:12px}
-.page-guide .settings-platforms a[aria-current=page]{background:#ffb7d4;border-color:#20152f;box-shadow:0 2px 0 #20152f}
+.page-guide .settings-platforms button{display:inline-block;min-width:76px;padding:7px 16px;border:1px solid #bdd5ff;background:#eef6ff;text-align:center;text-decoration:none;font-size:12px}
+.page-guide .settings-platforms button[aria-pressed=true]{background:#ffb7d4;border-color:#20152f;box-shadow:0 2px 0 #20152f}
 .page-guide .settings-platform-title{margin:0 0 16px;font-size:16px}
 .page-guide .settings-empty{min-height:100px;background:#eef6ff}
 /* Pink section headers / blue inner headings / white editable-copy surfaces. */
@@ -70,3 +70,19 @@
   .page-guide .copy-content{padding:12px;font-size:11px}
   .page-guide .guide-table th,.page-guide .guide-table td{padding:10px 8px;font-size:11px}
 }
+
+/* Inner model groups are visible boxes, without another disclosure step. */
+.page-guide .guide-model-section{margin:14px 0;border:1px solid #bdd5ff;border-radius:4px;background:white;overflow:hidden}
+.page-guide .guide-model-section:first-child{margin-top:0}.page-guide .guide-model-section:last-child{margin-bottom:0}
+.page-guide #guide-panel .guide-model-section>h3{margin:0;padding:12px 14px;border-bottom:1px solid #bdd5ff;background:#eef6ff;color:#23172f;font-size:13px;line-height:1.6}
+.page-guide .guide-model-section .guide-table{margin:0}
+
+/* Separate model choices from switching arrows and explanatory notes. */
+.page-guide .model-flow{display:flex;flex-wrap:wrap;align-items:center;gap:7px 6px;white-space:normal}
+.page-guide .model-flow-chip{display:inline-block;max-width:100%;padding:4px 8px;border:1px solid #bdd5ff;border-radius:3px;background:#eef6ff;color:#20152f;font-weight:700;line-height:1.65;overflow-wrap:anywhere;box-shadow:inset 0 -5px #bdd5ff}
+.page-guide .model-flow-chip:nth-of-type(4n+3){border-color:#ffb7d4;background:#fff0f7;box-shadow:inset 0 -5px #ffb7d4}
+.page-guide .model-flow-arrow{flex:0 0 auto;color:#75698c;font-size:15px;font-weight:700;line-height:1}
+.page-guide .model-flow+small{margin-top:10px;padding:7px 9px;border-left:2px solid #bdd5ff;background:#f7f4ff}
+
+.page-guide .guide-copy-label{font-weight:800;color:#23172f}
+.page-guide .guide-list .guide-subnote,.page-guide p.guide-subnote{margin:6px 0 0 12px;padding:0;font-size:11px;line-height:1.8;color:#75698c;list-style:none}

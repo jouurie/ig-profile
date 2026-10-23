@@ -1,17 +1,11 @@
 /* Profile copy only. Panel geometry and scrolling belong to the page shell. */
-#profile-panel .profile-detail{color:#20152f;font-size:12px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+#profile-panel .profile-detail{color:#20152f;font-size:12px;font-weight:500;line-height:1.8;word-break:keep-all;overflow-wrap:break-word}
 #profile-panel .profile-detail-title{display:table;margin:0 0 12px;padding:0 1px 3px;border-bottom:3px solid #ffb7d4;font-size:14px;font-weight:800;line-height:1.5;color:#23172f}
-#profile-panel .profile-keyword{padding:1px 3px;border-radius:3px;background:#bdd5ff;color:#20152f;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-#profile-panel .profile-detail--2 .profile-keyword,
-#profile-panel .profile-detail--5 .profile-keyword,
-#profile-panel .profile-detail--6 .profile-keyword{background:#ffb7d4}
 #profile-panel .profile-facts{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;margin:0}
 #profile-panel .profile-fact{display:flex;align-items:baseline;gap:9px;padding:5px 9px;border:1px solid #bdd5ff;border-radius:5px;background:#eef6ff}
 #profile-panel .profile-fact:first-child{background:#fff0f7;border-color:#ffb7d4}
-#profile-panel .profile-fact dt{flex-shrink:0;margin:0;color:#75698c;font-size:10px;font-weight:700;line-height:1.5}
-#profile-panel .profile-fact dd{min-width:0;margin:0;color:#20152f;font-weight:600}
-#profile-panel .profile-fact:first-child dd{font-size:14px;letter-spacing:.04em}
-#profile-panel .profile-fact:first-child .profile-keyword{padding:0;background:transparent}
+#profile-panel .profile-fact dt{flex-shrink:0;margin:0;color:#75698c;font-size:12px;font-weight:500;line-height:1.8}
+#profile-panel .profile-fact dd{min-width:0;margin:0;color:#20152f;font-size:12px;font-weight:500;line-height:1.8}
 #profile-panel .profile-detail-groups{display:grid;gap:12px}
 #profile-panel .profile-detail-lines{display:grid;gap:7px;list-style:none;padding:0;margin:0}
 #profile-panel .profile-detail-line{margin:0;padding:5px 11px;border:1px solid #bdd5ff;border-radius:4px;background:#eef6ff}
@@ -22,14 +16,13 @@
 #profile-panel .profile-detail-group .profile-detail-line:nth-child(even){border-bottom-color:#ffb7d4}
 #profile-panel .profile-detail-group{padding:11px;border:1px solid #bdd5ff;border-radius:5px;background:#eef6ff}
 #profile-panel .profile-detail-group:nth-child(even){border-color:#ffb7d4;background:#fff0f7}
-#profile-panel .profile-detail--3 .profile-detail-line:nth-child(2){padding:12px 14px;border:1px solid #ff7eb3;background:#fff0f7;font-size:13px;font-weight:700;line-height:2}
 #profile-panel .profile-detail--4 .profile-detail-lines{gap:0}
 #profile-panel .profile-detail--4 .profile-detail-line{border-radius:0;border-bottom:0}
 #profile-panel .profile-detail--4 .profile-detail-line:first-child{border-radius:5px 5px 0 0}
 #profile-panel .profile-detail--4 .profile-detail-line:last-child{border-bottom:1px solid #bdd5ff;border-radius:0 0 5px 5px}
 #profile-panel .profile-relation{padding:14px 16px;border:1px solid #ffb7d4;border-radius:5px;background:#fff0f7}
 #profile-panel .profile-relation-label{display:table;margin:0 0 10px;padding:2px 9px;border:1px solid #7eb3ff;border-radius:3px;background:#bdd5ff;color:#23172f;font-size:11px;font-weight:700}
-#profile-panel .profile-relation-copy{margin:0;color:#20152f;font-size:14px;line-height:2}
+#profile-panel .profile-relation-copy{margin:0;color:#20152f;font-size:12px;font-weight:500;line-height:1.8}
 @media(max-width:430px){
   #profile-panel .profile-detail{font-size:12px}
   #profile-panel .profile-facts{gap:6px}

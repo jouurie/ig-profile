@@ -8,17 +8,7 @@ d.intro.forEach(x=>$('#intro-copy').append(el('p','',x)));$('#tw-copy').textCont
 if($("#profile-tabs")){
 tabs($('#profile-tabs'),[...d.profile,{name:'관계',lines:[d.intro[0]]}],$('#profile-panel'),'profile-tab-',(item,i)=>{
 const panel=$('#profile-panel'),detail=el('div','profile-detail profile-detail--'+i);
-const keywords=['한이결','23세','194cm','소꿉친구','흑발','다크서클','회색 후드티','먼저 사과함','몸을 낮춤','질투','답장 시간','귀가 시간','밥','우산','약 봉투','후드 소매','택시 시간','막차 시간','낮게 잠긴 목소리','사과','아니… 아니야','삭제한 메시지','약값 · 택시비 · 편의점 계산','비누와 섬유유연제','화면빛','답장 흔적','작은 돌봄','머뭇거리는 허락','타인과의 약속','집안 얘기','기록과 거짓말'];
-function richText(host,text){
-let cursor=0;
-while(cursor<text.length){
-let start=text.length,word='';
-keywords.forEach(key=>{const at=text.indexOf(key,cursor);if(at>=0&&(at<start||(at===start&&key.length>word.length))){start=at;word=key}});
-if(start>cursor)host.append(document.createTextNode(text.slice(cursor,start)));
-if(!word)break;
-host.append(el('span','profile-keyword',word));cursor=start+word.length;
-}
-}
+function richText(host,text){host.append(document.createTextNode(text))}
 detail.append(el('h3','profile-detail-title',item.name));
 if(i===0){
 const list=el('dl','profile-facts');
