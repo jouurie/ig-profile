@@ -55,7 +55,8 @@
 .page-guide .copy-card .copy-button:focus-visible{outline:2px solid #20152f;outline-offset:3px}
 .page-guide .copy-content-label{margin-bottom:7px}
 .page-guide .copy-content{margin:0;padding:15px 16px;border:1px solid #bdd5ff;border-left:3px solid #7eb3ff;background:#f7f4ff;color:#23172f;font:12px/1.95 Consolas,monospace;max-height:340px;overflow-wrap:anywhere}
-.page-guide .guide-list li::marker,.page-guide .play-ideas li::marker{color:#75698c}
+.page-guide .guide-list li::marker{color:#75698c}
+.page-guide .play-ideas li::marker{color:#3974b8}
 @media(max-width:430px){
   .page-guide .guide-topic-tabs{display:grid;grid-template-columns:1fr 1fr}
   .page-guide .guide-topic-tabs button{width:100%;min-height:38px}

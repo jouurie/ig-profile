@@ -73,3 +73,20 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
 
 /* Keep all three record backs readable in the narrow two-column profile. */
 @media(min-width:431px) and (max-width:550px){.record-toggle{height:130px}}
+
+/* Shared character navigation stays at the header's right edge. */
+.site-shell > header { position: relative; z-index: 100; }
+.site-shell > header > nav { min-width: 0; }
+.character-switcher { position: relative; z-index: 95; flex: 0 0 auto; margin-left: auto; order: 2; }
+.character-switcher > summary { display: flex; align-items: center; gap: 12px; min-height: 30px; padding: 4px 9px; border: 1px solid var(--blue); border-radius: 3px; background: var(--bluepaper); color: var(--ink); font-size: 11px; list-style: none; white-space: nowrap; }
+.character-switcher > summary::-webkit-details-marker { display: none; }
+.character-switcher > summary:hover,.character-switcher[open] > summary { background: var(--pinkpaper); }
+.character-switch-mark { display: inline-block; font-size: 15px; line-height: 1; transition: transform 160ms ease; }
+.character-switcher[open] .character-switch-mark { transform: rotate(45deg); }
+.character-switch-list { position: absolute; top: calc(100% + 6px); right: 0; width: min(270px,calc(100vw - 32px)); margin: 0; padding: 5px; list-style: none; background: var(--white); border: 1px solid var(--blue); border-radius: 4px; }
+.character-switch-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 43px; padding: 8px 10px; color: var(--ink); text-decoration: none; font-size: 12px; }
+.character-switch-row small { color: var(--muted); font-size: 10px; white-space: nowrap; }
+.character-switch-row.is-current { background: var(--pinkpaper); }
+.character-switch-row[href]:hover { background: var(--bluepaper); color: var(--ink); }
+@media (max-width: 700px) { .site-shell > header > nav { order: 3; } }
+@media (prefers-reduced-motion: reduce) { .character-switch-mark { transition: none; } }
