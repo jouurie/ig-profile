@@ -5,6 +5,11 @@
 @keyframes ig-ribbon-drift { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .ig-ribbon-track { animation: none; } }
 
+.ig-click-hearts{position:fixed;inset:0;z-index:150;pointer-events:none;overflow:hidden;contain:strict;user-select:none}
+.ig-click-hearts>span{position:absolute;display:block;width:28px;height:28px;margin:0;padding:0;pointer-events:none;font-family:Georgia,serif;font-weight:700;line-height:1;text-align:center;font-size:var(--size);color:var(--tone);animation:ig-click-burst 900ms cubic-bezier(.17,.65,.32,1) both}
+@keyframes ig-click-burst{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}16%{opacity:.95}70%{opacity:.8}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.65) rotate(var(--spin))}}
+@media(prefers-reduced-motion:reduce){.ig-click-hearts{display:none!important}}
+
 /* Pointer feedback stays within the existing object; no extra frame or shadow. */
 @media (hover: hover) and (pointer: fine) {
   .site-shell [data-ig-hover="content"] { color: var(--muted); }

@@ -19,6 +19,66 @@
   header.before(ribbon);
 })();
 
+/* Click hearts live above the persistent header and survive content navigation. */
+(() => {
+  'use strict';
+  const inContent = window.IG_FRAME_CONTENT === true;
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  let burst;
+  if (!inContent) {
+    const layer = document.createElement('div');
+    layer.className = 'ig-click-hearts';
+    layer.setAttribute('aria-hidden', 'true');
+    document.body.append(layer);
+    let last = -Infinity;
+    burst = (x, y, fromContent = false) => {
+      if (motion.matches || document.hidden || !Number.isFinite(x) || !Number.isFinite(y)) return;
+      const now = performance.now();
+      if (now - last < 100) return;
+      last = now;
+      if (fromContent) {
+        const box = document.getElementById('ig-content-frame')?.getBoundingClientRect();
+        if (!box) return;
+        x += box.left; y += box.top;
+      }
+      for (let i = 0; i < 9; i++) {
+        if (layer.childElementCount >= 36) layer.firstElementChild.remove();
+        const particle = document.createElement('span');
+        const angle = i * 137.5 * Math.PI / 180;
+        const distance = 36 + (i % 3) * 15;
+        particle.textContent = ['♥', '✦', '♡', '✧'][i % 4];
+        particle.style.left = x + 'px'; particle.style.top = y + 'px';
+        particle.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+        particle.style.setProperty('--dy', Math.sin(angle) * distance - 20 + 'px');
+        particle.style.setProperty('--spin', (i % 2 ? 42 : -42) + 'deg');
+        particle.style.setProperty('--tone', ['var(--pink)', 'var(--blue)', 'var(--muted)'][i % 3]);
+        particle.style.setProperty('--size', 16 + i % 3 * 3 + 'px');
+        particle.addEventListener('animationend', () => particle.remove(), { once: true });
+        layer.append(particle);
+      }
+    };
+    window.IGClickHearts = { burst };
+    addEventListener('message', event => {
+      const frame = document.getElementById('ig-content-frame');
+      if (event.source !== frame?.contentWindow || (location.protocol !== 'file:' && event.origin !== location.origin)) return;
+      if (event.data?.type === 'ig-click-hearts') burst(event.data.x, event.data.y, true);
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) layer.replaceChildren(); });
+    motion.addEventListener('change', () => { if (motion.matches) layer.replaceChildren(); });
+  }
+  document.addEventListener('click', event => {
+    if (!event.isTrusted || motion.matches || !(event.target instanceof Element)) return;
+    const control = event.target.closest('button,a[href],summary,[role="button"],[role="tab"]');
+    if (!control || control.matches(':disabled') || control.closest('[aria-disabled="true"],[hidden],[inert]')) return;
+    const box = control.getBoundingClientRect();
+    const x = event.detail ? event.clientX : box.left + box.width / 2;
+    const y = event.detail ? event.clientY : box.top + box.height / 2;
+    if (!inContent) { burst(x, y); return; }
+    try { if (parent.IGClickHearts) { parent.IGClickHearts.burst(x, y, true); return; } } catch {}
+    parent.postMessage({ type: 'ig-click-hearts', x, y }, location.protocol === 'file:' ? '*' : location.origin);
+  }, { capture: true, passive: true });
+})();
+
 /* Persistent pointer feedback for controls and readable content, without moving layout. */
 (() => {
   'use strict';
