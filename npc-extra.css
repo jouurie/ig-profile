@@ -8,13 +8,14 @@
 .npc-traits{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 13px}
 .npc-trait{display:inline-block;padding:2px 7px;border:1px solid var(--blue);border-radius:3px;background:var(--white);font-size:10px;line-height:1.6;color:var(--ink)}
 .npc-trait:nth-child(even){border-color:var(--pink);background:var(--pinkpaper)}
-.npc-original{padding:6px 11px;background:var(--white);border-left:3px solid var(--blue);border-radius:2px}
+.npc-original{font-size:12px;line-height:1.85;padding:6px 11px;background:var(--white);border-left:3px solid var(--blue);border-radius:2px}
 .npc-notes{display:grid;gap:9px;margin-top:12px}
 .npc-note{padding:9px 11px;border:1px solid var(--pink);border-radius:4px;background:var(--pinkpaper)}
 .npc-note:nth-child(even){border-color:var(--blue);background:var(--white)}
 .npc-note-label{display:inline-block;font-size:10px;line-height:1.4;font-weight:700;padding:2px 6px;background:var(--pink);border-radius:2px}
 .npc-note:nth-child(even) .npc-note-label{background:var(--blue)}
-#npc-detail .npc-note p{margin:5px 0 0;font-size:11px;line-height:1.8}
+#npc-detail .npc-note p{margin:5px 0 0;font-size:12px;line-height:1.85}
+.npc-original p,.npc-note p{word-break:keep-all;overflow-wrap:break-word}
 @media(max-width:700px){.npc-photo-slot{height:160px}}
 @media(max-width:430px){.npc-photo{padding:4px}.npc-photo-slot{height:140px}#npc-detail .npc-name{font-size:15px}.npc-original{padding:5px 8px}.npc-note{padding:8px}.npc-trait{padding:2px 5px}}
 
@@ -25,3 +26,6 @@
 .page-npc .npc-folder[aria-pressed=true],.page-npc .npc-folder[aria-pressed=true]::before{background:var(--pink)}
 .page-npc .npc-folder:hover,.page-npc .npc-folder:active{color:var(--ink)}
 @media(max-width:700px){.page-npc .npc-folders{gap:16px 9px}.page-npc .npc-folder{padding:9px 8px;font-size:11px}.page-npc .npc-folder::before{width:45%;max-width:72px}}
+
+/* Keep the portrait beside the name; give the mobile biography the full reading width. */
+@media(max-width:430px){.page-npc .npc-intro{display:contents}.page-npc .npc-photo{grid-column:1;grid-row:1/3}.page-npc #npc-detail .npc-name{grid-column:2;grid-row:1;align-self:end;width:fit-content;margin:0}.page-npc .npc-traits{grid-column:2;grid-row:2;align-self:start;margin:0}.page-npc .npc-original,.page-npc .npc-notes{grid-column:1/-1}.page-npc .npc-notes{margin-top:0}}

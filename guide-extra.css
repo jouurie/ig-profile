@@ -94,6 +94,6 @@
 .page-guide .command-platform-pair{display:inline-flex;gap:4px;align-items:center;white-space:nowrap}
 .page-guide .command-platform-label{padding:2px 5px;border:1px solid #bdd5ff;border-radius:3px;background:#eef6ff;color:#23172f;font-size:10px;font-weight:700;line-height:1.5}
 .page-guide .command-platform-pair:nth-child(2) .command-platform-label{border-color:#ffb7d4;background:#fff0f7}
-.page-guide .command-description{display:block}
+.page-guide .command-description{display:block;font-size:12px;line-height:1.85;word-break:keep-all;overflow-wrap:break-word}
 .page-guide .state-platforms{margin:12px 0 10px}
 .page-guide #state-frame[hidden],.page-guide #command-feedback[hidden],.page-guide #state-placeholder[hidden]{display:none}
