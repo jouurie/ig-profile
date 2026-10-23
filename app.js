@@ -6,7 +6,41 @@ d.intro.forEach(x=>$('#intro-copy').append(el('p','',x)));$('#tw-copy').textCont
 }
 
 if($("#profile-tabs")){
-tabs($('#profile-tabs'),[...d.profile,{name:'관계',lines:[d.intro[0]]}],$('#profile-panel'),'profile-tab-',(item,i)=>{const panel=$('#profile-panel');panel.append(el('h3','',item.name));if(i===0){const dl=el('dl');[['이름','한이결'],['나이','23세'],['성별','남성'],['국적','대한민국'],['키','194cm'],['소속','휴학생'],['생활','자발적 히키코모리'],['관계','오래된 소꿉친구']].forEach(([k,v])=>{const row=el('div');row.append(el('dt','',k),el('dd','',v));dl.append(row)});panel.append(dl)}else if(i===6){panel.append(el('small','relation-label','이결 ↔ 당신'),el('p','relation-copy',item.lines[0]))}else lines(panel,item.lines)});
+tabs($('#profile-tabs'),[...d.profile,{name:'관계',lines:[d.intro[0]]}],$('#profile-panel'),'profile-tab-',(item,i)=>{
+const panel=$('#profile-panel'),detail=el('div','profile-detail profile-detail--'+i);
+const keywords=['한이결','23세','194cm','소꿉친구','흑발','다크서클','회색 후드티','먼저 사과함','몸을 낮춤','질투','답장 시간','귀가 시간','밥','우산','약 봉투','후드 소매','택시 시간','막차 시간','낮게 잠긴 목소리','사과','아니… 아니야','삭제한 메시지','약값 · 택시비 · 편의점 계산','비누와 섬유유연제','화면빛','답장 흔적','작은 돌봄','머뭇거리는 허락','타인과의 약속','집안 얘기','기록과 거짓말'];
+function richText(host,text){
+let cursor=0;
+while(cursor<text.length){
+let start=text.length,word='';
+keywords.forEach(key=>{const at=text.indexOf(key,cursor);if(at>=0&&(at<start||(at===start&&key.length>word.length))){start=at;word=key}});
+if(start>cursor)host.append(document.createTextNode(text.slice(cursor,start)));
+if(!word)break;
+host.append(el('span','profile-keyword',word));cursor=start+word.length;
+}
+}
+detail.append(el('h3','profile-detail-title',item.name));
+if(i===0){
+const list=el('dl','profile-facts');
+[['이름','한이결'],['나이','23세'],['성별','남성'],['국적','대한민국'],['키','194cm'],['소속','휴학생'],['생활','자발적 히키코모리'],['관계','오래된 소꿉친구']].forEach(([label,text])=>{const row=el('div','profile-fact'),value=el('dd');richText(value,text);row.append(el('dt','',label),value);list.append(row)});
+detail.append(list);
+}else if(i===6){
+const card=el('div','profile-relation'),copy=el('p','profile-relation-copy');
+richText(copy,item.lines[0]);card.append(el('small','profile-relation-label','이결 ↔ 당신'),copy);detail.append(card);
+}else{
+const groups=el('div','profile-detail-groups');let list;
+item.lines.forEach(text=>{
+if(text==='성격'||text==='버릇'||text==='선호'||text==='불호'){
+const section=el('section','profile-detail-group');section.append(el('h4','profile-group-title',text));list=el('ul','profile-detail-lines');section.append(list);groups.append(section);
+}else{
+if(!list){list=el('ul','profile-detail-lines');groups.append(list)}
+const row=el('li','profile-detail-line');richText(row,text);list.append(row);
+}
+});
+detail.append(groups);
+}
+panel.append(detail);panel.scrollTop=0;
+});
 const records=[{name:'삭제한 메시지 캡처',doc:['메시지','보냈다가 지운 메시지'],copy:'이결의 휴대폰에는 보냈다가 지운 메시지의 캡처가 남아 있습니다.'},{name:'택시 호출 내역',doc:['택시 호출','당신을 태워 보낸 기록'],copy:'이결의 휴대폰에는 당신을 태워 보낸 택시 호출 내역이 남아 있습니다.'},{name:'약국 영수증',doc:['약국 영수증','당신 대신 결제한 약값'],copy:'이결의 휴대폰에는 당신 대신 결제한 약국 영수증이 남아 있습니다.'}];records.forEach((r,i)=>{const b=el('button','record-toggle');b.type='button';b.setAttribute('aria-expanded','false');b.setAttribute('aria-label',r.name+' 뒤집어 보기');const front=el('span','record-front');front.append(el('b','',r.name),el('span','record-doc',r.doc[0]),el('span','',r.doc[1]),el('small','record-flip','뒤집기 ↗'));const back=el('span','record-back',r.copy);back.id='record-copy-'+i;b.setAttribute('aria-controls',back.id);back.setAttribute('aria-hidden','true');b.append(front,back);b.addEventListener('click',()=>{const on=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(on));back.setAttribute('aria-hidden',String(!on));b.setAttribute('aria-label',r.name+(on?' 돌려놓기':' 뒤집어 보기'))});$('#record-list').append(b)});
 
 }

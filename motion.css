@@ -64,8 +64,6 @@
 }
 .page-masthead,
 .page-index .hero,
-.page-index #profile > .section-heading,
-.page-index .profile-window,
 .page-world .world-lead,
 .page-starts .film,
 .page-npc #npc,
@@ -74,7 +72,6 @@
 }
 .page-masthead { animation-delay: 40ms; }
 .page-index .hero { animation-delay: 70ms; }
-.page-index .profile-window { animation-delay: 140ms; }
 .world-grid > .world-card {
   animation: ig-panel-enter 420ms ease-out both;
 }
@@ -82,13 +79,11 @@
 .world-grid > .world-card:nth-child(3) { animation-delay: 130ms; }
 .world-grid > .world-card:nth-child(4) { animation-delay: 195ms; }
 
-.brand-heart,
-.notebook figcaption > span {
+.brand-heart {
   display: inline-block;
   transform-origin: center;
   animation: ig-heartbeat 3s ease-in-out infinite;
 }
-.notebook figcaption > span { animation-delay: 700ms; }
 .titlebar {
   background-image: linear-gradient(105deg,var(--blue) 25%,var(--pink) 50%,var(--blue) 75%);
   background-size: 220% 100%;
@@ -118,7 +113,6 @@
 
 /* Child nodes are recreated by the existing tab renderers, so these replay
    on every real menu selection without observers or event interception. */
-#profile-panel > *,
 #guide-panel > *,
 .npc-preview,
 .guide-disclosure[open] > .disclosure-body,
@@ -144,7 +138,6 @@
 .record-back { transform-origin: center; backface-visibility: hidden; }
 .opening-card[aria-pressed="true"] { animation: ig-tada 400ms ease-out; }
 
-.notebook > figure { animation: ig-notebook-float 6s ease-in-out infinite; }
 .player > img { animation: ig-cassette-float 5.5s ease-in-out infinite; }
 .track-button[aria-pressed="true"]::before {
   display: inline-block;
@@ -182,3 +175,6 @@
   ::view-transition-new(root),
   ::view-transition-group(root) { animation: none !important; }
 }
+
+/* Profile tabs remain stationary while their content changes. */
+.page-index #profile-tabs button{animation:none;transition:none;translate:none}
