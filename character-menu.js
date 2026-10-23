@@ -12,6 +12,7 @@
   trigger.append(mark);
   const list = document.createElement('ul'); list.className = 'character-switch-list';
   const characters = [
+    { id: 'home', name: '소개 페이지', href: 'https://jouurie.github.io/' },
     { id: 'ww', name: '와이어트, 웨이드', href: 'https://jouurie.github.io/ww-profile/WW/' },
     { id: 'ig', name: '이결', href: 'index.html' }
   ];
@@ -22,7 +23,7 @@
     row.className = 'character-switch-row' + (current ? ' is-current' : '');
     if (current) row.setAttribute('aria-current', 'true'); else row.href = character.href;
     const name = document.createElement('span'); name.textContent = character.name;
-    const state = document.createElement('small'); state.textContent = current ? '현재 소개' : '소개 바로가기 ↗';
+    const state = document.createElement('small'); state.textContent = current ? '현재 소개' : character.id === 'home' ? '전체 캐릭터 ↗' : '소개 바로가기 ↗';
     row.append(name, state); item.append(row); list.append(item);
   });
   menu.append(trigger, list); header.append(menu);
