@@ -19,7 +19,7 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 .ig-image-close:hover{background:var(--pink)}
 
 /* Every scrolling surface uses the same accepted pink and blue palette. */
-:root{--ig-scroll-thumb:#df4f92;--ig-scroll-track:var(--bluepaper,#eef6ff)}
+:root{--ig-scroll-thumb:var(--pink,#ffb7d4);--ig-scroll-track:var(--bluepaper,#eef6ff)}
 *{scrollbar-color:var(--ig-scroll-thumb) var(--ig-scroll-track)}
 *::-webkit-scrollbar,*::-webkit-scrollbar-track,*::-webkit-scrollbar-corner{background-color:var(--ig-scroll-track)}
 *::-webkit-scrollbar-thumb{background-color:var(--ig-scroll-thumb);border-radius:8px}

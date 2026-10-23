@@ -11,7 +11,7 @@
 @media(prefers-reduced-motion:reduce){.ig-click-hearts{display:none!important}}
 
 /* Pointer feedback stays within the existing object; no extra frame or shadow. */
-.tags > .tag-muted { color: var(--muted); }
+.tags > span { color: var(--ink); }
 
 @media (hover: hover) and (pointer: fine) {
   .site-shell [data-ig-hover="content"] { color: var(--muted); }
@@ -25,4 +25,9 @@
   .site-shell img[data-ig-hover] { filter: brightness(1.06) saturate(1.08); }
   .site-shell .npc-folder[data-ig-hover="control"] { background: transparent; color: var(--muted); }
   .site-shell .npc-folder[data-ig-hover]::before { filter: brightness(1.08); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-shell .tags > span[data-ig-hover="content"] { color: var(--ink); background-color: var(--blue); }
+  .site-shell .tags > span:nth-child(even)[data-ig-hover="content"] { background-color: var(--pink); }
 }

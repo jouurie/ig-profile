@@ -125,3 +125,8 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
 
 .page-world .world-panorama{margin:0 0 18px;padding:0;border:1px solid var(--blue);border-radius:4px;overflow:hidden;background:var(--bluepaper);transform:none}
 .page-world .world-panorama img{display:block;width:100%;height:auto}
+
+/* Intro and trigger-warning expanded copy share centered alignment. */
+.page-index :is(#intro-copy,#tw-copy){text-align:center}
+
+.record-back{white-space:pre-line;word-break:keep-all;overflow-wrap:normal}
