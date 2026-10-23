@@ -3,7 +3,7 @@
 #profile-panel .profile-detail-title{display:table;margin:0 0 12px;padding:0 1px 3px;border-bottom:3px solid #ffb7d4;font-size:14px;font-weight:800;line-height:1.5;color:#23172f}
 #profile-panel .profile-facts{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;margin:0}
 #profile-panel .profile-fact{display:flex;align-items:baseline;gap:9px;padding:5px 9px;border:1px solid #bdd5ff;border-radius:5px;background:#eef6ff}
-#profile-panel .profile-fact:first-child{background:#fff0f7;border-color:#ffb7d4}
+#profile-panel .profile-fact:nth-child(4n+1),#profile-panel .profile-fact:nth-child(4n+4){background:#fff0f7;border-color:#ffb7d4}
 #profile-panel .profile-fact dt{flex-shrink:0;margin:0;color:#75698c;font-size:12px;font-weight:500;line-height:1.8}
 #profile-panel .profile-fact dd{min-width:0;margin:0;color:#20152f;font-size:12px;font-weight:500;line-height:1.8}
 #profile-panel .profile-detail-groups{display:grid;gap:12px}

@@ -1,5 +1,5 @@
 (() => {
-  'use strict';
+  'use strict';if(window.IG_FRAME_SHELL)return;
   const tracks = window.IG_CONTENT.tracks;
   // Resolved from the original twelve h1.nu links, in their approved order.
   const videoIds = ['G6Kspj3OO0s', 'wUL8NklXDsw', '6uEZjKtv_i8', 'MjQjaB-HedA', 'p3NZn0mA_XI', '5soixb2U6xM', '4YR_Mft7yIM', 'oZF3Z7oj1eQ', 'XfMBdq5iFnw', 'CKI8iQTgZKU', 'WPpDyIJdasg', '6cucosmPj-A'];

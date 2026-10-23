@@ -1,6 +1,7 @@
 /* Decorative symbols stay inside a reserved strip above the navigation. */
 (() => {
   'use strict';
+  if (window.IG_FRAME_CONTENT) return;
   const shell = document.querySelector('.site-shell');
   const header = shell && shell.querySelector('header');
   if (!header || shell.querySelector('.ig-delight-ribbon')) return;
@@ -24,7 +25,7 @@
   const shell = document.querySelector('.site-shell');
   if (!shell) return;
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
-  const controls = 'button,a[href],summary,input,select,textarea,[role="button"],[role="tab"]';
+  const controls = 'button,a[href],summary,input,select,textarea,[role="button"],[role="tab"],[role="link"],.platform-option';
   const surfaces = [
     'p','li','h1','h2','h3','h4','h5','h6','small','pre','code','blockquote','tr','figcaption','img',
     '.profile-fact','.profile-detail-line','.profile-group-title','.profile-relation',

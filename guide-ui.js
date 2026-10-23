@@ -1,5 +1,5 @@
 (() => {
-  'use strict';
+  'use strict';if(window.IG_FRAME_SHELL)return;
   const d = window.IG_CONTENT, extra = window.IG_SUPPLEMENT;
   const $ = s => document.querySelector(s);
   const make = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };

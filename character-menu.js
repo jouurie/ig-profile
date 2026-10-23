@@ -1,5 +1,6 @@
 /* Keep the same character order on every introduction site. */
 (() => {
+  if (window.IG_FRAME_CONTENT) return;
   const header = document.querySelector('.site-shell > header');
   if (!header || header.querySelector('.character-switcher')) return;
   const menu = document.createElement('details');

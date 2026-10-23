@@ -1,0 +1,19 @@
+/* A stationary top frame and one independently scrolling content frame. */
+html.ig-frame-shell,html.ig-frame-shell body{height:100%;overflow:hidden;scrollbar-gutter:auto}
+.ig-frame-shell body{padding-right:var(--ig-content-gutter,0px)}
+.ig-frame-shell .site-shell>main,.ig-frame-shell .site-shell>footer{display:none}
+#ig-content-frame{position:fixed;top:var(--ig-chrome-height,80px);left:0;display:block;width:100%;height:calc(100dvh - var(--ig-chrome-height,80px));border:0;background:transparent}
+.ig-frame-content .site-shell>header,.ig-frame-content .ig-delight-ribbon{display:none!important}
+.ig-frame-content .site-shell>main{display:block}
+
+/* Two native pixel cursors keep the visible tip in both frames. */
+html,body{cursor:url("cursor-default.svg") 2 2,auto}
+:is(button,a[href],summary,[role="button"],[role="tab"],input[type="range"]),img[data-ig-zoom]{cursor:url("cursor-action.svg") 10 2,pointer!important}
+:is(button:disabled,[aria-disabled="true"]){cursor:url("cursor-default.svg") 2 2,default!important}
+
+/* The full image opens above both frames and keeps the original proportions. */
+.ig-image-viewer{width:fit-content;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);margin:auto;padding:42px 12px 12px;border:1px solid var(--blue);border-radius:5px;background:var(--bg);overflow:auto;color:var(--ink)}
+.ig-image-viewer::backdrop{background:rgba(32,21,47,.7)}
+.ig-image-viewer img{display:block;max-width:calc(100vw - 58px);max-height:calc(100dvh - 100px);width:auto;height:auto;object-fit:contain;margin:auto}
+.ig-image-close{position:absolute;right:10px;top:8px;background:var(--pinkpaper);font-size:11px;min-height:26px}
+.ig-image-close:hover{background:var(--pink)}
