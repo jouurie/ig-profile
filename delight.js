@@ -106,7 +106,7 @@
   function show(node) {
     let next = null;
     if (fine.matches && node instanceof Element && shell.contains(node)) {
-      next = node.closest(controls) || node.closest(surfaces);
+      next = node.closest(controls) || (document.body.matches('.page-guide') ? null : node.closest(surfaces));
       if (next && (!shell.contains(next) || next.closest('[hidden],[inert],[aria-hidden="true"]'))) next = null;
     }
     if (next === current) return;

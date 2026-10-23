@@ -141,7 +141,7 @@
       const impersonation = card('사칭 플레이 (/이어서, *이어서* 위주)'); settingsList(impersonation, ['내 캐릭터 대신 하기 (사칭): 기본 살짝', '적극적인 사칭 플레이: 적극']);
       options.append(prevention, impersonation); panel.append(options);
       panel.append(settingsPath('채팅방 설정 → 대화'));
-      panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 5,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
+      panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
       panel.append(tableBlock("응답 품질 조절\n일상: 낮음 - 보통\n심화: 보통 - 높음\n갈등: 높음"));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n문체: 노디 기본\n지문 별표 쓰기: 끔"));
@@ -153,10 +153,8 @@
       panel.append(tableBlock("장기기억 설정\n요약 주기: 10턴\n요약 글자수: 6,000자\n자동으로 요약하기: 켬"));
       const memoryLink = make('p'); memoryLink.append(document.createTextNode('요약 방식 입력: '), disclosureLink('기억 지침', 'guide-memory')); panel.append(memoryLink);
       panel.append(make('p', 'guide-note', '노디의 1턴은 내 말과 캐릭터 답변 한 쌍입니다. 최근 대화는 원문으로 기억할 범위이고, 요약 주기는 장기기억을 갱신할 간격입니다.'));
-      panel.append(settingsPath('채팅방 설정 → 화면'));
-      panel.append(tableBlock("화면 취향 설정\n다크 모드: 취향에 맞게 선택\n답변 생성 중 자동 스크롤: 취향에 맞게 선택\n내 이름·프로필 표시: 취향에 맞게 선택\n내 지문 기울임: 취향에 맞게 선택\n캐릭터 지문 기울임: 지문 별표 쓰기를 끄면 기울임 없이 표시"));
       panel.append(settingsPath('채팅방 설정 → 화면 → 글자'));
-      panel.append(tableBlock("글자\n글꼴: 고딕\n글자 크기: 4\n줄 간격: 3\n자간: 3\n여백: 3\n정렬: 왼쪽\n원문 줄바꿈 그대로: 켬"));
+      panel.append(tableBlock("글자\n원문 줄바꿈 그대로: 켬"));
     } else if (active === 'models') {
       const model = make('div', 'guide-models'); model.id = 'guide-models';
       ["운용\n가성비: 3.8 Flash ↔ GLM 5.3 / DeepSeek Flash\n일반: 3.8 Flash ↔ 4 Argon / 3.1 Pro / Sonnet 5 / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / Kimi 3\nNSFW: 3.8 Flash / 4 Argon / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 다소 부정적인 전개로 기울 수 있습니다.\nGemini 3 Flash: 가볍고 빠른 대화에 맞는 저비용 선택지입니다.\nGLM 5.3: GLM 계열 최신 모델입니다. 노디에서는 표현이 안정적이고 비용이 낮은 라이트급으로 안내합니다.\n3.1 Pro: 추론이 깊은 Pro 계열입니다. 장면이 야릇한 방향으로 빠르게 기울 수 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 감정선이 장점입니다. 비용은 높은 편입니다.\nSonnet 5: 감정 묘사와 앞 대화의 맥락 유지에 맞는 선택지입니다. 노디 기준 비용은 중상위권입니다.\nGPT-6.1 Sol (SFW): 성능과 속도의 균형을 갖춘 최신 Sol입니다. 노디 기준 비용은 중간대입니다.\nDeepSeek Flash: 저렴하게 긴 대화를 이어 갈 때의 선택지입니다. 노디에서는 평일 낮 시간대의 캐시 소모가 더 커질 수 있다고 안내합니다.\nKimi 3: 차분하고 정돈된 문장을 선호할 때의 선택지입니다. 답이 길고 느려 실제 비용이 커질 수 있습니다.","참고\n최소 2개 모델을 번갈아 사용해 말투와 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
