@@ -126,8 +126,44 @@
     panel.append(platforms);
     if (!selected) { panel.append(make('h2', 'settings-platform-title', '플랫폼 미선택'), make('p', 'guide-note', '엘린 또는 노디를 선택하세요.')); return false; }
     panel.append(make('h2', 'settings-platform-title', (selected === 'elyn' ? '엘린' : '노디') + ' ' + title));
-    if (selected === 'nody') { const empty = make('div', 'guide-card settings-empty'); if (section === 'recovery') empty.append(make('p', '', '등록된 안내가 없습니다.')); panel.append(empty); return false; }
+    if (selected === 'nody' && section === 'settings') { renderNody(section); return false; }
     return true;
+  }
+  function renderNody(section) {
+    if (section === 'recovery') { panel.append(card('안내', '등록된 안내가 없습니다.')); return; }
+    if (active === 'budget') {
+      panel.append(settingsPath('채팅방 설정 → 대화 → 답변 → 로어북 예산'));
+      panel.append(tableBlock('로어북 예산\n추천: 최대로 설정\n현재 최대: 50,000자'));
+      panel.append(make('p', 'guide-note', '내용이 예산 한도로 잘리지 않도록 슬라이더를 최대로 설정하세요. 캐시가 아닌 글자수 한도입니다. 예산을 늘리면 매 턴 캐시 사용량도 늘 수 있습니다.'));
+    } else if (active === 'recommended') {
+      panel.append(settingsPath('채팅방 설정 → 대화'));
+      panel.append(tableBlock('답변\n출력량: 길게\n최대 출력량: 5,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시'));
+      panel.append(tableBlock('추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거'));
+      panel.append(tableBlock('문체와 기타\n문체: 노디 기본\n지문 별표 쓰기: 끔\n배경 이미지 표시: 끔\n채팅 속 이미지 표시: 끔\n상태창 표시: 켬'));
+      panel.append(tableBlock('AI 연기 방식\n내 캐릭터 대신 하기: 살짝 / 사칭 플레이는 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게'));
+      panel.append(settingsPath('채팅방 설정 → 화면 → 글자'));
+      panel.append(tableBlock('화면 설정\n원문 줄바꿈 그대로: 켬'));
+      panel.append(make('p', 'guide-note', 'Gemini 3.8 Flash로 비교한 설정을 기준으로 정리했습니다. 사칭·이야기 전개·출력 속도는 플레이 취향에 맞게 바꿔도 됩니다.'));
+    } else if (active === 'models') {
+      panel.append(tableBlock('공통 설정\n최대 출력량: 5,000토큰\n응답 품질: 높음\n로어북 예산: 최대 50,000자'));
+      panel.append(tableBlock('모델 선택\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.2\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro\n고가: Opus ↔ 4 Argon\n별도 선택: GPT-5.6 Sol / GPT-6 Sol / GPT-6.1 Sol (SFW)'));
+      panel.append(tableBlock('모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGLM 5.2: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 4.6: 순애 · 감정선 복원에 강합니다.\nOpus 4.8: 정돈된 문장과 자연스러운 장면 확장이 강점입니다.\nOpus 5: 캐릭터성과 관계를 유지하며 능동적으로 진행합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.'));
+      panel.append(make('p', 'guide-note', '엘린 안내의 모델 운용 기준을 노디에서 선택 가능한 모델에 맞춰 옮겼습니다. 이번 노디 가이던스 비교는 Gemini 3.8 Flash로 진행했습니다.'));
+      panel.append(card('노디에서 조절할 항목', '엘린의 개별 추론 토큰 수 대신 채팅방 설정의 응답 품질을 조절하세요. 기본은 높음으로 시작하고, 반응과 비용을 보며 낮음·보통으로 조정하세요. 표현이나 전개가 반복되면 모델을 바꿔 보세요.'));
+    } else if (active === 'output') {
+      panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
+      panel.append(card('적용 방법', '아래 두 항목을 각각 만들고 적용하세요. 분량 · 리듬 가이던스는 사용하지 않습니다.'));
+      var codes = make('div', 'guidance-code-grid');
+      codes.append(copyBlock('역할극 유지', "This is fictional roleplay; I know you are an AI. Express the characters' relationships and emotions through their dialogue, actions, and viewpoint within the story.", '1'));
+      codes.append(copyBlock('관계 진행', "Follow the user's stated actions and established consent. Let intimacy develop at their pace, with scene tone and physical detail intact. Add no unmentioned relationship prerequisites.", '2'));
+      panel.append(codes, card('분량 · 리듬', '사용 안 함. 이번 비교에서는 분량은 늘었지만 감정 설명과 반복도 늘어, 기본 추천에서는 제외했습니다.'));
+    } else if (active === 'memory') {
+      panel.append(settingsPath('채팅방 설정 → 기억 → 장기기억 설정'));
+      panel.append(tableBlock('기억 설정\n최근 대화: 10턴\n요약 주기: 10턴\n요약 글자수: 6,000자\n자동으로 요약하기: 켬'));
+      panel.append(make('p', 'guide-note', '노디의 1턴은 내 말과 캐릭터 답변 한 쌍입니다. 위 숫자는 확인한 시작 설정이며, 장기 대화에 최적인 범위를 검증한 값은 아닙니다.'));
+      panel.append(copyBlock('요약 방식', "Use only supplied evidence. Summarize in natural Korean within the summary length selected in NODY, including spaces. Prioritize what still affects later actions; merge repeats and omit filler.\nStart with the last scene's short [time band, established place]. Carry supported anchors from supplied context/memory within the same scene; retain identifying place names. Update on evidenced transitions, without guessing or carrying anchors across scene/POV/flashback breaks. Distinguish multiple scenes in prose. If formatting varies, retain the anchors in prose.\nName who did what and the supported result, without invented causes. Preserve explicit motives, promises, agreements, refusals and boundaries with their conditions/scope. Attribute claims/beliefs/knowledge with source certainty; update only holders reached by evidence. Retain active constraints and unresolved matters from supplied memory with confirmed corrections/resolutions.\nKeep supported relationship changes; local emotion, intimacy or roles alone do not establish formal status, permanent traits or first onset. For {{user}}, retain supplied words/actions and visible state; leave unwritten thoughts/reactions open.\nUse indirect speech with useful names/nicknames, terms and recurring motifs; omit full quotes, bilingual pairs, speech wrappers and HTML entities. Keep consequential NPC roles, arrivals/exits, last state/place, leverage and evidence/debt ownership. Keep relevant priorities below, respecting exact terms/values/archive formats.\nFor I-Gyeol, preserve established place, his evidenced stance toward {{user}}, visible body/contact/exit state, consequential care/control/avoidance/surveillance and relationship change, domestic/digital evidence, messages/calls, family/office pressure, hidden resources/self-neglect, and unresolved access or repair cost."));
+      panel.append(make('p', 'guide-note', '요약 방식 입력란에 붙여 넣으세요. 엘린의 200/400/600자 제한을 노디의 요약 글자수 설정에 맞게 바꿨습니다. 이미 저장된 요약은 그대로 두고 다음 요약부터 적용됩니다.'));
+    }
   }
   const renderers = {
     progress() { const start = card('진행 방식'); list(start, guide('진행 안내')); panel.append(start); },
@@ -156,7 +192,7 @@
       outputBlocks.slice(2).forEach(block => { const lines = block.split('\n'); if (lines[0] === '(선택 사항)') { optional = true; lines.shift(); } if (!lines.length) return; const title = lines.shift(); codes.append(copyBlock(title, lines.join('\n'), optional ? '선택' : String(++ruleNumber))); optional = false; }); output.append(codes); panel.append(output);
     },
     memory() {
-      if (!platformSection('settings', '추가 요약 지침')) return;
+      if (!platformSection('settings', platformSelections.settings === 'nody' ? '요약 방식' : '추가 요약 지침')) return;
       const memoryBlocks = source('⭐ 추가 요약 지침').split('\n\n'); panel.append(settingsPath(memoryBlocks.shift()), copyBlock('추가 요약 지침', memoryBlocks.join('\n\n')));
     },
     commands() {
@@ -176,7 +212,7 @@
   };
   const groups = [
     ['play', '플레이 방법', [['progress', '진행 안내'], ['tips', '플레이 팁'], ['examples', '추천 플레이']]],
-    ['settings', '시작 전 설정', [['budget', '로어북 예산 안내'], ['recommended', '추천 설정값'], ['models', '모델 추천'], ['output', '출력 가이던스'], ['memory', '추가 요약 지침']]],
+    ['settings', '시작 전 설정', [['budget', '로어북 예산 안내'], ['recommended', '추천 설정값'], ['models', '모델 추천'], ['output', '출력 가이던스'], ['memory', '기억 지침']]],
     ['commands', '명령어·상태창', [['commands', '명령어'], ['status', '상태창']]],
     ['recovery', '복원·이전', [['transfer', '채팅방 이전 안내'], ['restore', '상태창 복원 지침']]]
   ];
