@@ -149,10 +149,10 @@
       panel.append(tableBlock("AI 연기 방식\n내 캐릭터 대신 하기 (사칭): 상단에서 고른 플레이 방식에 맞춰 안 함 / 살짝 / 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       panel.append(tableBlock("기타\n상태창 표시: 켬"));
       panel.append(settingsPath('채팅방 설정 → 기억'));
-      panel.append(tableBlock("대화 기억 범위\n최근 대화: 10턴"));
-      panel.append(tableBlock("장기기억 설정\n요약 주기: 10턴\n요약 글자수: 6,000자\n자동으로 요약하기: 켬"));
+      panel.append(tableBlock("대화 기억 범위\n최근 대화: 5턴"));
+      panel.append(tableBlock("장기기억 설정\n요약 주기: 5턴\n요약 글자수: 6,000자\n자동으로 요약하기: 켬"));
       const memoryLink = make('p'); memoryLink.append(document.createTextNode('요약 방식 입력: '), disclosureLink('기억 지침', 'guide-memory')); panel.append(memoryLink);
-      panel.append(make('p', 'guide-note', '1턴은 내 말과 캐릭터 답변 한 쌍입니다. 최근 대화는 원문으로 기억할 범위이고, 요약 주기는 장기기억을 갱신할 간격입니다.'));
+      panel.append(make('p', 'guide-note', '1턴은 내 말과 캐릭터 답변 한 쌍입니다. 최근 대화는 원문으로 기억할 범위이고, 요약 주기는 장기기억을 갱신할 간격입니다. 원문 비용을 줄이려면 최근 대화부터 조절하세요.'));
       panel.append(settingsPath('채팅방 설정 → 화면 → 글자'));
       panel.append(tableBlock("글자\n원문 줄바꿈 그대로: 켬"));
     } else if (active === 'models') {
@@ -168,8 +168,9 @@
       panel.append(codes);
     } else if (active === 'memory') {
       panel.append(settingsPath('채팅방 설정 → 기억 → 장기기억 설정'));
-      panel.append(copyBlock('요약 방식', "Use only supplied evidence. Summarize in natural Korean within the summary length selected in NODY, including spaces. Prioritize what still affects later actions; merge repeats and omit filler.\nStart with the last scene's short [time band, established place]. Carry supported anchors from supplied context/memory within the same scene; retain identifying place names. Update on evidenced transitions, without guessing or carrying anchors across scene/POV/flashback breaks. Distinguish multiple scenes in prose. If formatting varies, retain the anchors in prose.\nName who did what and the supported result, without invented causes. Preserve explicit motives, promises, agreements, refusals and boundaries with their conditions/scope. Attribute claims/beliefs/knowledge with source certainty; update only holders reached by evidence. Retain active constraints and unresolved matters from supplied memory with confirmed corrections/resolutions.\nKeep supported relationship changes; local emotion, intimacy or roles alone do not establish formal status, permanent traits or first onset. For {{user}}, retain supplied words/actions and visible state; leave unwritten thoughts/reactions open.\nUse indirect speech with useful names/nicknames, terms and recurring motifs; omit full quotes, bilingual pairs, speech wrappers and HTML entities. Keep consequential NPC roles, arrivals/exits, last state/place, leverage and evidence/debt ownership. Keep relevant priorities below, respecting exact terms/values/archive formats.\nFor I-Gyeol, preserve established place, his evidenced stance toward {{user}}, visible body/contact/exit state, consequential care/control/avoidance/surveillance and relationship change, domestic/digital evidence, messages/calls, family/office pressure, hidden resources/self-neglect, and unresolved access or repair cost."));
-      panel.append(make('p', 'guide-note', '요약 방식 입력란에 붙여 넣으세요. 엘린의 200/400/600자 제한을 노디의 요약 글자수 설정에 맞게 바꿨습니다. 이미 저장된 요약은 그대로 두고 다음 요약부터 적용됩니다.'));
+      panel.append(copyBlock('요약 방식', "이번 요약 대상 구간을 한국어 350~550자로 기록한다. 분량보다 사실의 정확성과 아직 유효한 조건을 우선하고, 사실이 적으면 억지로 채우지 않는다. 이전 구간의 요약 전체를 반복하지 않는다.\n[현재] 구간에서 가장 마지막 응답이 끝난 순간의 장소·시간대·함께 있는 인물·몸과 접촉 상태·바로 이어질 행동. 초반이나 중간 장면을 현재로 적지 않는다. 장소를 따로 표기한다면 이 최종 상태와 일치시킨다.\n[변화] 누가 누구에게 무엇을 했거나 말했고 어떤 결과가 생겼는지. 각 사건의 주체와 대상을 이름으로 구분하고, 관계·소지품·접근 권한의 실제 변화만 남긴다.\n[유지] 아직 유효한 약속·거절·조건·정확한 기한·미해결 위험과 필요한 과거 원인. 감정 해설보다 다음 행동에 필요한 정보를 남긴다.\n말로 한 대사와 보낸 문자를 구별한다. 발언·추측을 확정 사실로 바꾸지 않으며, 인물별로 아는 정보를 섞지 않는다. 유저의 쓰이지 않은 생각·행동이나 새 원인을 만들지 않는다. 일시적 접촉·감정을 영구적인 관계로 확정하지 않는다. 이름·중요한 수치를 보존하고 긴 대사는 요지만 남긴다.\n이결의 돌봄·통제·회피, 연락과 디지털 증거, 가족·직장 압박, 숨긴 자원·자기방치·수리비는 후속 행동에 영향을 주는 것만 남긴다."));
+      panel.append(make('p', 'guide-note', '요약 방식 입력란에 붙여 넣으세요. 다음 요약부터 적용되며, 구간별 요약이 장기기억에 덧붙습니다. 확정 사실은 별도 목록으로 쌓입니다.'));
+      panel.append(make('p', 'guide-note', '요약 글자수는 매번 채우는 목표량이 아닙니다. 1,000자·3,000자 설정 시험에서는 한도를 넘자 오래된 구간이 빠지고 최근 구간이 원문 그대로 남았습니다. 지침의 분량과 형식도 항상 지켜지지는 않으므로, 중요한 약속·기한·조건은 확정 사실이나 노트에도 남겨두세요.'));
     }
   }
   const renderers = {
