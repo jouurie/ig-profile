@@ -48,6 +48,13 @@
     return rows;
   }
   function modelValue(value) {
+    const separateAt = value.indexOf('별도 선택:');
+    if (separateAt >= 0) {
+      const group = make('div', 'model-value'), regular = value.slice(0, separateAt).replace(/\s*\/\s*$/, '').trim();
+      if (regular) group.append(modelValue(regular));
+      group.append(make('div', 'model-separate-choice', value.slice(separateAt).trim()));
+      return group;
+    }
     if (!value.includes('↔')) return make('div', '', value);
     const flow = make('div', 'model-flow');
     value.split('↔').forEach((part, i) => { if (i) flow.append(make('span', 'model-flow-arrow', ' ↔ ')); flow.append(make('span', 'model-flow-chip', part.trim())); });
