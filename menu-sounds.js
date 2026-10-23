@@ -68,7 +68,7 @@
       if (!enabled) stopAll();
     });
     addEventListener('message', event => {
-      const frame = document.getElementById('ig-content-frame');
+      const frame = (window.IGActiveContentFrame?.() || document.getElementById('ig-content-frame'));
       if (event.source !== frame?.contentWindow || (location.protocol !== 'file:' && event.origin !== location.origin)) return;
       if (event.data?.type === 'ig-menu-sound') emit(event.data.kind);
     });

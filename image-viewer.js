@@ -19,10 +19,10 @@
       if (event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) dialog.close();
     });
     dialog.addEventListener('close', () => {
-      document.getElementById('ig-content-frame')?.contentWindow?.postMessage({ type: 'ig-image-closed' }, sendOrigin);
+      (window.IGActiveContentFrame?.() || document.getElementById('ig-content-frame'))?.contentWindow?.postMessage({ type: 'ig-image-closed' }, sendOrigin);
     });
     addEventListener('message', event => {
-      const frame = document.getElementById('ig-content-frame');
+      const frame = (window.IGActiveContentFrame?.() || document.getElementById('ig-content-frame'));
       if (event.source !== frame?.contentWindow || (location.protocol !== 'file:' && event.origin !== location.origin) || event.data?.type !== 'ig-image-open') return;
       let url;
       try { url = new URL(event.data.src, location.href); } catch { return; }

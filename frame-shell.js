@@ -1,7 +1,7 @@
 /* The header belongs to one document; only the content frame navigates. */
 (() => {
   'use strict';
-  const version = '20261024g';
+  const version = '20261024h';
   const names = ['index.html', 'world.html', 'starts.html', 'npc.html', 'guide.html', 'guide-nody.html', 'music.html'];
   const labels = ['소개·프로필', '세계관', '시작 상황', '주변 인물', '이용 가이드', '이용 가이드', '플레이리스트'];
   const base = new URL('./', location.href);
@@ -63,14 +63,19 @@
     document.body.append(measure);
     document.documentElement.style.setProperty('--ig-content-gutter', (measure.offsetWidth - measure.clientWidth) + 'px');
     measure.remove();
-    const frame = document.createElement('iframe');
-    frame.id = 'ig-content-frame';
-    frame.name = 'ig-content-frame';
-    frame.title = '이결 소개 본문';
-    frame.setAttribute('allow', 'autoplay; clipboard-write; fullscreen');
-    frame.setAttribute('aria-busy', 'true');
+    let contentFrame = null, musicFrame = null, activeFrame = null;
     let active = route(location.href) || route('index.html');
     if (location.protocol === 'file:' && location.hash.startsWith('#page=')) active = route(location.hash.slice(6)) || active;
+    window.IGActiveContentFrame = () => activeFrame;
+    function createFrame(id) {
+      const view = document.createElement('iframe');
+      view.id = view.name = id;
+      view.hidden = true;
+      view.setAttribute('aria-hidden', 'true');
+      view.setAttribute('allow', 'autoplay; clipboard-write; fullscreen');
+      view.setAttribute('aria-busy', 'true');
+      return view;
+    }
     const updateHeader = url => {
       const file = url.pathname.split('/').pop();
       const menuFile = file === 'guide-nody.html' ? 'guide.html' : file;
@@ -78,9 +83,35 @@
         if (new URL(link.href).pathname.endsWith('/' + menuFile)) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
       });
-      frame.title = (labels[names.indexOf(file)] || '이결 소개') + ' 본문';
       document.title = (labels[names.indexOf(file)] || '이결 소개') + ' · 한이결.exe';
     };
+    function display(url) {
+      const music = url.pathname.endsWith('/music.html');
+      let view = music ? musicFrame : contentFrame;
+      const fresh = !view;
+      if (fresh) {
+        view = createFrame(music ? 'ig-music-frame' : 'ig-content-frame');
+        if (music) musicFrame = view; else contentFrame = view;
+      }
+      activeFrame = view;
+      for (const item of [contentFrame, musicFrame]) {
+        if (!item) continue;
+        item.hidden = item !== view;
+        item.setAttribute('aria-hidden', String(item !== view));
+      }
+      view.title = (labels[names.indexOf(url.pathname.split('/').pop())] || '이결 소개') + ' 본문';
+      // The playlist document and its player are created once for this shell.
+      if (music && !fresh) return;
+      view.dataset.igRoute = url.href;
+      view.setAttribute('aria-busy', 'true');
+      if (fresh) {
+        view.src = embedded(url);
+        document.body.append(view);
+      } else {
+        try { view.contentWindow.location.replace(embedded(url)); }
+        catch { view.contentWindow?.postMessage({ type: 'ig-frame-replace', href: url.href }, origin); }
+      }
+    }
     const record = (url, replace = false) => {
       const target = location.protocol === 'file:' ? '#page=' + url.pathname.split('/').pop() : url.href;
       try { history[replace ? 'replaceState' : 'pushState']({ ...history.state, igRoute: url.href }, '', target); } catch { /* File previews still retain the frame. */ }
@@ -89,25 +120,23 @@
       const next = route(value);
       if (!next) return;
       if (next.pathname === active.pathname && next.hash === active.hash) {
-        frame.contentWindow?.postMessage({ type: 'ig-frame-top' }, origin);
+        activeFrame?.contentWindow?.postMessage({ type: 'ig-frame-top' }, origin);
         return;
       }
       active = next;
       updateHeader(next);
-      frame.setAttribute('aria-busy', 'true');
       if (!fromHistory) record(next);
-      try { frame.contentWindow.location.replace(embedded(next)); }
-      catch { frame.contentWindow?.postMessage({ type: 'ig-frame-replace', href: next.href }, origin); }
+      display(next);
     }
     updateHeader(active);
     record(active, true);
-    frame.src = embedded(active);
     addEventListener('message', event => {
-      if (event.source !== frame.contentWindow || (location.protocol !== 'file:' && event.origin !== location.origin)) return;
-      if (event.data?.type === 'ig-frame-navigate') navigate(event.data.href);
+      const sender = [contentFrame, musicFrame].find(view => view && event.source === view.contentWindow);
+      if (!sender || (location.protocol !== 'file:' && event.origin !== location.origin)) return;
+      if (event.data?.type === 'ig-frame-navigate' && sender === activeFrame) navigate(event.data.href);
       if (event.data?.type === 'ig-frame-ready') {
         const loaded = route(event.data.href);
-        if (loaded?.pathname === active.pathname) frame.setAttribute('aria-busy', 'false');
+        if (loaded?.pathname === route(sender.dataset.igRoute)?.pathname) sender.setAttribute('aria-busy', 'false');
       }
     });
     document.addEventListener('click', event => {
@@ -126,6 +155,6 @@
     addEventListener('resize', size, { passive: true });
     document.fonts?.ready.then(size);
     size();
-    document.body.append(frame);
+    display(active);
   });
 })();

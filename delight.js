@@ -37,7 +37,7 @@
       if (now - last < 100) return;
       last = now;
       if (fromContent) {
-        const box = document.getElementById('ig-content-frame')?.getBoundingClientRect();
+        const box = (window.IGActiveContentFrame?.() || document.getElementById('ig-content-frame'))?.getBoundingClientRect();
         if (!box) return;
         x += box.left; y += box.top;
       }
@@ -59,7 +59,7 @@
     };
     window.IGClickHearts = { burst };
     addEventListener('message', event => {
-      const frame = document.getElementById('ig-content-frame');
+      const frame = (window.IGActiveContentFrame?.() || document.getElementById('ig-content-frame'));
       if (event.source !== frame?.contentWindow || (location.protocol !== 'file:' && event.origin !== location.origin)) return;
       if (event.data?.type === 'ig-click-hearts') burst(event.data.x, event.data.y, true);
     });
