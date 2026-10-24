@@ -276,6 +276,15 @@
       }else if(group&&child.matches('p')){unit.append(child);}
       else{group=null;unit=null;}
     }
+    panel.querySelectorAll('.settings-table-grid').forEach(grid=>{
+      const units=[...grid.children];
+      const weights=units.map(item=>item.querySelectorAll('tr').length+2+[...item.querySelectorAll('p')].reduce((sum,p)=>sum+p.textContent.length/45+1,0));
+      const total=weights.reduce((sum,n)=>sum+n,0);
+      let split=1,best=Infinity,left=0;
+      for(let i=1;i<units.length;i++){left+=weights[i-1];const difference=Math.abs(total-2*left);if(difference<best){best=difference;split=i;}}
+      const columns=[make('div','settings-table-column'),make('div','settings-table-column')];
+      units.forEach((item,i)=>columns[i<split?0:1].append(item));grid.replaceChildren(...columns);
+    });
   }
   function select(key, focus) {
     active = key; panel.replaceChildren(); buttons.forEach(b => { const selected = b.dataset.guideItem === key; b.setAttribute('aria-selected', String(selected)); b.tabIndex = selected ? 0 : -1; });
