@@ -231,23 +231,26 @@
     },
     status() { const intro = card('상태창 읽는 법'); list(intro, guide('상태창 안내')); panel.append(intro); },
     transfer() {
-      if (!platformSection('recovery', '채팅방 이전')) return;
-      const move = card('새 채팅방으로 이어갈 때');
-      ["대화가 길어져 맥락이 흐려지거나 새 채팅방에서 이어가고 싶을 때 사용하세요. 인물 관계, 현재 상황, 진행 중인 사건을 인계 메모로 정리해 다음 방에서도 이어갈 수 있습니다.","기존 대화를 TXT로 내보낸 뒤, TXT와 인계 지침을 함께 전달해 인계 메모를 만드세요. 같은 캐릭터와 페르소나로 새 방을 열고, 완성된 메모 전체를 유저노트에 넣습니다."].forEach(text => move.append(make('p', '', text)));
-      move.append(make('p', 'guide-note', platformSelections.recovery === 'nody' ? "기존 방의 설정 → 메뉴 → 대화 내보내기에서 TXT를 저장하세요. 새 방의 설정 → 노트 → 유저노트 추가에 메모 전체를 넣고 해당 방에 연결한 뒤 이어갑니다." : "새 방의 유저노트에 메모를 붙여 넣고 추가 요약 지침을 확인하세요. 기존 방의 마지막 4턴은 시간순으로 옮기고 턴 번호를 1~4로 맞춥니다."));
-      externalLink(move, 'RP 인계 방법과 지침 열기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-handoff-note-nody' : 'https://rentry.co/rp-handoff-note');
-      panel.append(move);
+      if (!platformSection('recovery', '채팅방 이전 안내')) return;
+      const when = card('사용 시점'); list(when, ["대화가 길어져 맥락이 흐려졌을 때","새 채팅방에서 이어가고 싶을 때"]);
+      const more = card('RP 인계 방법 + 가이드');
+      externalLink(more, '지침 보기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-handoff-note-nody' : 'https://rentry.co/rp-handoff-note');
+      panel.append(when, more);
     },
     restore() {
-      if (!platformSection('recovery', '상태창 복원')) return;
-      const restore = card('상태창이 어긋났을 때'); restore.append(make('p', 'guide-note', '이럴 때 복원하세요.')); list(restore, guide('상태창 복원').filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '사용 시점')); externalLink(restore, '상태창 복원 지침 열기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-status-recovery-igyeol-nody' : guide('상태창 복원').find(x => x.startsWith('http'))); panel.append(restore);
+      if (!platformSection('recovery', '상태창 복원 안내')) return;
+      const when = card('사용 시점');
+      list(when, guide('상태창 복원').filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '사용 시점'));
+      const more = card('상태창 복원 안내 + 가이드');
+      externalLink(more, '지침 보기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-status-recovery-igyeol-nody' : guide('상태창 복원').find(x => x.startsWith('http')));
+      panel.append(when, more);
     }
   };
   const groups = [
     ['play', '플레이 방법', [['progress', '진행 안내'], ['tips', '플레이 팁'], ['examples', '추천 플레이']]],
     ['settings', '시작 전 설정', [['budget', '로어북 예산 안내'], ['recommended', '추천 설정값'], ['models', '모델 추천'], ['output', '출력 가이던스'], ['memory', '기억 지침']]],
     ['commands', '명령어·상태창', [['commands', '명령어'], ['status', '상태창']]],
-    ['recovery', '복원·이전', [['transfer', '채팅방 이전 안내'], ['restore', '상태창 복원 지침']]]
+    ['recovery', '복원·이전', [['transfer', '채팅방 이전 안내'], ['restore', '상태창 복원 안내']]]
   ];
   const choices = groups.flatMap(group => group[2]), buttons = []; let active = 'progress';
   tabBar.setAttribute('aria-label', '가이드 메뉴');
