@@ -13,7 +13,7 @@
 .ig-opening-preview-close { flex: none; width: 44px; min-height: 44px; padding: 0; background: var(--pinkpaper); font: inherit; font-size: 24px; line-height: 1; }
 .ig-opening-preview-close:hover { background: var(--pink); color: var(--ink); }
 .ig-opening-preview-prose { max-width: 75ch; white-space: pre-wrap; overflow-wrap: anywhere; word-break: keep-all; font-size: 16px; line-height: 1.9; }
-.ig-opening-user { padding: 0 .12em; background: #e9dcff; color: inherit; font-weight: inherit; border-radius: 2px; text-decoration: underline; text-decoration-color: #9c79cd; text-decoration-thickness: 1px; text-underline-offset: .14em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.ig-opening-user { padding: 0 .12em; background: #e9dcff; color: inherit; font-weight: inherit; border-radius: 2px; text-decoration: none; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .ig-opening-photo-preview { width: min(1020px, calc(100% - 32px)); }
 .ig-opening-photo-crop { width: 100%; aspect-ratio: 3 / 2; background-size: 200% 400%; background-repeat: no-repeat; }
 @media(hover:hover) { .ig-opening-card:hover { background-color: var(--pinkpaper); color: var(--ink); } .ig-opening-card:nth-child(even):hover { background-color: var(--bluepaper); } }
