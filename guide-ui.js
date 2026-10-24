@@ -86,7 +86,10 @@
     rowsFromBlock(block).forEach(row => {
       if (title === '참고' && !row.label) { notes.push(row.value, ...row.notes); return; }
       const tr = make('tr'), th = recommendedModelText('th', '', row.label), td = make('td');
-      th.scope = 'row'; td.append(modelValue(row.value));
+      th.scope = 'row';
+      const labelGroups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
+      if(labelGroups[row.label]){th.replaceChildren();labelGroups[row.label].forEach((part,index)=>{if(index)th.append(document.createTextNode(' '));th.append(make('span','guide-label-part',part));});}
+      td.append(modelValue(row.value));
       if (title === '추론 조절') notes.push(...row.notes);
       else row.notes.forEach(n => td.append(make('small', '', n)));
       tr.append(th, td); body.append(tr);
@@ -135,16 +138,14 @@
       const budget = card('로어북 예산');
       settingsList(budget, ["로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.","로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.","내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다.","권장 예산: 하단 [ ⭐ 모델 추천 ]을 참고하세요."]); panel.append(budget);
     } else if (active === 'recommended') {
-      const options = make('div', 'guide-card-grid');
-      const prevention = card('사칭 방지 플레이'); settingsList(prevention, ['내 캐릭터 대신 하기 (사칭): 안 함']);
-      const impersonation = card('사칭 플레이 (/이어서, *이어서* 위주)'); settingsList(impersonation, ['내 캐릭터 대신 하기 (사칭): 기본 살짝', '적극적인 사칭 플레이: 적극']);
-      options.append(prevention, impersonation); panel.append(options);
       panel.append(settingsPath('채팅방 설정 → 대화'));
+      const options = make('div', 'guide-card-grid');
+      options.append(tableBlock("사칭 방지 플레이\n내 캐릭터 대신 하기 (사칭): 안 함"),tableBlock("사칭 플레이 (/이어서, *이어서* 위주)\n내 캐릭터 대신 하기 (사칭): 기본 살짝\n적극적인 사칭 플레이: 적극")); panel.append(options);
       panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
       panel.append(make('p', 'guide-note', "응답 품질은 답변 전에 점검하는 항목 수입니다. 노디 안내 기준 낮음은 3개, 보통은 4개, 높음은 5개이며, 모델 자체의 추론 예산과 같은 수치로 볼 수는 없습니다. 설정과 앞선 대화를 더 챙기도록 모델 공통으로 높음을 권장합니다. 모델별 최적값이나 최저비용을 검증한 값은 아니며, 답변이 느려지고 캐시 사용량이 늘 수 있습니다. 높음도 상태창과 기억의 정확성을 보장하지는 않습니다."));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n문체: 노디 기본\n지문 별표 쓰기: 끔"));
-      const guidance = card('출력 가이던스'); settingsList(guidance, ['역할극 유지: 적용', '관계 진행: 적용']); guidance.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
+      const guidance = tableBlock('출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용'); guidance.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
       panel.append(tableBlock("AI 연기 방식\n내 캐릭터 대신 하기 (사칭): 상단에서 고른 플레이 방식에 맞춰 안 함 / 살짝 / 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       panel.append(tableBlock("기타\n상태창 표시: 켬"));
       panel.append(settingsPath('채팅방 설정 → 기억'));
@@ -157,7 +158,7 @@
       panel.append(tableBlock("글자\n원문 줄바꿈 그대로: 켬"));
     } else if (active === 'models') {
       const model = make('div', 'guide-models'); model.id = 'guide-models';
-      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
+      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 저렴한 축이라 긴 대화의 비용 부담이 적습니다. 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
       const instructions = make('div', 'guide-instructions');
@@ -184,8 +185,8 @@
     budget() { if (!platformSection('settings', '로어북 예산')) return; const budget = card('로어북 예산'); settingsList(budget, source('로어북 예산 안내').split('\n')); panel.append(budget); },
     recommended() {
       if (!platformSection('settings', '추천 설정값')) return;
-      const options = make('div', 'guide-card-grid'); source('⭐ 추천 설정값').split('\n\n').forEach(block => { const lines = block.split('\n'), c = card(lines.shift()); settingsList(c, lines); options.append(c); }); panel.append(options);
       panel.append(settingsPath('출력 탭'));
+      const options = make('div', 'guide-card-grid'); source('⭐ 추천 설정값').split('\n\n').forEach(block => { const lines = block.split('\n'), c = card(lines.shift()); settingsList(c, lines); options.append(c); }); panel.append(options);
       const modelChoice = card('채팅 모델'); modelChoice.append(disclosureLink('모델 추천에서 선택', 'guide-models')); panel.append(modelChoice);
       panel.append(tableBlock('프롬프트\n프롬프트: 상단에서 고른 플레이 방식에 맞춰 선택'));
       panel.append(settingsPath('출력 탭 → 과금 방식 및 출력 설정'));
@@ -251,9 +252,21 @@
       const b = make('button', '', text); b.type = 'button'; b.id = 'guide-topic-' + id; b.dataset.guideItem = id; b.setAttribute('role', 'tab'); b.setAttribute('aria-controls', 'guide-panel'); b.addEventListener('click', () => select(id)); children.append(b); buttons.push(b);
     }); tabBar.append(group);
   });
+  const mobileTables=matchMedia('(max-width:650px)');
+  function foldLongTables(){
+    panel.querySelectorAll('.guide-model-section').forEach(section=>{
+      const table=section.querySelector('table'),heading=section.querySelector(':scope>h3');
+      if(!heading||!table||table.rows.length<3)return;
+      const details=make('details','guide-table-disclosure'),summary=make('summary','',heading.textContent);
+      heading.remove();details.open=!mobileTables.matches;summary.tabIndex=mobileTables.matches?0:-1;
+      summary.addEventListener('click',event=>{if(!mobileTables.matches)event.preventDefault();});
+      details.append(summary,...section.childNodes);section.append(details);
+    });
+  }
+  mobileTables.addEventListener('change',()=>panel.querySelectorAll('.guide-table-disclosure').forEach(details=>{details.open=!mobileTables.matches;details.querySelector('summary').tabIndex=mobileTables.matches?0:-1;}));
   function select(key, focus) {
     active = key; panel.replaceChildren(); buttons.forEach(b => { const selected = b.dataset.guideItem === key; b.setAttribute('aria-selected', String(selected)); b.tabIndex = selected ? 0 : -1; });
-    const selected = buttons.find(b => b.dataset.guideItem === key); panel.setAttribute('aria-labelledby', selected.id); renderers[key]();
+    const selected = buttons.find(b => b.dataset.guideItem === key); panel.setAttribute('aria-labelledby', selected.id); renderers[key](); foldLongTables();
     const state = $('#status'); if (state) state.hidden = key !== 'status'; if (focus) selected.focus();
   }
   tabBar.addEventListener('keydown', e => {

@@ -121,3 +121,10 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 
 /* Separate the common settings cards from the model-specific tables. */
 .page-guide .settings-metrics + .guide-models{margin-top:20px}
+/* Preserve whole words in setting labels on narrow screens. */
+.page-guide .guide-table th{word-break:keep-all;overflow-wrap:normal}
+.page-guide .guide-table th .guide-label-part{display:inline-block;white-space:nowrap}
+
+.page-guide #guide-panel .guide-table-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;margin:0;padding:12px 14px;border-bottom:1px solid #bdd5ff;background:#eef6ff;color:#23172f;font-size:13px;font-weight:700;line-height:1.6}
+.page-guide .guide-table-disclosure>summary::-webkit-details-marker{display:none}
+@media(max-width:650px){.page-guide .guide-table-disclosure>summary{cursor:pointer;min-height:44px}.page-guide .guide-table-disclosure>summary::after{content:'펼치기';flex:none;font-size:11px;font-weight:400}.page-guide .guide-table-disclosure[open]>summary::after{content:'접기'}.page-guide .guide-table-disclosure:not([open])>summary{border-bottom:0}}
