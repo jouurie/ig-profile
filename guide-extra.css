@@ -128,3 +128,6 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 .page-guide #guide-panel .guide-table-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;margin:0;padding:12px 14px;border-bottom:1px solid #bdd5ff;background:#eef6ff;color:#23172f;font-size:13px;font-weight:700;line-height:1.6}
 .page-guide .guide-table-disclosure>summary::-webkit-details-marker{display:none}
 @media(max-width:650px){.page-guide .guide-table-disclosure>summary{cursor:pointer;min-height:44px}.page-guide .guide-table-disclosure>summary::after{content:'펼치기';flex:none;font-size:11px;font-weight:400}.page-guide .guide-table-disclosure[open]>summary::after{content:'접기'}.page-guide .guide-table-disclosure:not([open])>summary{border-bottom:0}}
+/* Paired setting tables align at the top and keep their natural height. */
+.page-guide .guide-card-grid{align-items:start}
+.page-guide .guide-card-grid>.guide-model-section{margin:0}
