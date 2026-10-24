@@ -23,7 +23,6 @@
 (() => {
   'use strict';
   const inContent = window.IG_FRAME_CONTENT === true;
-  const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let burst;
   if (!inContent) {
     const layer = document.createElement('div');
@@ -32,7 +31,7 @@
     document.body.append(layer);
     let last = -Infinity;
     burst = (x, y, fromContent = false) => {
-      if (motion.matches || document.hidden || !Number.isFinite(x) || !Number.isFinite(y)) return;
+      if (document.hidden || !Number.isFinite(x) || !Number.isFinite(y)) return;
       const now = performance.now();
       if (now - last < 100) return;
       last = now;
@@ -64,10 +63,9 @@
       if (event.data?.type === 'ig-click-hearts') burst(event.data.x, event.data.y, true);
     });
     document.addEventListener('visibilitychange', () => { if (document.hidden) layer.replaceChildren(); });
-    motion.addEventListener('change', () => { if (motion.matches) layer.replaceChildren(); });
   }
   document.addEventListener('click', event => {
-    if (!event.isTrusted || motion.matches || !(event.target instanceof Element)) return;
+    if (!event.isTrusted || !(event.target instanceof Element)) return;
     const control = event.target.closest('button,a[href],summary,[role="button"],[role="tab"]');
     if (!control || control.matches(':disabled') || control.closest('[aria-disabled="true"],[hidden],[inert]')) return;
     const box = control.getBoundingClientRect();

@@ -151,20 +151,8 @@
 }
 
 /* No dimensions, font sizes, iframe selectors or ancestor transforms touch
-   the original StatePop. Reduced motion removes every local animation. */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .site-shell,
-  .site-shell *,
-  .site-shell *::before,
-  .site-shell *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-  ::view-transition-old(root),
-  ::view-transition-new(root),
-  ::view-transition-group(root) { animation: none !important; }
-}
+   the original StatePop. Existing motion remains enabled independently of system preferences. */
+
 
 /* Profile tabs remain stationary while their content changes. */
 .page-index #profile-tabs button{animation:none;transition:none;translate:none}
