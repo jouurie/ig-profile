@@ -232,11 +232,11 @@
     status() { const intro = card('상태창 읽는 법'); list(intro, guide('상태창 안내')); panel.append(intro); },
     transfer() {
       if (!platformSection('recovery', '채팅방 이전')) return;
-      const move = card('새 채팅방으로 이어갈 때'), text = source('채팅방 이전 안내').split('\n').filter(Boolean); list(move, text.filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '이전 시점' && !x.startsWith('↳'))); move.append(make('p', 'guide-note', '새 채팅방으로 옮겨 이어가세요.')); externalLink(move, 'RP 인계 방법과 지침 열기', text.find(x => x.startsWith('http'))); panel.append(move);
+      const move = card('새 채팅방으로 이어갈 때'), text = source('채팅방 이전 안내').split('\n').filter(Boolean); list(move, text.filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '이전 시점' && !x.startsWith('↳'))); move.append(make('p', 'guide-note', '새 채팅방으로 옮겨 이어가세요.')); externalLink(move, 'RP 인계 방법과 지침 열기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-handoff-note-nody' : text.find(x => x.startsWith('http'))); panel.append(move);
     },
     restore() {
       if (!platformSection('recovery', '상태창 복원')) return;
-      const restore = card('상태창이 어긋났을 때'); restore.append(make('p', 'guide-note', '이럴 때 복원하세요.')); list(restore, guide('상태창 복원').filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '사용 시점')); externalLink(restore, '상태창 복원 지침 열기', guide('상태창 복원').find(x => x.startsWith('http'))); panel.append(restore);
+      const restore = card('상태창이 어긋났을 때'); restore.append(make('p', 'guide-note', '이럴 때 복원하세요.')); list(restore, guide('상태창 복원').filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '사용 시점')); externalLink(restore, '상태창 복원 지침 열기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-status-recovery-igyeol-nody' : guide('상태창 복원').find(x => x.startsWith('http'))); panel.append(restore);
     }
   };
   const groups = [
