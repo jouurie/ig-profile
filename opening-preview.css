@@ -1,5 +1,5 @@
 /* Existing film-card artwork and geometry remain in styles.css. */
-.ig-opening-card { font: inherit; color: inherit; cursor: pointer; }
+.ig-opening-card { font: inherit; color: inherit; cursor: default; }
 .page-starts .ig-opening-card[data-ig-opening-selected="true"] { outline: 3px solid var(--pink); outline-offset: -4px; }
 .page-starts .ig-opening-card[data-ig-opening-selected="true"]::before { filter: brightness(1.1) saturate(1.06); }
 .ig-opening-card .ig-opening-photo-button { position: absolute; inset: 0 0 auto; z-index: 1; width: 100%; height: calc(100% - 82px); min-height: 44px; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
@@ -21,3 +21,6 @@
 @media(max-width:600px) { .ig-opening-preview { width: calc(100% - 20px); max-height: calc(100dvh - 20px); padding: 20px; } }
 
 .ig-opening-component { display:block; width:100%; min-height:160px; height:640px; border:0; margin:12px 0; }
+
+.page-starts .ig-opening-card > .ig-opening-preview-button{position:absolute;top:10px;right:10px;z-index:3;width:auto;min-height:36px;margin:0;padding:7px 12px;border:1px solid var(--blue);border-radius:5px;background:var(--bluepaper);color:var(--ink);font:inherit;font-size:12px;font-weight:700;line-height:1.4;cursor:pointer;box-shadow:0 2px 0 var(--blue)}
+.page-starts .ig-opening-card > .ig-opening-preview-button:is(:hover,:focus-visible){background:var(--pinkpaper);border-color:var(--pink);color:var(--ink)}

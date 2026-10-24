@@ -232,7 +232,11 @@
     status() { const intro = card('상태창 읽는 법'); list(intro, guide('상태창 안내')); panel.append(intro); },
     transfer() {
       if (!platformSection('recovery', '채팅방 이전')) return;
-      const move = card('새 채팅방으로 이어갈 때'), text = source('채팅방 이전 안내').split('\n').filter(Boolean); list(move, text.filter(x => !x.startsWith('http') && !x.startsWith('🔗') && x !== '이전 시점' && !x.startsWith('↳'))); move.append(make('p', 'guide-note', '새 채팅방으로 옮겨 이어가세요.')); externalLink(move, 'RP 인계 방법과 지침 열기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-handoff-note-nody' : text.find(x => x.startsWith('http'))); panel.append(move);
+      const move = card('새 채팅방으로 이어갈 때');
+      ["대화가 길어져 맥락이 흐려지거나 새 채팅방에서 이어가고 싶을 때 사용하세요. 인물 관계, 현재 상황, 진행 중인 사건을 인계 메모로 정리해 다음 방에서도 이어갈 수 있습니다.","기존 대화를 TXT로 내보낸 뒤, TXT와 인계 지침을 함께 전달해 인계 메모를 만드세요. 같은 캐릭터와 페르소나로 새 방을 열고, 완성된 메모 전체를 유저노트에 넣습니다."].forEach(text => move.append(make('p', '', text)));
+      move.append(make('p', 'guide-note', platformSelections.recovery === 'nody' ? "기존 방의 설정 → 메뉴 → 대화 내보내기에서 TXT를 저장하세요. 새 방의 설정 → 노트 → 유저노트 추가에 메모 전체를 넣고 해당 방에 연결한 뒤 이어갑니다." : "새 방의 유저노트에 메모를 붙여 넣고 추가 요약 지침을 확인하세요. 기존 방의 마지막 4턴은 시간순으로 옮기고 턴 번호를 1~4로 맞춥니다."));
+      externalLink(move, 'RP 인계 방법과 지침 열기', platformSelections.recovery === 'nody' ? 'https://rentry.co/rp-handoff-note-nody' : 'https://rentry.co/rp-handoff-note');
+      panel.append(move);
     },
     restore() {
       if (!platformSection('recovery', '상태창 복원')) return;

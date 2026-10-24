@@ -103,11 +103,9 @@
   let selected = 0;
   const cards = [...list.children].map((original, index) => {
     const card = element('article', original.className + ' ig-opening-card');
-    card.tabIndex = 0;
     card.dataset.plot = ids[index];
     card.dataset.igOpeningSelected = String(index === selected);
-    card.setAttribute('aria-label', data[index].name + ' 도입부 전문 보기');
-    card.setAttribute('aria-haspopup', 'dialog');
+    card.setAttribute('aria-label', data[index].name);
     while (original.firstChild) card.append(original.firstChild);
     const photo = element('button', 'ig-opening-photo-button');
     photo.type = 'button';
@@ -115,6 +113,11 @@
     photo.setAttribute('aria-haspopup', 'dialog');
     photo.addEventListener('click', event => { event.stopPropagation(); parent.IGOpeningPreview?.open(index, data[index].name, photo, true); });
     card.append(photo);
+    const preview = element('button', 'ig-opening-preview-button', '전문 보기');
+    preview.type = 'button';
+    preview.setAttribute('aria-label', data[index].name + ' 전문 보기');
+    preview.setAttribute('aria-haspopup', 'dialog');
+    card.append(preview);
     const open = event => {
       const box = card.getBoundingClientRect();
       parent.IGClickHearts?.burst(event?.detail ? event.clientX : box.left + box.width / 2, event?.detail ? event.clientY : box.top + box.height / 2, true);
@@ -122,10 +125,9 @@
       cards.forEach((item, i) => { item.dataset.igOpeningSelected = String(i === selected); });
       document.getElementById('opening-name').textContent = selected < 0 ? '어디에서 시작할까요?' : data[selected].name;
       document.getElementById('opening-copy').textContent = selected < 0 ? '도입부를 선택하면 자세한 상황을 확인할 수 있습니다.' : data[selected].description;
-      parent.IGOpeningPreview?.open(index, data[index].name, card);
+      parent.IGOpeningPreview?.open(index, data[index].name, preview);
     };
-    card.addEventListener('click', event => { if (!event.target.closest('button,a,input,select,textarea')) open(event); });
-    card.addEventListener('keydown', event => { if (event.target === card && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); open(event); } });
+    preview.addEventListener('click', event => { event.stopPropagation(); open(event); });
     original.replaceWith(card);
     return card;
   });
