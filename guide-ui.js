@@ -133,8 +133,7 @@
     if (section === 'recovery') { panel.append(card('안내', '등록된 안내가 없습니다.')); return; }
     if (active === 'budget') {
       const budget = card('로어북 예산');
-      paragraphs(budget, '로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.\n로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.\n내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다.');
-      const link = make('p'); link.append(document.createTextNode('권장 예산: '), disclosureLink('추천 설정값', 'guide-recommended')); budget.append(link); panel.append(budget);
+      settingsList(budget, ["로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.","로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.","내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다.","권장 예산: 하단 [ ⭐ 모델 추천 ]을 참고하세요."]); panel.append(budget);
     } else if (active === 'recommended') {
       const options = make('div', 'guide-card-grid');
       const prevention = card('사칭 방지 플레이'); settingsList(prevention, ['내 캐릭터 대신 하기 (사칭): 안 함']);
@@ -158,7 +157,7 @@
       panel.append(tableBlock("글자\n원문 줄바꿈 그대로: 켬"));
     } else if (active === 'models') {
       const model = make('div', 'guide-models'); model.id = 'guide-models';
-      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 상태창 출력이 잘 되지 않습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
+      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
       const instructions = make('div', 'guide-instructions');
