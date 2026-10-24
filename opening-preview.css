@@ -17,10 +17,12 @@
 .ig-opening-photo-preview { width: min(1020px, calc(100% - 32px)); }
 .ig-opening-photo-crop { width: 100%; aspect-ratio: 3 / 2; background-size: 200% 400%; background-repeat: no-repeat; }
 @media(hover:hover) { .ig-opening-card:hover { background-color: var(--pinkpaper); color: var(--ink); } .ig-opening-card:nth-child(even):hover { background-color: var(--bluepaper); } }
-@media(max-width:700px) { .page-starts .ig-opening-card:last-child .ig-opening-photo-button { width: 47%; } .page-starts .ig-opening-card > .ig-opening-preview-button { top:10px; right:10px; } }
+@media(max-width:700px) { .page-starts .ig-opening-card:last-child .ig-opening-photo-button { width: 47%; } }
 @media(max-width:600px) { .ig-opening-preview { width: calc(100% - 20px); max-height: calc(100dvh - 20px); padding: 20px; } }
 
 .ig-opening-component { display:block; width:100%; min-height:160px; height:640px; border:0; margin:12px 0; }
 
 .page-starts .ig-opening-card > .ig-opening-preview-button{position:absolute;top:12px;right:12px;z-index:3;width:auto;min-height:21px;margin:0;padding:2px 6px;border:1px solid var(--pink);border-radius:1px;background:var(--pinkpaper);color:var(--ink);font:inherit;font-size:10px;font-weight:500;line-height:15px;cursor:pointer;box-shadow:none}
 .page-starts .ig-opening-card > .ig-opening-preview-button:is(:hover,:focus-visible){background:var(--pink);border-color:var(--pink);color:var(--ink)}
+
+@media(max-width:700px){.page-starts .ig-opening-card > .ig-opening-preview-button{top:10px;right:10px}}
