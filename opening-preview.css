@@ -13,7 +13,7 @@
 .ig-opening-preview-close { flex: none; width: 44px; min-height: 44px; padding: 0; background: var(--pinkpaper); font: inherit; font-size: 24px; line-height: 1; }
 .ig-opening-preview-close:hover { background: var(--pink); color: var(--ink); }
 .ig-opening-preview-prose { max-width: 75ch; white-space: pre-wrap; overflow-wrap: anywhere; word-break: keep-all; font-size: 16px; line-height: 1.9; }
-.ig-opening-user { padding: 0; background: linear-gradient(to bottom, transparent 68%, color-mix(in srgb, currentColor 24%, transparent) 68%, color-mix(in srgb, currentColor 24%, transparent) 94%, transparent 94%); color: inherit; font-weight: inherit; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.ig-opening-user { padding: 0 .12em; background: #e9dcff; color: inherit; font-weight: inherit; border-radius: 2px; text-decoration: underline; text-decoration-color: #9c79cd; text-decoration-thickness: 1px; text-underline-offset: .14em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .ig-opening-photo-preview { width: min(1020px, calc(100% - 32px)); }
 .ig-opening-photo-crop { width: 100%; aspect-ratio: 3 / 2; background-size: 200% 400%; background-repeat: no-repeat; }
 @media(hover:hover) { .ig-opening-card:hover { background-color: var(--pinkpaper); color: var(--ink); } .ig-opening-card:nth-child(even):hover { background-color: var(--bluepaper); } }
@@ -22,5 +22,5 @@
 
 .ig-opening-component { display:block; width:100%; min-height:160px; height:640px; border:0; margin:12px 0; }
 
-.page-starts .ig-opening-card > .ig-opening-preview-button{position:absolute;top:10px;right:10px;z-index:3;width:auto;min-height:36px;margin:0;padding:7px 12px;border:1px solid var(--blue);border-radius:5px;background:var(--bluepaper);color:var(--ink);font:inherit;font-size:12px;font-weight:700;line-height:1.4;cursor:pointer;box-shadow:0 2px 0 var(--blue)}
-.page-starts .ig-opening-card > .ig-opening-preview-button:is(:hover,:focus-visible){background:var(--pinkpaper);border-color:var(--pink);color:var(--ink)}
+.page-starts .ig-opening-card > .ig-opening-preview-button{position:absolute;top:12px;right:12px;z-index:3;width:auto;min-height:21px;margin:0;padding:2px 6px;border:1px solid var(--pink);border-radius:1px;background:var(--pinkpaper);color:var(--ink);font:inherit;font-size:10px;font-weight:500;line-height:15px;cursor:pointer;box-shadow:none}
+.page-starts .ig-opening-card > .ig-opening-preview-button:is(:hover,:focus-visible){background:var(--pink);border-color:var(--pink);color:var(--ink)}
