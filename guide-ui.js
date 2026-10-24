@@ -266,9 +266,20 @@
     });
   }
   mobileTables.addEventListener('change',()=>panel.querySelectorAll('.guide-table-disclosure').forEach(details=>{details.open=!mobileTables.matches;details.querySelector('summary').tabIndex=mobileTables.matches?0:-1;}));
+  function packSettingTables(){
+    if(active!=='recommended'||platformSelections.settings!=='nody')return;
+    let group=null,unit=null;
+    for(const child of [...panel.children]){
+      if(child.matches('.guide-model-section')){
+        if(!group){group=make('div','settings-table-grid');child.before(group);}
+        unit=make('div','settings-table-unit');group.append(unit);unit.append(child);
+      }else if(group&&child.matches('p')){unit.append(child);}
+      else{group=null;unit=null;}
+    }
+  }
   function select(key, focus) {
     active = key; panel.replaceChildren(); buttons.forEach(b => { const selected = b.dataset.guideItem === key; b.setAttribute('aria-selected', String(selected)); b.tabIndex = selected ? 0 : -1; });
-    const selected = buttons.find(b => b.dataset.guideItem === key); panel.setAttribute('aria-labelledby', selected.id); renderers[key](); foldLongTables();
+    const selected = buttons.find(b => b.dataset.guideItem === key); panel.setAttribute('aria-labelledby', selected.id); renderers[key](); packSettingTables(); foldLongTables();
     const state = $('#status'); if (state) state.hidden = key !== 'status'; if (focus) selected.focus();
   }
   tabBar.addEventListener('keydown', e => {

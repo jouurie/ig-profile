@@ -131,3 +131,14 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 /* Paired setting tables align at the top and keep their natural height. */
 .page-guide .guide-card-grid{align-items:start}
 .page-guide .guide-card-grid>.guide-model-section{margin:0}
+/* Table titles have a distinct, centered heading band. */
+.page-guide #guide-panel .guide-model-section>h3,.page-guide #guide-panel .guide-table-disclosure>summary{box-sizing:border-box;display:block;position:relative;margin:0;padding:13px 16px;background:#bdd5ff;color:#23172f;border-bottom:1px solid #23172f;text-align:center;font-size:14px;font-weight:700;line-height:1.6;word-break:keep-all}
+@media(max-width:650px){.page-guide #guide-panel .guide-table-disclosure>summary{min-height:48px;padding:13px 64px}.page-guide #guide-panel .guide-table-disclosure>summary::after{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:400}.page-guide #guide-panel .guide-table-disclosure:not([open])>summary{border-bottom:0}}
+
+/* Short settings share the desktop width instead of stretching empty cells. */
+.page-guide .settings-table-grid{columns:2;column-gap:18px;margin:16px 0}
+.page-guide .settings-table-unit{display:inline-block;width:100%;vertical-align:top;break-inside:avoid;margin:0 0 16px}
+.page-guide .settings-table-unit>.guide-model-section{margin:0}
+.page-guide .settings-table-unit>.guide-note{margin:10px 0 0}
+.page-guide .settings-table-grid .guide-table th{width:42%}
+@media(max-width:650px){.page-guide .settings-table-grid{columns:1}.page-guide .settings-table-unit{display:block}}
