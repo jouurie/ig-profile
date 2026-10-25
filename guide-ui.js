@@ -157,8 +157,6 @@
       appendTableLink(memorySettings,'요약 방식',disclosureLink('기억 지침', 'guide-memory'));
       panel.append(make('p', 'guide-note', '1턴은 내 말과 캐릭터 답변 한 쌍입니다. 최근 대화는 원문으로 기억할 범위이고, 요약 주기는 장기기억을 갱신할 간격입니다. 원문 비용을 줄이려면 최근 대화부터 조절하세요.'));
       panel.append(make('p', 'guide-note', '요약 주기를 줄이면 요약 횟수가 늘어납니다. 총비용은 답변 사용량과 실제 캐시 차감, 요약 요금의 포함 여부를 함께 확인하세요. DeepSeek Flash로 각 20턴을 시험했을 때는 별도 추가 요약 차감이 확인되지 않았습니다. 위 5턴 주기는 기억을 자주 갱신하기 위한 권장값이며, 최저비용 설정으로 검증된 값은 아닙니다.'));
-      panel.append(settingsPath('채팅방 설정 → 화면 → 글자'));
-      panel.append(tableBlock("글자\n원문 줄바꿈 그대로: 켬"));
     } else if (active === 'models') {
       const model = make('div', 'guide-models'); model.id = 'guide-models';
       ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 저렴한 축이라 긴 대화의 비용 부담이 적습니다. 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
