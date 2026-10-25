@@ -1,7 +1,7 @@
 /* The header belongs to one document; only the content frame navigates. */
 (() => {
   'use strict';
-  const version = '20261026-nody-names1';
+  const version = '20261026-nody-names2';
   const names = ['index.html', 'world.html', 'starts.html', 'npc.html', 'guide.html', 'guide-nody.html', 'music.html'];
   const labels = ['소개·프로필', '세계관', '시작 상황', '주변 인물', '이용 가이드', '이용 가이드', '플레이리스트'];
   const base = new URL('./', location.href);
