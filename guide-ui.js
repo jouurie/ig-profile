@@ -68,7 +68,7 @@
     return rows;
   }
   function recommendedModelText(tag, className, text) {
-    const node = make(tag, className), pattern = /3\.8 Flash|4 Argon|Opus|GPT[ -]5\.6 Sol/g;
+    const node = make(tag, className), pattern = /3\.8 Flash|4 Argon|Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g;
     let end = 0;
     for (const match of text.matchAll(pattern)) {
       node.append(document.createTextNode(text.slice(end, match.index)));
@@ -94,6 +94,8 @@
   }
   function tableBlock(block) {
     const title = block.split('\n')[0], section = make('section', 'guide-model-section'), table = make('table', 'guide-table'), body = make('tbody'), notes = [];
+    if(title==='운용')section.classList.add('guide-model-operation');
+    if(title==='모델별 특징'||title==='모델별 특징 · 개별 추론')section.classList.add('guide-model-features');
     section.append(make('h3', '', title));
     rowsFromBlock(block).forEach(row => {
       if (title === '참고' && !row.label) { notes.push(row.value, ...row.notes); return; }
@@ -101,9 +103,9 @@
       th.scope = 'row';
       const labelGroups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
       if(labelGroups[row.label]){th.replaceChildren();labelGroups[row.label].forEach((part,index)=>{if(index)th.append(document.createTextNode(' '));th.append(make('span','guide-label-part',part));});}
-      td.append(modelValue(row.value));
-      if (title === '추론 조절') notes.push(...row.notes);
-      else row.notes.forEach(n => td.append(make('small', '', n)));
+      if(section.classList.contains('guide-model-features')&&row.label==='Opus'){
+        [row.value,...row.notes].forEach(text=>{const match=text.match(/^(Opus \d+(?:\.\d+)*):\s*(.*)$/);const line=make('div','model-opus-version');if(match){line.append(recommendedModelText('span','model-opus-label',match[1]),document.createTextNode(': '+match[2]));}else line.textContent=text;td.append(line);});
+      }else{td.append(modelValue(row.value));if(title==='추론 조절')notes.push(...row.notes);else row.notes.forEach(n=>td.append(make('small','',n)));}
       tr.append(th, td); body.append(tr);
     });
     table.append(body); section.append(table);
@@ -170,7 +172,7 @@
       panel.append(make('p', 'guide-note', '요약 주기를 줄이면 요약 횟수가 늘어납니다. 총비용은 답변 사용량과 실제 캐시 차감, 요약 요금의 포함 여부를 함께 확인하세요. DeepSeek Flash로 각 20턴을 시험했을 때는 별도 추가 요약 차감이 확인되지 않았습니다. 위 5턴 주기는 기억을 자주 갱신하기 위한 권장값이며, 최저비용 설정으로 검증된 값은 아닙니다.'));
     } else if (active === 'models') {
       const model = make('div', 'guide-models'); model.id = 'guide-models';
-      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 저렴한 축이라 긴 대화의 비용 부담이 적습니다. 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
+      ["운용\n가성비: 3.7 Flash / 3.8 Flash ↔ GLM 5.3\n일반: 3.7 Flash / 3.8 Flash ↔ 4 Argon / 2.5 Pro / 3.1 Pro / 별도 선택: GPT-6.1 Sol (SFW)\n고가: Opus 5.5 ↔ 4 Argon / 별도 선택: GPT-5.6 Sol · GPT-6.1 Sol (SFW)\nNSFW: 3.7 Flash / 3.8 Flash / 4 Argon / 2.5 Pro / 3.1 Pro ↔ GLM 5.3 / Opus 5.5","모델별 특징\n3.7 Flash / 3.8 Flash: 대사가 자연스럽고 진행이 능동적입니다. 3.7 Flash는 다소 긍정적이고, 3.8 Flash는 다소 부정적인 경향이 있습니다.\nGemini 3 Flash: 비용이 낮은 선택지입니다. 3.7 Flash · 3.8 Flash의 전개가 한쪽으로 치우칠 때 사용하세요.\nGLM 5.3: Opus와 비슷한 감정선을 더 가볍게 이어 갑니다.\nDeepSeek Flash: 저렴한 축이라 긴 대화의 비용 부담이 적습니다. 상태창 출력이 잘 되지 않습니다.\nKimi 3: 차분하고 정돈된 문장을 씁니다. 답변이 길고 느린 편이라 실제 비용이 커질 수 있습니다.\n2.5 Pro: 캐릭터 해석은 안정적이며 소유욕 · 집착이 강해질 수 있습니다.\n3.1 Pro: NSFW로 빠르게 기울고 상황을 야릇하게 몰아가는 경향이 있습니다.\n4 Argon: 생생한 인물별 상호작용과 풍부한 동작 · 감각 묘사에 강합니다.\nOpus: Opus 4.6: 순애 · 감정선 복원에 강합니다.\n↳ Opus 4.7: 지침을 충실히 따르며, 4.6보다 적극적으로 전개하는 편입니다.\n↳ Opus 4.8: 정돈된 문장과 자연스러운 장면 확장에 강합니다.\n↳ Opus 5: 캐릭터성과 관계를 유지하며 능동적으로 진행합니다.\n↳ Opus 5.5: 능동적인 진행과 4.6에 가까운 감정선이 장점입니다.\nGPT-5.6 Sol (SFW): 밀도 있는 서술과 능동적인 진행이 특징입니다. 여러 인물의 대화 · 복잡한 관계에 강합니다.\nGPT-6.1 Sol (SFW): 능동적인 진행과 여러 인물의 티키타카 · 관계 전개에 강합니다.","참고\n최소 2개 모델을 번갈아 사용해 말투, 전개의 치우침을 줄이세요.\n표현과 전개가 반복되면 → 모델을 교체하세요."].forEach(block => model.append(tableBlock(block))); panel.append(model);
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
       const instructions = make('div', 'guide-instructions');

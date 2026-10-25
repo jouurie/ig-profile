@@ -150,3 +150,7 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 .page-guide .copy-card.is-optional{border-color:#ffb7d4}
 .page-guide .copy-card.is-optional .copy-card-header{border-bottom-color:#ffb7d4;background:#fff0f7}
 .page-guide .copy-card.is-optional .copy-content{border-color:#ffb7d4}
+
+/* model-highlight-scope */
+#guide .guide-model-operation .model-recommended,#guide .guide-model-features td .model-recommended:not(.model-opus-label .model-recommended){background:none}
+#guide .model-opus-version{font:inherit;color:inherit}#guide .model-opus-version+.model-opus-version{margin-top:8px}

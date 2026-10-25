@@ -36,3 +36,7 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 #guide .i3w.is-optional>.ig-guide-subtitle,#guide .i3w.is-optional .i3x{border-bottom-color:#ffb7d4;background:#fff0f7}
 #guide .i3w.is-optional .i3y{border-color:#ffb7d4;background:#fff0f7}
 #guide .i3w.is-optional .i42{border-color:#ffb7d4}
+
+/* model-highlight-scope */
+#guide .guide-model-operation .i3n,#guide .guide-model-features td .i3n:not(.model-opus-label){background:none}
+#guide .model-opus-version{font:inherit;color:inherit}#guide .model-opus-version+.model-opus-version{margin-top:8px}
