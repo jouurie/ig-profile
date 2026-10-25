@@ -32,3 +32,6 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 
 /* Page entry settles with the frame instead of fading again in a stagger. */
 .ig-frame-content :is(.page-masthead,.page-index .hero,.page-world .world-lead,.page-starts .film,.page-npc #npc,.page-music .music-layout,.world-grid > .world-card){animation-duration:160ms;animation-delay:0ms}
+
+/* Keep the mobile page menu on one reachable row. */
+@media(max-width:700px){.ig-frame-shell .site-shell>header>nav[aria-label="페이지 메뉴"]{flex-wrap:nowrap;overflow-x:auto;min-width:0}.ig-frame-shell .site-shell>header>nav[aria-label="페이지 메뉴"]>a{flex:0 0 auto;white-space:nowrap}}
