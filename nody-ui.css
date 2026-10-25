@@ -12,3 +12,8 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 #playlist .i4g{display:block;align-self:start;min-width:0;padding:12px;background:var(--white);border:1px solid var(--edge);border-radius:4px;box-shadow:3px 3px 0 var(--pink)}
 #playlist .i4g img{width:150px;height:110px;margin:0 auto 8px}#playlist .i4g h3{font-size:13px;line-height:20px;margin:4px 0}#playlist #track-list{min-width:0;grid-template-columns:minmax(0,1fr);gap:0}#playlist .i4h{min-height:44px;padding:7px 8px}#playlist .i4h b{font-size:11px}#playlist .i4h small{font-size:10px}
 @media(max-width:700px){#playlist .i4f{grid-template-columns:240px minmax(0,1fr);gap:14px;padding:12px}}@media(max-width:560px){#playlist .i4f{grid-template-columns:minmax(0,1fr)}#playlist .i4g{width:100%;max-width:260px;justify-self:center}}
+
+/* Adapt the live site feedback to native controls without moving hit targets. */
+.i2 :is(summary,label[for]){transition:background-color 180ms,color 180ms,border-color 180ms,filter 100ms ease-out}.i2 :is(summary,label[for]):active{filter:brightness(1.18)!important}
+.i2 label[for]:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media(hover:hover) and (pointer:fine){.i2 img{transition:filter 180ms ease}.i2 img:hover{filter:brightness(1.06) saturate(1.08)}}
