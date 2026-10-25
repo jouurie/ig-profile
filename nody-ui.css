@@ -27,3 +27,6 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 *::-webkit-scrollbar,*::-webkit-scrollbar-track,*::-webkit-scrollbar-corner{background-color:var(--ig-scroll-track)}
 *::-webkit-scrollbar-thumb{background-color:var(--ig-scroll-thumb);border-radius:8px}
 @media(forced-colors:active){*{scrollbar-color:auto}*::-webkit-scrollbar,*::-webkit-scrollbar-track,*::-webkit-scrollbar-thumb,*::-webkit-scrollbar-corner{background-color:revert}}
+
+/* Native equivalent of GitHub delight.js tag pointer feedback. */
+@media(hover:hover) and (pointer:fine){.i2 .il>span:is(:hover,:active){color:var(--ink);background-color:var(--blue)}.i2 .il>span:nth-child(even):is(:hover,:active){background-color:var(--pink)}}
