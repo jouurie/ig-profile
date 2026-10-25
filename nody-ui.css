@@ -17,3 +17,6 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 .i2 :is(summary,label[for]){transition:background-color 180ms,color 180ms,border-color 180ms,filter 100ms ease-out}.i2 :is(summary,label[for]):active{filter:brightness(1.18)!important}
 .i2 label[for]:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 @media(hover:hover) and (pointer:fine){.i2 img{transition:filter 180ms ease}.i2 img:hover{filter:brightness(1.06) saturate(1.08)}}
+
+/* Table-only wrappers share the flush card edge used by the live guide. */
+#guide .i3b>.i3r:has(>.i3c){padding:0}
