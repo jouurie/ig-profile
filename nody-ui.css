@@ -20,3 +20,10 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 
 /* Table-only wrappers share the flush card edge used by the live guide. */
 #guide .i3b>.i3r:has(>.i3c){padding:0}
+
+/* Match GitHub scrollbars on the document and every inner pane. */
+:root{--ig-scroll-thumb:var(--pink,#ffb7d4);--ig-scroll-track:var(--bluepaper,#eef6ff)}
+*{scrollbar-color:var(--ig-scroll-thumb) var(--ig-scroll-track)}
+*::-webkit-scrollbar,*::-webkit-scrollbar-track,*::-webkit-scrollbar-corner{background-color:var(--ig-scroll-track)}
+*::-webkit-scrollbar-thumb{background-color:var(--ig-scroll-thumb);border-radius:8px}
+@media(forced-colors:active){*{scrollbar-color:auto}*::-webkit-scrollbar,*::-webkit-scrollbar-track,*::-webkit-scrollbar-thumb,*::-webkit-scrollbar-corner{background-color:revert}}
