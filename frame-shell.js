@@ -1,7 +1,7 @@
 /* The header belongs to one document; only the content frame navigates. */
 (() => {
   'use strict';
-  const version = '20261025-motion-exception1';
+  const version = '20261025-window-turn1';
   const names = ['index.html', 'world.html', 'starts.html', 'npc.html', 'guide.html', 'guide-nody.html', 'music.html'];
   const labels = ['소개·프로필', '세계관', '시작 상황', '주변 인물', '이용 가이드', '이용 가이드', '플레이리스트'];
   const base = new URL('./', location.href);
@@ -64,13 +64,22 @@
     document.documentElement.style.setProperty('--ig-content-gutter', (measure.offsetWidth - measure.clientWidth) + 'px');
     measure.remove();
     let contentFrame = null, musicFrame = null, activeFrame = null;
+    let pendingFrame = null, leavingFrame = null, entrance = null;
     let active = route(location.href) || route('index.html');
     if (location.protocol === 'file:' && location.hash.startsWith('#page=')) active = route(location.hash.slice(6)) || active;
     window.IGActiveContentFrame = () => activeFrame;
     function createFrame(id) {
       const view = document.createElement('iframe');
       view.id = view.name = id;
+      view.className = 'ig-route-frame';
       view.hidden = true;
+      view.inert = true;
+      view.addEventListener('load', () => {
+        try {
+          const loaded = route(view.contentWindow.location.href);
+          if (loaded?.pathname === route(view.dataset.igRoute)?.pathname) frameReady(view);
+        } catch { /* The ready message remains the file-preview fallback. */ }
+      });
       view.setAttribute('aria-hidden', 'true');
       view.setAttribute('allow', 'autoplay; clipboard-write; fullscreen');
       view.setAttribute('aria-busy', 'true');
@@ -85,32 +94,90 @@
       });
       document.title = (labels[names.indexOf(file)] || '이결 소개') + ' · 한이결.exe';
     };
+    function retire(view) {
+      if (!view) return;
+      view.hidden = true;
+      view.inert = true;
+      view.setAttribute('aria-hidden', 'true');
+      view.classList.remove('ig-frame-entering');
+      if (view !== musicFrame) {
+        if (contentFrame === view) contentFrame = null;
+        view.remove();
+      }
+    }
+    function finishEntrance() {
+      const running = entrance;
+      entrance = null;
+      running?.cancel();
+      activeFrame?.classList.remove('ig-frame-entering');
+      retire(leavingFrame);
+      leavingFrame = null;
+    }
+    function present(view) {
+      if (view !== pendingFrame) return;
+      finishEntrance();
+      const previous = activeFrame;
+      pendingFrame = null;
+      activeFrame = view;
+      if (previous && previous !== musicFrame && previous !== view) previous.id = previous.name = 'ig-content-leaving';
+      if (view !== musicFrame) {
+        contentFrame = view;
+        view.id = view.name = 'ig-content-frame';
+      }
+      view.hidden = false;
+      view.inert = false;
+      view.setAttribute('aria-hidden', 'false');
+      if (!previous || previous === view || typeof view.animate !== 'function') {
+        if (previous !== view) retire(previous);
+        return;
+      }
+      // Keep the previous document until ready, then reveal only the new window.
+      leavingFrame = previous;
+      previous.hidden = true;
+      previous.inert = true;
+      previous.setAttribute('aria-hidden', 'true');
+      view.classList.add('ig-frame-entering');
+      entrance = view.animate([
+        { opacity: .35, transform: 'translateY(7px) scale(.992)' },
+        { opacity: 1, transform: 'translateY(0) scale(1)' }
+      ], { duration: 220, easing: 'cubic-bezier(.16,1,.3,1)' });
+      entrance.id = 'ig-window-switch';
+      const running = entrance;
+      running.finished.then(() => {
+        if (entrance === running) finishEntrance();
+      }, () => { /* A newer selection owns cleanup after cancellation. */ });
+    }
+    function frameReady(view) {
+      view.dataset.igReady = 'true';
+      view.setAttribute('aria-busy', 'false');
+      present(view);
+    }
     function display(url) {
+      finishEntrance();
+      if (pendingFrame) {
+        if (pendingFrame !== activeFrame) retire(pendingFrame);
+        pendingFrame = null;
+      }
+      // A rapid return to the visible page needs no second document load.
+      if (activeFrame && route(activeFrame.dataset.igRoute)?.pathname === url.pathname) return;
       const music = url.pathname.endsWith('/music.html');
-      let view = music ? musicFrame : contentFrame;
+      let view = music ? musicFrame : null;
       const fresh = !view;
       if (fresh) {
-        view = createFrame(music ? 'ig-music-frame' : 'ig-content-frame');
-        if (music) musicFrame = view; else contentFrame = view;
+        view = createFrame(music ? 'ig-music-frame' : 'ig-content-pending');
+        if (music) musicFrame = view;
       }
-      activeFrame = view;
-      for (const item of [contentFrame, musicFrame]) {
-        if (!item) continue;
-        item.hidden = item !== view;
-        item.setAttribute('aria-hidden', String(item !== view));
-      }
+      pendingFrame = view;
       view.title = (labels[names.indexOf(url.pathname.split('/').pop())] || '이결 소개') + ' 본문';
       // The playlist document and its player are created once for this shell.
-      if (music && !fresh) return;
+      if (music && !fresh) {
+        if (view.dataset.igReady === 'true') present(view);
+        return;
+      }
       view.dataset.igRoute = url.href;
       view.setAttribute('aria-busy', 'true');
-      if (fresh) {
-        view.src = embedded(url);
-        document.body.append(view);
-      } else {
-        try { view.contentWindow.location.replace(embedded(url)); }
-        catch { view.contentWindow?.postMessage({ type: 'ig-frame-replace', href: url.href }, origin); }
-      }
+      view.src = embedded(url);
+      document.body.append(view);
     }
     const record = (url, replace = false) => {
       const target = location.protocol === 'file:' ? '#page=' + url.pathname.split('/').pop() : url.href;
@@ -131,12 +198,12 @@
     updateHeader(active);
     record(active, true);
     addEventListener('message', event => {
-      const sender = [contentFrame, musicFrame].find(view => view && event.source === view.contentWindow);
+      const sender = [contentFrame, musicFrame, pendingFrame, leavingFrame].find(view => view && event.source === view.contentWindow);
       if (!sender || (location.protocol !== 'file:' && event.origin !== location.origin)) return;
       if (event.data?.type === 'ig-frame-navigate' && sender === activeFrame) navigate(event.data.href);
       if (event.data?.type === 'ig-frame-ready') {
         const loaded = route(event.data.href);
-        if (loaded?.pathname === route(sender.dataset.igRoute)?.pathname) sender.setAttribute('aria-busy', 'false');
+        if (loaded?.pathname === route(sender.dataset.igRoute)?.pathname) frameReady(sender);
       }
     });
     document.addEventListener('click', event => {

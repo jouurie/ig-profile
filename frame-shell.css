@@ -2,8 +2,8 @@
 html.ig-frame-shell,html.ig-frame-shell body{height:100%;overflow:hidden;scrollbar-gutter:auto}
 .ig-frame-shell body{padding-right:var(--ig-content-gutter,0px)}
 .ig-frame-shell .site-shell>main,.ig-frame-shell .site-shell>footer{display:none}
-#ig-content-frame,#ig-music-frame{position:fixed;top:var(--ig-chrome-height,80px);left:0;display:block;width:100%;height:calc(100dvh - var(--ig-chrome-height,80px));border:0;background:transparent}
-#ig-content-frame[hidden],#ig-music-frame[hidden]{display:none}
+.ig-route-frame{position:fixed;top:var(--ig-chrome-height,80px);left:0;display:block;width:100%;height:calc(100dvh - var(--ig-chrome-height,80px));border:0;background:transparent}
+.ig-route-frame[hidden]{display:none}
 .ig-frame-content .site-shell>header,.ig-frame-content .ig-delight-ribbon{display:none!important}
 .ig-frame-content .site-shell>main{display:block}
 
@@ -25,3 +25,7 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 *::-webkit-scrollbar,*::-webkit-scrollbar-track,*::-webkit-scrollbar-corner{background-color:var(--ig-scroll-track)}
 *::-webkit-scrollbar-thumb{background-color:var(--ig-scroll-thumb);border-radius:8px}
 @media(forced-colors:active){*{scrollbar-color:auto}*::-webkit-scrollbar,*::-webkit-scrollbar-track,*::-webkit-scrollbar-thumb,*::-webkit-scrollbar-corner{background-color:revert}}
+
+/* One brief window-opening gesture; the shared header never moves. */
+.ig-route-frame{transform-origin:50% 0}
+.ig-route-frame.ig-frame-entering{z-index:1;will-change:transform,opacity}
