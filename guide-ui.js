@@ -104,7 +104,7 @@
       const labelGroups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
       if(labelGroups[row.label]){th.replaceChildren();labelGroups[row.label].forEach((part,index)=>{if(index)th.append(document.createTextNode(' '));th.append(make('span','guide-label-part',part));});}
       if(section.classList.contains('guide-model-features')&&row.label==='Opus'){
-        [row.value,...row.notes].forEach(text=>{const match=text.match(/^(Opus \d+(?:\.\d+)*):\s*(.*)$/);const line=make('div','model-opus-version');if(match){line.append(recommendedModelText('span','model-opus-label',match[1]),document.createTextNode(': '+match[2]));}else line.textContent=text;td.append(line);});
+        [row.value,...row.notes].forEach(text=>{const match=text.match(/^(Opus \d+(?:\.\d+)*):\s*(.*)$/);const line=make('div','model-opus-version');if(match){line.append(/^Opus (?:4\.6|5\.5)$/.test(match[1])?recommendedModelText('span','model-opus-label',match[1]):make('span','model-opus-label',match[1]),document.createTextNode(': '+match[2]));}else line.textContent=text;td.append(line);});
       }else{td.append(modelValue(row.value));if(title==='추론 조절')notes.push(...row.notes);else row.notes.forEach(n=>td.append(make('small','',n)));}
       tr.append(th, td); body.append(tr);
     });
