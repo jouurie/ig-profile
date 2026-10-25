@@ -63,6 +63,55 @@
     document.body.append(measure);
     document.documentElement.style.setProperty('--ig-content-gutter', (measure.offsetWidth - measure.clientWidth) + 'px');
     measure.remove();
+    const pageMenu = shell.querySelector(':scope>header>nav[aria-label="페이지 메뉴"]');
+    if (pageMenu) {
+      const header = pageMenu.parentElement, mobileMenu = matchMedia('(max-width:700px)');
+      const originalTabindex = pageMenu.getAttribute('tabindex');
+      if (!pageMenu.id) pageMenu.id = 'ig-page-menu';
+      const arrows = [-1, 1].map(direction => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'ig-menu-arrow ' + (direction < 0 ? 'is-left' : 'is-right');
+        button.setAttribute('aria-label', '페이지 메뉴 ' + (direction < 0 ? '왼쪽' : '오른쪽') + '으로 이동');
+        button.setAttribute('aria-controls', pageMenu.id);
+        button.addEventListener('click', () => moveMenu(direction));
+        return button;
+      });
+      pageMenu.before(arrows[0]); pageMenu.after(arrows[1]);
+      const maxMenuScroll = () => Math.max(0, pageMenu.scrollWidth - pageMenu.clientWidth);
+      function refreshMenu() {
+        const mobile = mobileMenu.matches, position = Math.max(0, pageMenu.scrollLeft);
+        arrows[0].disabled = !mobile || position <= 2;
+        arrows[1].disabled = !mobile || position >= maxMenuScroll() - 2;
+        if (mobile) pageMenu.tabIndex = 0;
+        else if (originalTabindex === null) pageMenu.removeAttribute('tabindex');
+        else pageMenu.setAttribute('tabindex', originalTabindex);
+        header.style.setProperty('--ig-menu-top', pageMenu.offsetTop + 'px');
+        header.style.setProperty('--ig-menu-height', pageMenu.getBoundingClientRect().height + 'px');
+      }
+      function moveMenu(direction) {
+        const items = [...pageMenu.children], origin = items[0]?.getBoundingClientRect().left;
+        if (origin === undefined) return;
+        const positions = items.map(item => item.getBoundingClientRect().left - origin);
+        const position = Math.max(0, pageMenu.scrollLeft);
+        const target = direction > 0 ? positions.find(value => value > position + 2) : positions.reverse().find(value => value < position - 2);
+        pageMenu.scrollTo({ left: Math.max(0, Math.min(maxMenuScroll(), target ?? (direction > 0 ? maxMenuScroll() : 0))), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      }
+      pageMenu.addEventListener('scroll', refreshMenu, { passive: true });
+      pageMenu.addEventListener('keydown', event => {
+        if (!mobileMenu.matches || event.target !== pageMenu || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          event.preventDefault(); moveMenu(event.key === 'ArrowLeft' ? -1 : 1);
+        } else if (event.key === 'Home' || event.key === 'End') {
+          event.preventDefault(); pageMenu.scrollLeft = event.key === 'Home' ? 0 : maxMenuScroll(); refreshMenu();
+        }
+      });
+      const menuResize = new ResizeObserver(refreshMenu);
+      menuResize.observe(pageMenu); menuResize.observe(header);
+      mobileMenu.addEventListener('change', refreshMenu);
+      document.fonts?.ready.then(refreshMenu);
+      refreshMenu();
+    }
     let contentFrame = null, musicFrame = null, activeFrame = null;
     let pendingFrame = null, leavingFrame = null, entrance = null;
     let active = route(location.href) || route('index.html');

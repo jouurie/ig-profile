@@ -35,3 +35,18 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 
 /* Keep the mobile page menu on one reachable row. */
 @media(max-width:700px){.ig-frame-shell .site-shell>header>nav[aria-label="페이지 메뉴"]{flex-wrap:nowrap;overflow-x:auto;min-width:0}.ig-frame-shell .site-shell>header>nav[aria-label="페이지 메뉴"]>a{flex:0 0 auto;white-space:nowrap}}
+
+/* Mobile page-menu arrows share the Rhodes triangle form and the IG palette. */
+.ig-frame-shell .site-shell>header>.ig-menu-arrow{display:none}
+@media(max-width:700px){
+  .ig-frame-shell .site-shell>header{position:relative}
+  .ig-frame-shell .site-shell>header>nav[aria-label="페이지 메뉴"]{flex-basis:calc(100% - 60px);margin-inline:30px}
+  .ig-frame-shell .site-shell>header>.ig-menu-arrow{position:absolute;top:var(--ig-menu-top);display:grid;place-items:center;width:30px;min-width:30px;height:var(--ig-menu-height);min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;color:var(--blue);box-shadow:none;font-size:0;line-height:1;transition:color 120ms ease;-webkit-tap-highlight-color:transparent}
+  .ig-frame-shell .site-shell>header>.ig-menu-arrow.is-left{left:0}
+  .ig-frame-shell .site-shell>header>.ig-menu-arrow.is-right{right:0}
+  .ig-frame-shell .site-shell>header>.ig-menu-arrow::before{content:"";display:block;width:10px;height:8px;background:currentColor;clip-path:polygon(100% 0,0 50%,100% 100%)}
+  .ig-frame-shell .site-shell>header>.ig-menu-arrow.is-right::before{clip-path:polygon(0 0,100% 50%,0 100%)}
+  .ig-frame-shell .site-shell>header>.ig-menu-arrow:disabled{opacity:.35;cursor:default}
+  .ig-frame-shell .site-shell>header>.ig-menu-arrow:not(:disabled):active{color:var(--pink)}
+}
+@media(max-width:700px) and (hover:hover) and (pointer:fine){.ig-frame-shell .site-shell>header>.ig-menu-arrow:not(:disabled):hover{color:var(--pink)}}
