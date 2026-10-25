@@ -1,7 +1,7 @@
 /* The header belongs to one document; only the content frame navigates. */
 (() => {
   'use strict';
-  const version = '20261025-window-turn1';
+  const version = '20261025-window-turn2';
   const names = ['index.html', 'world.html', 'starts.html', 'npc.html', 'guide.html', 'guide-nody.html', 'music.html'];
   const labels = ['소개·프로필', '세계관', '시작 상황', '주변 인물', '이용 가이드', '이용 가이드', '플레이리스트'];
   const base = new URL('./', location.href);
@@ -140,7 +140,7 @@
       entrance = view.animate([
         { opacity: .35, transform: 'translateY(7px) scale(.992)' },
         { opacity: 1, transform: 'translateY(0) scale(1)' }
-      ], { duration: 220, easing: 'cubic-bezier(.16,1,.3,1)' });
+      ], { duration: 160, easing: 'cubic-bezier(.16,1,.3,1)' });
       entrance.id = 'ig-window-switch';
       const running = entrance;
       running.finished.then(() => {
