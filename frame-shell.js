@@ -180,7 +180,9 @@
       document.body.append(view);
     }
     const record = (url, replace = false) => {
-      const target = location.protocol === 'file:' ? '#page=' + url.pathname.split('/').pop() : url.href;
+      const visible = new URL(url);
+      if (visible.pathname === base.pathname + 'index.html') { visible.pathname = base.pathname; visible.searchParams.delete('v'); }
+      const target = location.protocol === 'file:' ? '#page=' + url.pathname.split('/').pop() : visible.href;
       try { history[replace ? 'replaceState' : 'pushState']({ ...history.state, igRoute: url.href }, '', target); } catch { /* File previews still retain the frame. */ }
     };
     function navigate(value, fromHistory = false) {

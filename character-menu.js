@@ -13,7 +13,7 @@
   const list = document.createElement('ul'); list.className = 'character-switch-list';
   const characters = [
     { id: 'home', name: '소개 페이지', href: 'https://jouurie.github.io/' },
-    { id: 'ww', name: '와이어트, 웨이드', href: 'https://jouurie.github.io/ww-profile/WW/' },
+    { id: 'ww', name: '와이어트, 웨이드', href: 'https://jouurie.github.io/ww-profile/' },
     { id: 'ig', name: '이결', href: 'index.html' }
   ];
   characters.forEach(character => {
