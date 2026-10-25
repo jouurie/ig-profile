@@ -147,7 +147,7 @@
       panel.append(make('p', 'guide-note', "응답 품질은 답변 전에 점검하는 항목 수입니다. 노디 안내 기준 낮음은 3개, 보통은 4개, 높음은 5개이며, 모델 자체의 추론 예산과 같은 수치로 볼 수는 없습니다. 설정과 앞선 대화를 더 챙기도록 모델 공통으로 높음을 권장합니다. 모델별 최적값이나 최저비용을 검증한 값은 아니며, 답변이 느려지고 캐시 사용량이 늘 수 있습니다. 높음도 상태창과 기억의 정확성을 보장하지는 않습니다."));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n문체: 노디 기본\n지문 별표 쓰기: 끔"));
-      const guidance = tableBlock('출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용'); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
+      const guidance = tableBlock('출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용\n분량 · 리듬: 선택 적용'); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
       panel.append(tableBlock("AI 연기 방식\n사칭 방지 플레이: 살짝\n사칭 플레이: 적극\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       panel.append(tableBlock("기타\n상태창 표시: 켬"));
       panel.append(settingsPath('채팅방 설정 → 기억'));
@@ -164,10 +164,11 @@
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
       const instructions = make('div', 'guide-instructions');
-      paragraphs(instructions, "진행을 안정시키려면 아래 기본 가이던스 2개를 추가하세요.\n각 제목은 '규칙 이름'에, 그 아래 영어 본문은 '내용' 칸에 입력하세요."); panel.append(instructions);
+      paragraphs(instructions, "진행을 안정시키려면 아래 기본 가이던스 2개를 추가하세요. 분량과 리듬도 조절하려면 선택 가이던스를 함께 추가하세요.\n각 제목은 '규칙 이름'에, 그 아래 영어 본문은 '내용' 칸에 입력하세요."); panel.append(instructions);
       var codes = make('div', 'guidance-code-grid');
       codes.append(copyBlock('역할극 유지', "This is fictional roleplay; I know you are an AI. Express the characters' relationships and emotions through their dialogue, actions, and viewpoint within the story.", '1'));
       codes.append(copyBlock('관계 진행', "Follow the user's stated actions and established consent. Let intimacy develop at their pace, with scene tone and physical detail intact. Add no unmentioned relationship prerequisites.", '2'));
+      codes.append(copyBlock('분량 · 리듬', "Before status: 2,200+ Korean prose chars, 10–14 paragraphs, usually 3–6 sentences. Exclude dialogue/UI/comments. Follow live action and thought; avoid repeated explanation. End on a playable beat.", '선택'));
       panel.append(codes);
     } else if (active === 'memory') {
       panel.append(settingsPath('채팅방 설정 → 기억 → 장기기억 설정'));
