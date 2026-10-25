@@ -32,11 +32,22 @@
     return path;
   }
   function externalLink(host, label, url) { const a = make('a', 'guide-link', label + ' ↗'); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; host.append(a); }
+  function alignBookmarkHeading(){
+    const expected=active,heading=panel.querySelector('.settings-platform-title')||panel.querySelector('h2,h3')||panel;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      if(active!==expected||!heading.isConnected)return;
+      panel.style.minHeight='';
+      const offset=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0;
+      panel.style.minHeight=Math.ceil(heading.getBoundingClientRect().top-panel.getBoundingClientRect().top+innerHeight-offset)+'px';
+      heading.tabIndex=-1;heading.focus({preventScroll:true});
+      window.scrollTo({top:Math.max(0,heading.getBoundingClientRect().top+scrollY-offset),behavior:'instant'});
+    }));
+  }
   function disclosureLink(label, id) {
     const a = make('a', 'guide-inline-link', label); a.href = '#' + id;
     a.addEventListener('click', event => {
       event.preventDefault(); select(id === 'guide-output' ? 'output' : id === 'guide-recommended' ? 'recommended' : id === 'guide-memory' ? 'memory' : 'models');
-      panel.focus({ preventScroll: true }); panel.scrollIntoView({ block: 'start' });
+      alignBookmarkHeading();
     });
     return a;
   }
@@ -267,12 +278,12 @@
       const table=section.querySelector('table'),heading=section.querySelector(':scope>h3');
       if(!heading||!table||table.rows.length<3)return;
       const details=make('details','guide-table-disclosure'),summary=make('summary','',heading.textContent);
-      heading.remove();details.open=!mobileTables.matches;summary.tabIndex=mobileTables.matches?0:-1;
+      heading.remove();details.open=true;summary.tabIndex=mobileTables.matches?0:-1;
       summary.addEventListener('click',event=>{if(!mobileTables.matches)event.preventDefault();});
       details.append(summary,...section.childNodes);section.append(details);
     });
   }
-  mobileTables.addEventListener('change',()=>panel.querySelectorAll('.guide-table-disclosure').forEach(details=>{details.open=!mobileTables.matches;details.querySelector('summary').tabIndex=mobileTables.matches?0:-1;}));
+  mobileTables.addEventListener('change',()=>panel.querySelectorAll('.guide-table-disclosure').forEach(details=>{details.querySelector('summary').tabIndex=mobileTables.matches?0:-1;}));
   function packSettingTables(){
     if(active!=='recommended'||platformSelections.settings!=='nody')return;
     let group=null,unit=null;
@@ -294,7 +305,7 @@
     });
   }
   function select(key, focus) {
-    active = key; panel.replaceChildren(); buttons.forEach(b => { const selected = b.dataset.guideItem === key; b.setAttribute('aria-selected', String(selected)); b.tabIndex = selected ? 0 : -1; });
+    active = key; panel.style.minHeight=''; panel.replaceChildren(); buttons.forEach(b => { const selected = b.dataset.guideItem === key; b.setAttribute('aria-selected', String(selected)); b.tabIndex = selected ? 0 : -1; });
     const selected = buttons.find(b => b.dataset.guideItem === key); panel.setAttribute('aria-labelledby', selected.id); renderers[key](); packSettingTables(); foldLongTables();
     const state = $('#status'); if (state) state.hidden = key !== 'status'; if (focus) selected.focus();
   }
