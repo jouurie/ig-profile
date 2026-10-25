@@ -96,14 +96,14 @@
     '.track-timeline','.track-volume','.track-options','.track-original',
     'figure','.window','header','footer'
   ].join(',');
-  let current = null, point = null, frame = 0;
+  let current = null, point = null, frame = 0, touchPoint = null;
   function clear() {
     if (current) { current.removeAttribute('data-ig-hover'); current.removeAttribute('data-ig-tone'); current.removeAttribute('data-ig-fill'); }
     current = null;
   }
-  function show(node) {
+  function show(node, pressed = false) {
     let next = null;
-    if (fine.matches && node instanceof Element && shell.contains(node)) {
+    if ((fine.matches || pressed) && node instanceof Element && shell.contains(node)) {
       next = node.closest(controls) || (document.body.matches('.page-guide') ? null : node.closest(surfaces));
       if (next && (!shell.contains(next) || next.closest('[hidden],[inert],[aria-hidden="true"]'))) next = null;
     }
@@ -127,7 +127,19 @@
     point = { x: event.clientX, y: event.clientY };
     show(event.target);
   }
-  function leave() { point = null; clear(); }
+  function leave() { point = null; touchPoint = null; clear(); }
+  document.addEventListener('pointerdown', event => {
+    if (event.pointerType !== 'touch' || fine.matches) return;
+    touchPoint = { x: event.clientX, y: event.clientY };
+    point = null;
+    show(event.target, true);
+  }, { passive: true });
+  document.addEventListener('pointermove', event => {
+    if (touchPoint && Math.hypot(event.clientX - touchPoint.x, event.clientY - touchPoint.y) > 8) leave();
+  }, { passive: true });
+  document.addEventListener('pointerup', () => { if (touchPoint) leave(); }, { passive: true, capture: true });
+  document.addEventListener('pointercancel', () => { if (touchPoint) leave(); }, { passive: true, capture: true });
+  document.addEventListener('scroll', () => { if (touchPoint) leave(); }, { passive: true, capture: true });
   document.addEventListener('pointerover', follow, { passive: true });
   document.addEventListener('pointermove', follow, { passive: true });
   document.addEventListener('pointerout', event => { if (!event.relatedTarget) leave(); }, { passive: true });

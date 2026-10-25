@@ -5,7 +5,7 @@
 .page-guide .guide-disclosure{background:#f7f4ff;scroll-margin-top:20px}
 .page-guide .setting-metric,.page-guide .command-explainer code,.page-guide .guide-link{background:#f7f4ff}
 .page-guide .guide-inline-link{color:#20152f;text-decoration-color:#75698c;text-underline-offset:3px;font-weight:700}
-.page-guide .guide-inline-link:hover{background:#ffb7d4}
+@media (hover:hover) and (pointer:fine){.page-guide .guide-inline-link:hover{background:#ffb7d4}}@media (hover:none),(pointer:coarse),(pointer:none){.page-guide .guide-inline-link:active{background:#ffb7d4}}
 .page-guide .guide-inline-link:focus-visible,.page-guide summary:focus-visible{outline:2px solid #20152f;outline-offset:3px}
 .page-guide .guide-list li,.page-guide .guide-table td{overflow-wrap:anywhere}
 .page-guide .guide-table th{overflow-wrap:anywhere}
@@ -51,7 +51,7 @@
 .page-guide .copy-card-badge{display:grid;place-items:center;flex-shrink:0;min-width:30px;height:30px;border:1px solid #bdd5ff;border-radius:4px;background:#eef6ff;color:#23172f;font:700 13px/1 Consolas,monospace}
 .page-guide .copy-card-badge.is-optional{min-width:40px;padding:0 7px;border-color:#ffb7d4;background:#fff0f7;font-family:inherit;font-size:11px}
 .page-guide .copy-card .copy-button{position:static;flex-shrink:0;min-height:34px;padding:5px 11px;border-color:#7eb3ff;background:#bdd5ff;color:#20152f;font-size:11px;font-weight:700;white-space:nowrap}
-.page-guide .copy-card .copy-button:hover{background:#eef6ff;color:#23172f;border-color:#20152f}
+@media (hover:hover) and (pointer:fine){.page-guide .copy-card .copy-button:hover{background:#eef6ff;color:#23172f;border-color:#20152f}}@media (hover:none),(pointer:coarse),(pointer:none){.page-guide .copy-card .copy-button:active{background:#eef6ff;color:#23172f;border-color:#20152f}}
 .page-guide .copy-card .copy-button:focus-visible{outline:2px solid #20152f;outline-offset:3px}
 .page-guide .copy-content-label{margin-bottom:7px}
 .page-guide .copy-content{margin:0;padding:15px 16px;border:1px solid #bdd5ff;border-left:3px solid #7eb3ff;background:#f7f4ff;color:#23172f;font:12px/1.95 Consolas,monospace;max-height:340px;overflow-wrap:anywhere}
@@ -112,8 +112,8 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 .page-guide .guide-nav-items{display:flex;flex-wrap:wrap;gap:6px}
 .page-guide #guide-tabs .guide-nav-items button{width:auto;min-height:32px;padding:5px 9px;border:1px solid var(--blue);border-radius:3px;background:var(--bluepaper);color:var(--ink);font-size:11px;line-height:1.6;text-align:left}
 .page-guide #guide-tabs .guide-nav-items button[aria-selected=true]{border-color:var(--ink);background:var(--pink);box-shadow:0 2px 0 var(--ink)}
-.page-guide #guide-tabs .guide-nav-items button:hover{background:var(--pinkpaper)}
-.page-guide #guide-tabs .guide-nav-items button[aria-selected=true]:hover{background:var(--pink)}
+@media (hover:hover) and (pointer:fine){.page-guide #guide-tabs .guide-nav-items button:hover{background:var(--pinkpaper)}}@media (hover:none),(pointer:coarse),(pointer:none){.page-guide #guide-tabs .guide-nav-items button:active{background:var(--pinkpaper)}}
+@media (hover:hover) and (pointer:fine){.page-guide #guide-tabs .guide-nav-items button[aria-selected=true]:hover{background:var(--pink)}}@media (hover:none),(pointer:coarse),(pointer:none){.page-guide #guide-tabs .guide-nav-items button[aria-selected=true]:active{background:var(--pink)}}
 .page-guide .guide-model-notes{padding:13px 14px;border-top:1px solid var(--blue);background:var(--pinkpaper);color:var(--muted);font-size:11px;line-height:1.8}
 .page-guide .guide-model-notes h4{margin:0 0 5px;color:var(--ink);font-size:11px}
 .page-guide .guide-model-notes p{margin:3px 0;word-break:keep-all;overflow-wrap:anywhere}

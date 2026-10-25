@@ -93,7 +93,7 @@
   display: inline-block;
   transition: transform 180ms ease-out;
 }
-.titlebar:hover > span:last-child { transform: translateY(-1px); }
+@media (hover:hover) and (pointer:fine){.titlebar:hover > span:last-child { transform: translateY(-1px); }}@media (hover:none),(pointer:coarse),(pointer:none){.titlebar:active > span:last-child { transform: translateY(-1px); }}
 
 /* Modest movement keeps click targets and the surrounding layout stable. */
 .site-shell nav a,
@@ -148,7 +148,10 @@
   .notebook > figure:hover,
   .player > img:hover { animation-play-state: paused; }
   .record-toggle:hover { box-shadow: 2px 2px 0 var(--blue); }
-}
+}@media (hover:none),(pointer:coarse),(pointer:none){.site-shell nav a:active,
+  .site-shell .guide-link:active { translate: none; }.hero-copy button:active,
+  .player-controls button:active { animation: ig-tada 450ms ease-out; }.notebook > figure:active,
+  .player > img:active { animation-play-state: paused; }.record-toggle:active { box-shadow: 2px 2px 0 var(--blue); }}
 
 /* No dimensions, font sizes, iframe selectors or ancestor transforms touch
    the original StatePop. Existing motion remains enabled independently of system preferences. */

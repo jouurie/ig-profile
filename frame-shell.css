@@ -17,7 +17,7 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 .ig-image-viewer::backdrop{background:rgba(32,21,47,.7)}
 .ig-image-viewer img{display:block;max-width:calc(100vw - 58px);max-height:calc(100dvh - 100px);width:auto;height:auto;object-fit:contain;margin:auto}
 .ig-image-close{position:absolute;right:10px;top:8px;background:var(--pinkpaper);font-size:11px;min-height:26px}
-.ig-image-close:hover{background:var(--pink)}
+@media (hover:hover) and (pointer:fine){.ig-image-close:hover{background:var(--pink)}}@media (hover:none),(pointer:coarse),(pointer:none){.ig-image-close:active{background:var(--pink)}}
 
 /* Every scrolling surface uses the same accepted pink and blue palette. */
 :root{--ig-scroll-thumb:var(--pink,#ffb7d4);--ig-scroll-track:var(--bluepaper,#eef6ff)}

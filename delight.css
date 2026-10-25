@@ -31,3 +31,8 @@
   .site-shell .tags > span[data-ig-hover="content"] { color: var(--ink); background-color: var(--blue); }
   .site-shell .tags > span:nth-child(even)[data-ig-hover="content"] { background-color: var(--pink); }
 }
+
+@media (hover:none),(pointer:coarse),(pointer:none){.site-shell [data-ig-hover="content"] { color: var(--muted); }.site-shell [data-ig-hover="content"][data-ig-tone="ink"] { color: var(--ink); }.site-shell :is(button,summary,[role="button"],[role="tab"])[data-ig-hover="control"] {
+    background-color: var(--pinkpaper);
+    color: var(--ink);
+  }.site-shell :is(button,summary,[role="button"],[role="tab"])[data-ig-hover="control"][data-ig-fill="blue"] { background-color: var(--bluepaper); }.site-shell a[data-ig-hover="control"] { color: var(--muted); }.site-shell img[data-ig-hover] { filter: brightness(1.06) saturate(1.08); }.site-shell .npc-folder[data-ig-hover="control"] { background: transparent; color: var(--muted); }.site-shell .npc-folder[data-ig-hover]::before { filter: brightness(1.08); }.site-shell .tags > span[data-ig-hover="content"] { color: var(--ink); background-color: var(--blue); }.site-shell .tags > span:nth-child(even)[data-ig-hover="content"] { background-color: var(--pink); }}
