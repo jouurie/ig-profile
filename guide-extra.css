@@ -145,3 +145,8 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 .page-guide .guide-model-section>.guide-table,.page-guide .guide-table-disclosure>.guide-table{display:table;width:100%;margin:0;padding:0;border-spacing:0;border-collapse:collapse;table-layout:fixed}
 .page-guide .guide-model-section .guide-table th{width:42%}
 @media(max-width:650px){.page-guide .settings-table-grid{grid-template-columns:1fr}.page-guide .settings-table-column:empty{display:none}}
+
+/* Optional guidance uses the established ELYN pink palette. */
+.page-guide .copy-card.is-optional{border-color:#ffb7d4}
+.page-guide .copy-card.is-optional .copy-card-header{border-bottom-color:#ffb7d4;background:#fff0f7}
+.page-guide .copy-card.is-optional .copy-content{border-color:#ffb7d4}

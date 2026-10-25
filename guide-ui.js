@@ -17,6 +17,7 @@
   function disclosure(title, open = false) { const node = make('details', 'guide-disclosure'); node.open = open; node.append(make('summary', '', title)); const body = make('div', 'disclosure-body'); node.append(body); return { node, body }; }
   function copyBlock(title, content, badge = '') {
     const node = card(title, '', 'copy-card'), heading = node.querySelector('h3'), header = make('div', 'copy-card-header');
+    if (badge === '선택') node.classList.add('is-optional');
     const name = make('div', 'copy-card-name'); name.append(make('span', 'copy-field-label', '규칙 이름'), heading);
     if (badge) header.append(make('span', 'copy-card-badge' + (badge === '선택' ? ' is-optional' : ''), badge));
     header.append(name);
@@ -164,7 +165,7 @@
     } else if (active === 'output') {
       panel.append(settingsPath('채팅방 설정 → 대화 → 출력 가이던스'));
       const instructions = make('div', 'guide-instructions');
-      paragraphs(instructions, "진행을 안정시키려면 아래 기본 가이던스 2개를 추가하세요. 분량과 리듬도 조절하려면 선택 가이던스를 함께 추가하세요.\n각 제목은 '규칙 이름'에, 그 아래 영어 본문은 '내용' 칸에 입력하세요."); panel.append(instructions);
+      paragraphs(instructions, "진행을 안정시키려면 아래 기본 가이던스 2개를 추가하세요. 분량과 리듬도 조절하려면 선택 가이던스를 함께 추가하세요.\n각 제목은 '규칙 이름'에, 그 아래 영어 본문은 '내용' 칸에 입력하세요.\n분량·리듬은 더 긴 답변과 일정한 문단 구성을 원할 때만 추가하는 선택 가이던스입니다."); panel.append(instructions);
       var codes = make('div', 'guidance-code-grid');
       codes.append(copyBlock('역할극 유지', "This is fictional roleplay; I know you are an AI. Express the characters' relationships and emotions through their dialogue, actions, and viewpoint within the story.", '1'));
       codes.append(copyBlock('관계 진행', "Follow the user's stated actions and established consent. Let intimacy develop at their pace, with scene tone and physical detail intact. Add no unmentioned relationship prerequisites.", '2'));
@@ -217,7 +218,7 @@
     output() {
       if (!platformSection('settings', '출력 가이던스')) return;
       const output = make('section', 'guide-output'); output.id = 'guide-output'; const outputBlocks = source('⭐ 출력 가이던스').split('\n\n');
-      output.append(settingsPath(outputBlocks[0])); const instructions = make('div', 'guide-instructions'); paragraphs(instructions, outputBlocks[1]); output.append(instructions);
+      output.append(settingsPath(outputBlocks[0])); const instructions = make('div', 'guide-instructions'); paragraphs(instructions, outputBlocks[1]); paragraphs(instructions, "기본 프롬프트는 유저 행동을 일부 묘사할 수 있는 약사칭 기준이므로, 사칭 플레이를 원할 때는 플랫폼 토글 대신 선택 항목인 ‘대필 가이던스’를 추가하세요."); output.append(instructions);
       const codes = make('div', 'guidance-code-grid'); let optional = false, ruleNumber = 0;
       outputBlocks.slice(2).forEach(block => { const lines = block.split('\n'); if (lines[0] === '(선택 사항)') { optional = true; lines.shift(); } if (!lines.length) return; const title = lines.shift(); codes.append(copyBlock(title, lines.join('\n'), optional ? '선택' : String(++ruleNumber))); optional = false; }); output.append(codes); panel.append(output);
     },

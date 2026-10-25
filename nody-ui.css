@@ -30,3 +30,9 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 
 /* Native equivalent of GitHub delight.js tag pointer feedback. */
 @media(hover:hover) and (pointer:fine){.i2 .il>span:is(:hover,:active){color:var(--ink);background-color:var(--blue)}.i2 .il>span:nth-child(even):is(:hover,:active){background-color:var(--pink)}}@media (hover:none),(pointer:coarse),(pointer:none){.i2 .il>span:is(:active){color:var(--ink);background-color:var(--blue)}.i2 .il>span:nth-child(even):is(:active){background-color:var(--pink)}}
+
+/* Optional guidance uses the established ELYN pink palette. */
+#guide .i3w.is-optional{border-color:#ffb7d4}
+#guide .i3w.is-optional>.ig-guide-subtitle,#guide .i3w.is-optional .i3x{border-bottom-color:#ffb7d4;background:#fff0f7}
+#guide .i3w.is-optional .i3y{border-color:#ffb7d4;background:#fff0f7}
+#guide .i3w.is-optional .i42{border-color:#ffb7d4}
