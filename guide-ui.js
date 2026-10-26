@@ -67,8 +67,8 @@
     lines.forEach(line => { if (!line.trim()) return; if (line.startsWith('↳')) { if (rows.length) rows[rows.length - 1].notes.push(line.slice(1).trim()); return; } const at = line.indexOf(':'); rows.push({ label: at >= 0 ? line.slice(0, at) : '', value: at >= 0 ? line.slice(at + 1).trim() : line, notes: [] }); });
     return rows;
   }
-  function recommendedModelText(tag, className, text) {
-    const node = make(tag, className), pattern = /(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g;
+  function recommendedModelText(tag, className, text, includeFlash37 = false) {
+    const node = make(tag, className), pattern = includeFlash37 ? /(?:Gemini )?3\.7 Flash|(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g : /(?:Gemini )?3\.8 Flash|(?:Gemini )?4 Argon|(?:Claude )?Opus(?: \d+(?:\.\d+)*)?|GPT[ -]5\.6 Sol/g;
     let end = 0;
     for (const match of text.matchAll(pattern)) {
       node.append(document.createTextNode(text.slice(end, match.index)));
@@ -99,7 +99,7 @@
     section.append(make('h3', '', title));
     rowsFromBlock(block).forEach(row => {
       if (title === '참고' && !row.label) { notes.push(row.value, ...row.notes); return; }
-      const tr = make('tr'), th = recommendedModelText('th', '', row.label), td = make('td');
+      const tr = make('tr'), th = recommendedModelText('th', '', row.label, section.classList.contains('guide-model-features')), td = make('td');
       th.scope = 'row';
       const labelGroups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
       if(labelGroups[row.label]){th.replaceChildren();labelGroups[row.label].forEach((part,index)=>{if(index)th.append(document.createTextNode(' '));th.append(make('span','guide-label-part',part));});}
