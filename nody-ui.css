@@ -40,3 +40,6 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 /* model-highlight-scope */
 #guide .guide-model-operation .i3n,#guide .guide-model-features td .i3n:not(.model-opus-label){background:none}
 #guide .model-opus-version{font:inherit;color:inherit}#guide .model-opus-version+.model-opus-version{margin-top:8px}
+
+/* Native zoom must escape entrance-animation stacking contexts. */
+.i2:has(.ie[open]),.i2 :has(.ie[open]){animation:none!important;transform:none!important;translate:none!important;rotate:none!important;scale:none!important;filter:none!important;opacity:1!important;will-change:auto!important}.i2 .i5:has(.ie[open]){position:relative;z-index:10001}.ie[open]>summary{z-index:10002}
