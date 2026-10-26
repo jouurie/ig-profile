@@ -99,7 +99,7 @@
     section.append(make('h3', '', title));
     rowsFromBlock(block).forEach(row => {
       if (title === '참고' && !row.label) { notes.push(row.value, ...row.notes); return; }
-      const tr = make('tr'), th = recommendedModelText('th', '', row.label, section.classList.contains('guide-model-features')), td = make('td');
+      const tr = make('tr'), th = recommendedModelText('th', '', row.label, true), td = make('td');
       th.scope = 'row';
       const labelGroups={'자동으로 요약하기':['자동으로','요약하기'],'원문 줄바꿈 그대로':['원문 줄바꿈','그대로'],'내 캐릭터 대신 하기 (사칭)':['내 캐릭터','대신 하기','(사칭)'],'적극적인 사칭 플레이':['적극적인','사칭 플레이']};
       if(labelGroups[row.label]){th.replaceChildren();labelGroups[row.label].forEach((part,index)=>{if(index)th.append(document.createTextNode(' '));th.append(make('span','guide-label-part',part));});}
