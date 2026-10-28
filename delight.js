@@ -92,7 +92,7 @@
     '.command-platform-label','.copy-card-badge','.copy-field-label','.guide-copy-label',
     '.titlebar','.section-heading','.page-masthead','.world-lead','.world-idea-card',
     '.guide-card','.guide-model-section','.guide-instructions','.settings-path',
-    '.tags > span','.relation-label','.records-heading','.opening-detail','.player',
+    '.tags .tag-row > span','.relation-label','.records-heading','.opening-detail','.player',
     '.track-timeline','.track-volume','.track-options','.track-original',
     'figure','.window','header','footer'
   ].join(',');
