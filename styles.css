@@ -192,3 +192,29 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
  .status-reference .status-field-table tbody th{grid-row:span 2}
  .status-reference .status-field-table tbody td{grid-column:2}
 }
+
+/* Shared section-heading language; desktop preview and reference share one row. */
+.page-guide #status .status-reference{margin:0;border-radius:4px}
+.page-guide #status>.section-heading,.page-guide #status .status-reference>summary{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bluepaper);font-size:13px;font-weight:700;line-height:1.3}
+.page-guide #status>.section-heading h2{font-size:13px;line-height:1.3;margin:0}
+.page-guide #status .status-reference>summary{letter-spacing:1px;list-style:none}
+.page-guide #status .status-reference>summary::-webkit-details-marker{display:none}
+.page-guide #status .status-reference>summary::before{content:'▸';font-size:11px;letter-spacing:0}
+.page-guide #status .status-reference[open]>summary::before{content:'▾'}
+.page-guide #status .status-reference>summary::after{content:'';height:1px;flex:1;background:var(--blue)}
+.page-guide #status .status-reference[open]>summary{border-bottom:1px solid var(--blue);margin-bottom:6px}
+.page-guide #status .status-field-table th:first-child{width:32%}
+.page-guide #status .status-field-table th:nth-child(2){width:36%}
+.page-guide #status .status-field-table th:nth-child(3){width:32%}
+.page-guide #status .status-field-table tbody th code{padding:0;font:10.5px/1.45 ui-monospace,monospace;white-space:nowrap;overflow-wrap:normal;word-break:normal}
+@media(min-width:800px){
+ .page-guide #status.state-section{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);align-items:start;gap:10px 20px;width:100%;max-width:none;margin:18px 0 0}
+ .page-guide #status>.section-heading{grid-column:1;grid-row:1;margin:0;min-height:34px}
+ .page-guide #status>.state-platforms{grid-column:1;grid-row:2;margin:0}
+ .page-guide #state-frame,.page-guide #state-placeholder{grid-column:1;grid-row:3;width:100%;margin:0}
+ .page-guide #command-feedback{grid-column:1;grid-row:4;margin:0}
+ .page-guide #status-reference-slot{grid-column:2;grid-row:1 / span 4;min-width:0;align-self:start}
+}
+@media(max-width:799px){
+ .page-guide #status-reference-slot{margin-top:10px}
+}

@@ -60,7 +60,7 @@
 /* File previews use the local entrance animations below. */
 
 .site-shell > header {
-  animation: ig-window-enter 360ms cubic-bezier(.2,.7,.3,1) both;
+  animation: ig-window-enter 120ms cubic-bezier(.2,.7,.3,1) both;
 }
 .page-masthead,
 .page-index .hero,
@@ -68,16 +68,16 @@
 .page-starts .film,
 .page-npc #npc,
 .page-music .music-layout {
-  animation: ig-window-enter 480ms cubic-bezier(.2,.7,.3,1) both;
+  animation: ig-window-enter 120ms cubic-bezier(.2,.7,.3,1) both;
 }
-.page-masthead { animation-delay: 40ms; }
-.page-index .hero { animation-delay: 70ms; }
+.page-masthead { animation-delay: 0ms; }
+.page-index .hero { animation-delay: 0ms; }
 .world-grid > .world-card {
-  animation: ig-panel-enter 420ms ease-out both;
+  animation: ig-panel-enter 120ms ease-out both;
 }
-.world-grid > .world-card:nth-child(2) { animation-delay: 65ms; }
-.world-grid > .world-card:nth-child(3) { animation-delay: 130ms; }
-.world-grid > .world-card:nth-child(4) { animation-delay: 195ms; }
+.world-grid > .world-card:nth-child(2) { animation-delay: 0ms; }
+.world-grid > .world-card:nth-child(3) { animation-delay: 0ms; }
+.world-grid > .world-card:nth-child(4) { animation-delay: 0ms; }
 
 .brand-heart {
   display: inline-block;
@@ -114,10 +114,10 @@
 .npc-preview,
 .guide-disclosure[open] > .disclosure-body,
 .intro-toolbar details[open] > :not(summary) {
-  animation: ig-panel-enter 300ms cubic-bezier(.2,.7,.3,1) both;
+  animation: ig-panel-enter 120ms cubic-bezier(.2,.7,.3,1) both;
 }
-#guide-panel > :nth-child(2) { animation-delay: 40ms; }
-#guide-panel > :nth-child(3) { animation-delay: 70ms; }
+#guide-panel > :nth-child(2) { animation-delay: 0ms; }
+#guide-panel > :nth-child(3) { animation-delay: 0ms; }
 
 .npc-folder,.npc-folder::before{animation:none;transform:none;translate:none;rotate:none;transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease}
 .npc-folder[aria-pressed="true"]{background-color:var(--pink)}
