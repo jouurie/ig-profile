@@ -15,8 +15,9 @@
   };
   function playbackState(value) {
     playing = value;
-    play.textContent = value ? 'Ⅱ' : '▶';
+    play.innerHTML = value ? "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M8 5v14M16 5v14\"/></svg>" : "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m8 5 11 7-11 7z\"/></svg>";
     play.setAttribute('aria-label', value ? '일시정지' : '재생');
+    play.title = play.getAttribute('aria-label');
     play.setAttribute('aria-pressed', String(value));
   }
   function progress(position) {
@@ -120,6 +121,7 @@
     $('track-volume-value').textContent = shown + '%';
     mute.setAttribute('aria-pressed', String(silent));
     mute.setAttribute('aria-label', silent ? '음소거 해제' : '음소거');
+    mute.title = mute.getAttribute('aria-label');
   }
   function setVolume(value) {
     if (!widget || !ready) return;
@@ -141,6 +143,7 @@
     repeatOne = !repeatOne;
     $('track-repeat').setAttribute('aria-pressed', String(repeatOne));
     $('track-repeat').setAttribute('aria-label', repeatOne ? '한 곡 반복 끄기' : '한 곡 반복 켜기');
+    $('track-repeat').title = $('track-repeat').getAttribute('aria-label');
   });
   select(0);
   controls();
@@ -158,10 +161,10 @@
           setVolume(Number(volume.value));
           widget.load(currentURL(), { auto_play: false });
           controls();
-          setStatus('재생 버튼을 눌러 주세요.');
+          setStatus('');
         },
-        play() { if (dead) return; failed = false; window.clearTimeout(requestTimer); playbackState(true); setStatus('재생 중'); },
-        pause() { if (dead) return; playbackState(false); if (!failed) setStatus('일시정지'); },
+        play() { if (dead) return; failed = false; window.clearTimeout(requestTimer); playbackState(true); setStatus(''); },
+        pause() { if (dead) return; playbackState(false); if (!failed) setStatus(''); },
         volume(value, muted) {
           if (dead) return;
           const level = clampVolume(value);
@@ -192,4 +195,24 @@
   });
   window.addEventListener('pageshow', event => { if (event.persisted) { dead = false; controls(); connect(); } });
   connect();
+})();
+
+/* Function hints stay within the viewport and follow current control state. */
+(() => {
+ if(window.IG_FRAME_SHELL||window.CR_FRAME_SHELL)return;
+ const tip=document.createElement('span');tip.className='player-function-tip';tip.setAttribute('role','tooltip');tip.hidden=true;document.body.append(tip);
+ let active;
+ const selector='.player-controls button,.player-controls a,#track-mute,.sh-nav-arrow';
+ function show(event){const target=event.target.closest?.(selector);if(!target)return;active=target;
+  const text=target.id==='track-link'?'원본에서 듣기':target.getAttribute('aria-label')||target.title;
+  if(!text)return;target.removeAttribute('title');tip.textContent=text;tip.hidden=false;
+  const r=target.getBoundingClientRect(),t=tip.getBoundingClientRect();
+  tip.style.left=Math.max(6,Math.min(innerWidth-t.width-6,r.left+r.width/2-t.width/2))+'px';
+  tip.style.top=(r.bottom+t.height+8<innerHeight?r.bottom+6:Math.max(6,r.top-t.height-6))+'px';
+ }
+ function hide(event){if(event?.relatedTarget&&active?.contains(event.relatedTarget))return;tip.hidden=true;active=null;}
+ document.addEventListener('pointerover',show);document.addEventListener('focusin',show);
+ document.addEventListener('pointerout',hide);document.addEventListener('focusout',hide);
+ document.addEventListener('pointerdown',hide);document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+ window.addEventListener('scroll',()=>hide(),true);window.addEventListener('resize',()=>hide());
 })();
