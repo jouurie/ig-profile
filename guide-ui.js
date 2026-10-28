@@ -248,8 +248,9 @@
       if (!platformSection('status', '상태창')) return;
       const platform = platformSelections.status;
       const intro = card('상태창 읽는 법'); list(intro, guide('상태창 안내')); panel.append(intro);
-      const fields = card('상태값');
-      fields.append(make('p', 'guide-note', platform === 'nody'
+      const fields = make('details', 'status-reference'), referenceBody = make('div', 'status-reference-body');
+      fields.append(make('summary', '', '상태값 · 필요할 때 펼치기'), referenceBody);
+      referenceBody.append(make('p', 'guide-note', platform === 'nody'
         ? "노디는 응답 끝의 status JSON을 수정합니다. n·charHeart·charReason·charImmersion은 숫자, 나머지는 문자열입니다."
         : '엘린은 StatePop 호출문의 prop 값을 수정합니다. 숫자는 중괄호, 문자열은 큰따옴표로 감쌉니다.'));
       const table = make('table', 'guide-table status-field-table'), head = make('thead'), header = make('tr'), body = make('tbody');
@@ -264,7 +265,10 @@
         value.append(make('span', 'status-value-kind', row.kind), make('code', '', row.example));
         tr.append(key, meaning, value); body.append(tr);
       });
-      table.append(head, body); fields.append(table); panel.append(fields);
+      table.append(head, body); referenceBody.append(table);
+      fields.querySelector('summary').textContent = '상태값 · ' + rows.length + '개 항목';
+      const referenceSlot = document.getElementById('status-reference-slot');
+      if (referenceSlot) referenceSlot.replaceChildren(fields); else panel.append(fields);
       const previewChoice = document.querySelector('#status [data-state-platform="' + platform + '"]');
       if (previewChoice?.getAttribute('aria-pressed') !== 'true') previewChoice?.click();
     },
@@ -332,6 +336,7 @@
     });
   }
   function select(key, focus) {
+    document.getElementById('status-reference-slot')?.replaceChildren();
     active = key; panel.style.minHeight=''; panel.replaceChildren(); buttons.forEach(b => { const selected = b.dataset.guideItem === key; b.setAttribute('aria-selected', String(selected)); b.tabIndex = selected ? 0 : -1; });
     const selected = buttons.find(b => b.dataset.guideItem === key); panel.setAttribute('aria-labelledby', selected.id); renderers[key](); packSettingTables(); foldLongTables();
     const state = $('#status'); if (state) state.hidden = key !== 'status'; if (focus) selected.focus();
