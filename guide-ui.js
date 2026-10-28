@@ -142,7 +142,7 @@
     });
     panel.append(platforms);
     if (!selected) { panel.append(make('h2', 'settings-platform-title', '플랫폼 미선택'), make('p', 'guide-note', '엘린 또는 노디를 선택하세요.')); return false; }
-    panel.append(make('h2', 'settings-platform-title', (selected === 'elyn' ? '엘린' : '노디') + ' ' + title));
+    panel.append(make('h2', 'settings-platform-title', title));
     if (selected === 'nody' && section === 'settings') { renderNody(section); return false; }
     return true;
   }
@@ -249,6 +249,7 @@
       const platform = platformSelections.status;
       const intro = card('상태창 읽는 법'); list(intro, guide('상태창 안내')); panel.append(intro);
       const fields = make('details', 'status-reference'), referenceBody = make('div', 'status-reference-body');
+      fields.open = window.top.matchMedia('(min-width:800px)').matches;
       fields.append(make('summary', '', '상태값 · 필요할 때 펼치기'), referenceBody);
       referenceBody.append(make('p', 'guide-note', platform === 'nody'
         ? "노디는 응답 끝의 status JSON을 수정합니다. n·charHeart·charReason·charImmersion은 숫자, 나머지는 문자열입니다."
