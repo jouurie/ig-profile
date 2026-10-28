@@ -149,3 +149,21 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
 #record-list .record-art-mark{stroke:var(--pink)}
 @container(min-width:120px){#record-list .record-art{display:block}}
 @container(min-width:150px){#record-list .record-art{width:36px;height:46.8px}}
+
+/* Status reference uses the existing guide table and palette. */
+.status-field-table{table-layout:fixed}
+.status-field-table thead th{width:auto;font-weight:700}
+.status-field-table th:first-child{width:28%}
+.status-field-table th:nth-child(2){width:40%}
+.status-field-table th:nth-child(3){width:32%}
+.status-field-table code{font-size:.95em;white-space:normal;overflow-wrap:anywhere}
+.status-field-table td{overflow-wrap:anywhere;word-break:keep-all}
+.status-field-table .status-value-kind{display:block;font-size:.9em;margin-bottom:4px;font-weight:600}
+@media(max-width:650px){
+  .status-field-table,.status-field-table tbody{display:block;width:100%}
+  .status-field-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .status-field-table tbody tr{display:grid;grid-template-columns:1fr;padding:12px 0;border-bottom:1px solid currentColor}
+  .status-field-table tbody th,.status-field-table tbody td{display:block;width:auto!important;padding:4px 8px;border:0}
+  .status-field-table tbody th{font-weight:700}
+  .status-field-table tbody td:last-child{padding-top:7px}
+}
