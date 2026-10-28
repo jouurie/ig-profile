@@ -105,6 +105,7 @@
     let next = null;
     if ((fine.matches || pressed) && node instanceof Element && shell.contains(node)) {
       next = node.closest(controls) || (document.body.matches('.page-guide') ? null : node.closest(surfaces));
+      if (node.closest('h1,h2,h3,h4,h5,h6,.guide-nav-title') && !node.closest(controls)) next = null;
       if (next && (!shell.contains(next) || next.closest('[hidden],[inert],[aria-hidden="true"]'))) next = null;
     }
     if (next === current) return;
@@ -152,4 +153,13 @@
   addEventListener('blur', leave);
   fine.addEventListener('change', () => { if (!fine.matches) leave(); });
   addEventListener('pagehide', () => { leave(); if (frame) cancelAnimationFrame(frame); frame = 0; });
+})();
+
+(() => {
+ let held=null,start=null;
+ const clear=()=>{held?.removeAttribute('data-role-feedback');held=null;start=null;};
+ document.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;clear();held=e.target.closest('table th,table td');if(held){held.dataset.roleFeedback=held.matches('th')?'label':'value';start={x:e.clientX,y:e.clientY};}},{passive:true});
+ document.addEventListener('pointermove',e=>{if(start&&Math.hypot(e.clientX-start.x,e.clientY-start.y)>8)clear();},{passive:true});
+ for(const type of ['pointerup','pointercancel','scroll'])document.addEventListener(type,clear,{passive:true,capture:true});
+ window.addEventListener('blur',clear);
 })();

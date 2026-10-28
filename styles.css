@@ -218,3 +218,12 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
 @media(max-width:799px){
  .page-guide #status-reference-slot{margin-top:10px}
 }
+
+/* Feedback follows information roles; static section headings remain still. */
+:is(.guide-table,.status-calendar-table,.wg-model-support-table) :is(th,td) {transition:box-shadow .14s ease;}
+:is(.guide-table,.status-calendar-table,.wg-model-support-table) th:is(:active,[data-role-feedback]) {box-shadow:inset 0 -2px currentColor;}
+:is(.guide-table,.status-calendar-table,.wg-model-support-table) td:is(:active,[data-role-feedback]) {box-shadow:inset 0 0 0 1px currentColor;}
+@media(hover:hover) and (pointer:fine){:is(.guide-table,.status-calendar-table,.wg-model-support-table) th:hover{box-shadow:inset 0 -2px currentColor}:is(.guide-table,.status-calendar-table,.wg-model-support-table) td:hover{box-shadow:inset 0 0 0 1px currentColor}}
+:is(.guide-table,.status-calendar-table,.wg-model-support-table) :is(th,td) a {font:inherit;line-height:inherit;letter-spacing:inherit;vertical-align:baseline;text-underline-offset:.2em;}
+:is(.guide-list,.guide-card,.guide-model-notes) a.guide-inline-link {font:inherit;line-height:inherit;letter-spacing:inherit;}
+[data-role-feedback="prose"] {text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:var(--red,currentColor);}
