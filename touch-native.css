@@ -1,0 +1,28 @@
+/* Native press feedback also applies on hybrid mouse/touch devices. */
+.i1z .i23:active::before { filter: brightness(1.1) saturate(1.06); }
+.i2p .i37:active { background: rgb(255, 183, 212); }
+.i2p #guide-tabs .i2u summary:active { background: var(--pinkpaper); }
+.i2p #guide-tabs .i2u details[open] > summary:active { background: var(--pink); }
+.i2a, .i2a::before, .i2a:active, .iu[open] > .i2a { transform: none; translate: none; rotate: none; }
+.i2a:active { transform: none; translate: none; rotate: none; }
+.i26 .i2a:active { color: var(--ink); }
+.ia:active > span:last-child { transform: translateY(-1px); }
+.i2 button:not(:disabled):active, .i2 nav a:active, .i2 .guide-link:active { translate: none; }
+.i2 nav a:active, .i2 .guide-link:active { translate: none; }
+.if button:active, .player-controls button:active { animation: 450ms ease-out 0s 1 normal none running ig-tada; }
+.io > figure:active, .i4g > img:active { animation-play-state: paused; }
+.i1i:active { box-shadow: 2px 2px 0 var(--blue); }
+nav label:active { color: var(--muted); }
+.it details:not([open]) > .iv:active, .i2v:not([open]) > summary:active { background: var(--pinkpaper); color: var(--ink); }
+.i1j:active { box-shadow: 2px 2px 0 var(--blue); }
+.ie:not([open]) img:active { filter: brightness(1.06) saturate(1.08); }
+.i26 .i2a:active::before { filter: brightness(1.08); }
+.i4h:active { background: var(--pinkpaper); }
+nav[aria-label="구성"] label:active { background: var(--blue); color: var(--ink); }
+#guide-tabs summary:active { filter: brightness(1.18) !important; }
+.i2 :is(summary, label[for]):active { filter: brightness(1.18) !important; }
+.i2 img:active { filter: brightness(1.06) saturate(1.08); }
+.i2 .il > span:is(:hover, :active) { color: var(--ink); background-color: var(--blue); }
+.i2 .il > span:nth-child(2n):is(:hover, :active) { background-color: var(--pink); }
+.i2 .il > span:is(:active) { color: var(--ink); background-color: var(--blue); }
+.i2 .il > span:nth-child(2n):is(:active) { background-color: var(--pink); }

@@ -96,7 +96,7 @@
     '.track-timeline','.track-volume','.track-options','.track-original',
     'figure','.window','header','footer'
   ].join(',');
-  let current = null, point = null, frame = 0, touchPoint = null;
+  let current = null, point = null, frame = 0, touchPoint = null, releaseTimer = 0;
   function clear() {
     if (current) { current.removeAttribute('data-ig-hover'); current.removeAttribute('data-ig-tone'); current.removeAttribute('data-ig-fill'); }
     current = null;
@@ -127,9 +127,10 @@
     point = { x: event.clientX, y: event.clientY };
     show(event.target);
   }
-  function leave() { point = null; touchPoint = null; clear(); }
+  function leave() { clearTimeout(releaseTimer); releaseTimer = 0; point = null; touchPoint = null; clear(); }
   document.addEventListener('pointerdown', event => {
-    if (event.pointerType !== 'touch' || fine.matches) return;
+    if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
+    clearTimeout(releaseTimer);
     touchPoint = { x: event.clientX, y: event.clientY };
     point = null;
     show(event.target, true);
@@ -137,7 +138,7 @@
   document.addEventListener('pointermove', event => {
     if (touchPoint && Math.hypot(event.clientX - touchPoint.x, event.clientY - touchPoint.y) > 8) leave();
   }, { passive: true });
-  document.addEventListener('pointerup', () => { if (touchPoint) leave(); }, { passive: true, capture: true });
+  document.addEventListener('pointerup', () => { if (touchPoint) releaseTimer = setTimeout(leave, 140); }, { passive: true, capture: true });
   document.addEventListener('pointercancel', () => { if (touchPoint) leave(); }, { passive: true, capture: true });
   document.addEventListener('scroll', () => { if (touchPoint) leave(); }, { passive: true, capture: true });
   document.addEventListener('pointerover', follow, { passive: true });
