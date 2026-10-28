@@ -63,6 +63,7 @@
     host.append(ul);
   }
   function rowsFromBlock(block) {
+    block=block.replaceAll('엘린 FREE','FREE');
     const lines = block.split('\n').slice(1), rows = [];
     lines.forEach(line => { if (!line.trim()) return; if (line.startsWith('↳')) { if (rows.length) rows[rows.length - 1].notes.push(line.slice(1).trim()); return; } const at = line.indexOf(':'); rows.push({ label: at >= 0 ? line.slice(0, at) : '', value: at >= 0 ? line.slice(at + 1).trim() : line, notes: [] }); });
     return rows;
@@ -98,7 +99,6 @@
     if(title==='모델별 특징'||title==='모델별 특징 · 개별 추론')section.classList.add('guide-model-features');
     section.append(make('h3', '', title));
     rowsFromBlock(block).forEach(row => {
-      if(row.label==='엘린 FREE')row.label='FREE';
       if (title === '참고' && !row.label) { notes.push(row.value, ...row.notes); return; }
       const tr = make('tr'), th = recommendedModelText('th', '', row.label, true), td = make('td');
       th.scope = 'row';
