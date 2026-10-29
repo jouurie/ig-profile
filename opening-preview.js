@@ -49,6 +49,7 @@
       if (!Number.isInteger(index) || !ids[index] || document.querySelector('dialog[open]')) return;
       const source = window.IGOpeningPreviews?.[ids[index]];
       if (!source) return;
+      if(photo){window.IGImageViewer?.openScene(atlas,name+' 이미지',trigger,positions[index]);return;}
       create();
       opener = trigger;
       title.textContent = name;

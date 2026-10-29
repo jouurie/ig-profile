@@ -50,3 +50,9 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
   .ig-frame-shell .site-shell>header>.ig-menu-arrow:not(:disabled):active{color:var(--pink)}
 }
 @media(max-width:700px) and (hover:hover) and (pointer:fine){.ig-frame-shell .site-shell>header>.ig-menu-arrow:not(:disabled):hover{color:var(--pink)}}
+
+/* One titleless, viewport-contained image enlargement surface. */
+.ig-image-viewer{padding-top:60px;overflow:hidden}
+.ig-image-viewer img{max-height:calc(100dvh - 116px)}
+.ig-image-close{display:grid;place-items:center;box-sizing:border-box;width:44px;height:44px;min-height:44px;padding:0;border:1px solid var(--ink);font-size:24px;line-height:1;font-weight:400;background:var(--pinkpaper);color:var(--ink)}
+.ig-image-close:is(:active,.is-pressed){background:var(--pink);color:var(--ink)}
