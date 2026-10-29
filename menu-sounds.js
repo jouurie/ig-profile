@@ -43,28 +43,9 @@
       playing?.catch(error => { if (error.name === 'NotAllowedError') unlocked = false; });
     }
     controller = window.IGMenuSound = { emit };
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'ig-sound-toggle';
-    toggle.dataset.igSoundToggle = '';
-    toggle.innerHTML = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 8h3l4-3v10l-4-3H3z"/><path class="ig-sound-waves" d="M13 7a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/><path class="ig-sound-off" d="m13 8 4 4m0-4-4 4"/></svg>';
-    function render() {
-      toggle.setAttribute('aria-pressed', String(enabled));
-      toggle.setAttribute('aria-label', enabled ? '효과음 끄기' : '효과음 켜기');
-      toggle.title = enabled ? '효과음 끄기' : '효과음 켜기';
-    }
-    toggle.addEventListener('click', () => {
-      enabled = !enabled;
-      try { localStorage.setItem(key, String(enabled)); } catch {}
-      render();
-      if (enabled) { unlocked = true; emit('click'); } else stopAll();
-    });
-    render();
-    const header = document.querySelector('.site-shell > header');
-    header?.insertBefore(toggle, header.querySelector('.character-switcher'));
     addEventListener('storage', event => {
       if (event.key !== key) return;
-      enabled = event.newValue !== 'false'; render();
+      enabled = event.newValue !== 'false';
       if (!enabled) stopAll();
     });
     addEventListener('message', event => {
