@@ -227,3 +227,14 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
 :is(.guide-table,.status-calendar-table,.wg-model-support-table) :is(th,td) a {font:inherit;line-height:inherit;letter-spacing:inherit;vertical-align:baseline;text-underline-offset:.2em;}
 :is(.guide-list,.guide-card,.guide-model-notes) a.guide-inline-link {font:inherit;line-height:inherit;letter-spacing:inherit;}
 [data-role-feedback="prose"] {text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:var(--red,currentColor);}
+
+/* Semantic reading rhythm, shared by every content page. */
+:root{--ig-heading-gap:12px;--ig-subheading-gap:8px;--ig-subsection-gap:24px;--ig-paragraph-gap:8px}
+main :is(.world-lead,.guide-card,.npc-intro,.prose)>p:not(.guide-note):not(.guide-subnote),#npc-detail>p{margin-block:0}
+main :is(.world-lead,.guide-card,.npc-intro,.prose)>p+p:not(.guide-note):not(.guide-subnote),#npc-detail>p+p{margin-top:var(--ig-paragraph-gap)}
+.page-world .world-card>h3{margin:0 0 var(--ig-heading-gap)}
+.page-world .world-card>h4,.page-world .world-card>h4:first-of-type{margin:var(--ig-subsection-gap) 0 var(--ig-subheading-gap)}
+.page-world .world-card>h3+h4:first-of-type{margin-top:0}
+.page-world .world-ideas>h3{margin:0 0 var(--ig-heading-gap)}
+.page-world .world-idea-card>h4{margin-bottom:var(--ig-subheading-gap)}
+#npc-detail>h3{margin:0 0 var(--ig-subheading-gap)}
