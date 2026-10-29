@@ -38,7 +38,7 @@
   let lastImage;
   function decorate() {
     document.querySelectorAll('main img:not([data-ig-zoom])').forEach(image => {
-      if (image.closest('a,button,[role="button"]')) return;
+      if (image.matches('.player > img') || image.closest('a,button,[role="button"]')) return;
       image.dataset.igZoom = '';
       image.tabIndex = 0;
       image.setAttribute('role', 'button');

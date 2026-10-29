@@ -213,6 +213,10 @@
  function hide(event){if(event?.relatedTarget&&active?.contains(event.relatedTarget))return;tip.hidden=true;active=null;}
  document.addEventListener('pointerover',show);document.addEventListener('focusin',show);
  document.addEventListener('pointerout',hide);document.addEventListener('focusout',hide);
- document.addEventListener('pointerdown',hide);document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
- window.addEventListener('scroll',()=>hide(),true);window.addEventListener('resize',()=>hide());
+ let pressed;
+ function release(){pressed?.classList.remove('is-pressed');pressed=null;}
+ document.addEventListener('pointerdown',e=>{hide();release();if(e.pointerType!=='touch')return;const target=e.target.closest?.('.player-controls button,.player-controls a,#track-mute');if(target&&!target.disabled){pressed=target;pressed.classList.add('is-pressed');}},{passive:true});
+ document.addEventListener('pointerup',release,{passive:true});document.addEventListener('pointercancel',release,{passive:true});window.addEventListener('blur',release);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();});
+ window.addEventListener('scroll',()=>{hide();release();},true);window.addEventListener('resize',()=>hide());
 })();
