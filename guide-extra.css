@@ -154,3 +154,12 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 /* model-highlight-scope */
 #guide .guide-model-operation .model-recommended,#guide .guide-model-features td .model-recommended:not(.model-opus-label .model-recommended){background:none}
 #guide .model-opus-version{font:inherit;color:inherit}#guide .model-opus-version+.model-opus-version{margin-top:8px}
+
+/* Distinct title, body, and subordinate explanation roles. */
+.page-guide{--guide-body-size:13px;--guide-note-size:11px}
+.page-guide :is(#guide-panel,.guide-card,.guide-list,.guide-instructions,.guide-model-notes,.guide-model-section,.settings-table-unit){font-size:var(--guide-body-size);line-height:1.75}
+.page-guide .guide-card>h3,.page-guide .guide-model-section>h3{font-size:16px;line-height:1.5;margin-bottom:12px}
+.page-guide .guide-table :is(th,td){font-size:13px;line-height:1.7}
+.page-guide p.guide-note,.page-guide p.guide-subnote,.page-guide .guide-list .guide-subnote,.page-guide .guide-table small{font-size:var(--guide-note-size);font-weight:400;line-height:1.65;margin-top:5px}
+.page-guide p.guide-subnote,.page-guide .guide-list .guide-subnote{margin-left:1em;padding-left:0}
+.page-guide :is(.guide-subnote,.guide-note) :is(a,strong,span){font-size:inherit;line-height:inherit}
