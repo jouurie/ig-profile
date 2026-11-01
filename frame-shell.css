@@ -59,3 +59,9 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 
 /* Header and route scroll are separate; offsets belong only to this viewport. */
 html.ig-frame-content{--route-start-gap:8px;scroll-padding-top:0;scroll-behavior:auto}
+
+/* Shared reading rhythm: preserve route-start alignment. */
+html.ig-frame-content .page-masthead{margin-bottom:32px}
+html.ig-frame-content #guide-tabs.guide-topic-tabs{gap:32px}
+html.ig-frame-content #guide-tabs .guide-nav-items{gap:8px}
+html.ig-frame-content .opening-detail{padding-top:16px}
