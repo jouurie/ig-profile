@@ -1,7 +1,7 @@
 /* The header belongs to one document; only the content frame navigates. */
 (() => {
   'use strict';
-  const version = '20261029-sehyuk-links';
+  const version = '20261102-nav-start';
   const names = ['index.html', 'world.html', 'starts.html', 'npc.html', 'guide.html', 'guide-nody.html', 'music.html'];
   const labels = ['소개·프로필', '세계관', '도입부', '주변 인물', '이용 가이드', '이용 가이드', '플레이리스트'];
   const base = new URL('./', location.href);
@@ -33,6 +33,20 @@
 
   if (contentMode) {
     ready(() => {
+      // Navigation owns one starting baseline inside the content frame.
+      // The persistent header is outside this viewport: never subtract it twice.
+      function alignRouteStart() {
+        requestAnimationFrame(() => {
+          const target = document.querySelector('.page-masthead h1') || document.querySelector('main > :first-child');
+          const main = document.querySelector('main');
+          if (!target || !main) return;
+          const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--route-start-gap')) || 0;
+          main.style.minHeight = '';
+          const offset = target.getBoundingClientRect().top - main.getBoundingClientRect().top;
+          main.style.minHeight = Math.ceil(Math.max(0, offset) + innerHeight - gap) + 'px';
+          scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + scrollY - gap), behavior: 'instant' });
+        });
+      }
       document.addEventListener('click', event => {
         if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         const link = event.target.closest('a[href]');
@@ -44,12 +58,13 @@
       });
       addEventListener('message', event => {
         if (event.source !== parent || (location.protocol !== 'file:' && event.origin !== location.origin)) return;
-        if (event.data?.type === 'ig-frame-top') scrollTo({ top: 0, behavior: 'instant' });
+        if (event.data?.type === 'ig-frame-top') alignRouteStart();
         if (event.data?.type === 'ig-frame-replace') {
           const next = route(event.data.href);
           if (next) location.replace(embedded(next));
         }
       });
+      alignRouteStart();
       parent.postMessage({ type: 'ig-frame-ready', href: route(location.href)?.href, title: document.title }, origin);
     });
     return;
@@ -176,6 +191,7 @@
       view.hidden = false;
       view.inert = false;
       view.setAttribute('aria-hidden', 'false');
+      view.contentWindow?.postMessage({ type: 'ig-frame-top' }, origin);
       if (!previous || previous === view || typeof view.animate !== 'function') {
         if (previous !== view) retire(previous);
         return;

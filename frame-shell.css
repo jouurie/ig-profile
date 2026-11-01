@@ -56,3 +56,6 @@ html,body{cursor:url("cursor-default.svg?v=20261023q") 2 2,auto}
 .ig-image-viewer img{max-height:calc(100dvh - 116px)}
 .ig-image-close{display:grid;place-items:center;box-sizing:border-box;width:44px;height:44px;min-height:44px;padding:0;border:1px solid var(--ink);font-size:24px;line-height:1;font-weight:400;background:var(--pinkpaper);color:var(--ink)}
 .ig-image-close:is(:active,.is-pressed){background:var(--pink);color:var(--ink)}
+
+/* Header and route scroll are separate; offsets belong only to this viewport. */
+html.ig-frame-content{--route-start-gap:8px;scroll-padding-top:0;scroll-behavior:auto}
