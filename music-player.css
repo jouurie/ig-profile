@@ -24,8 +24,8 @@
 .page-music .player #player-status{grid-column:auto;align-self:start;margin:6px 0 0;padding-top:7px;border-top:1px solid var(--blue);font-size:11px;line-height:17px;text-align:left;overflow:auto;max-height:42px;scrollbar-gutter:stable;color:var(--ink)}
 .page-music #track-list{min-width:0;grid-template-columns:minmax(0,1fr);gap:0}
 .page-music #track-list .track-button{min-height:44px;padding:7px 8px}
-.page-music #track-list .track-button b{font-size:11px}
-.page-music #track-list .track-button small{font-size:10px}
+.page-music #track-list .track-button b{font-size:14px}
+.page-music #track-list .track-button small{font-size:12px}
 /* Keep the original 200px engine alive outside the visual/accessibility surfaces. */
 .page-music .youtube-engine{position:fixed;left:-10000px;top:0;width:200px;height:200px;overflow:hidden;pointer-events:none}
 .page-music .youtube-engine iframe{display:block;width:200px;height:200px;border:0}
@@ -69,3 +69,6 @@
 .page-music .player-sticker-top{width:36px;height:42px;top:-18px;right:28px;color:var(--pink);transform:rotate(14deg)}
 .page-music .player-sticker-side{width:24px;height:28px;top:122px;left:6px;color:var(--blue);transform:rotate(-18deg)}
 .page-music .player-sticker-bottom{width:30px;height:34px;right:14px;bottom:-14px;color:var(--pink);transform:rotate(-12deg)}
+
+.page-music #track-list .track-button::before{font-size:14px;color:#536FA8}
+.page-music .player #track-artist{color:var(--muted)}
