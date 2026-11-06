@@ -156,14 +156,12 @@
       settingsList(budget, ["로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.","로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.","내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다.","권장 예산: 하단 [ ⭐ 모델 추천 ]을 참고하세요."]); panel.append(budget);
     } else if (active === 'recommended') {
       panel.append(settingsPath('채팅방 설정 → 대화'));
-      const options = make('div', 'guide-card-grid');
-      options.append(tableBlock("사칭 방지 플레이\n내 캐릭터 대신하기: 간접"),tableBlock("사칭 플레이\n내 캐릭터 대신하기: 자유")); panel.append(options);
       panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
       panel.append(make('p', 'guide-note', "응답 품질은 답변 전에 점검하는 항목 수입니다. 노디 안내 기준 낮음은 3개, 보통은 4개, 높음은 5개이며, 모델 자체의 추론 예산과 같은 수치로 볼 수는 없습니다. 설정과 앞선 대화를 더 챙기도록 모델 공통으로 높음을 권장합니다. 모델별 최적값이나 최저비용을 검증한 값은 아니며, 답변이 느려지고 캐시 사용량이 늘 수 있습니다. 높음도 상태창과 기억의 정확성을 보장하지는 않습니다."));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n지문 별표 쓰기: 끔"));
       const guidance = tableBlock('출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용\n분량 · 리듬: 선택 적용'); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
-      panel.append(tableBlock("AI 연기 방식\n사칭 방지 플레이: 간접\n사칭 플레이: 자유\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
+      panel.append(tableBlock("AI 연기 방식\n이야기 전개: 차분하게 또는 적극적으로\n캐릭터 태도: 중립 또는 거칠게"));
       const statusDisplay = tableBlock("기타\n상태창 표시: 켬");
       const statusValue = statusDisplay.querySelector("td"); statusValue.replaceChildren(make("strong", "", "켬"));
       statusDisplay.append(make("p", "guide-note", "상태창과 연결된 로어북이 있으므로, 상태창 표시를 켜 주세요.")); panel.append(statusDisplay);
