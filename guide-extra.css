@@ -7,7 +7,8 @@
 .page-guide .guide-inline-link{color:#20152f;text-decoration-color:#75698c;text-underline-offset:3px;font-weight:700}
 @media (hover:hover) and (pointer:fine){.page-guide .guide-inline-link:hover{background:#ffb7d4}}@media (hover:none),(pointer:coarse),(pointer:none){.page-guide .guide-inline-link:active{background:#ffb7d4}}
 .page-guide .guide-inline-link:focus-visible,.page-guide summary:focus-visible{outline:2px solid #20152f;outline-offset:3px}
-.page-guide .guide-list li,.page-guide .guide-table td{overflow-wrap:anywhere}
+.page-guide .guide-table td{overflow-wrap:anywhere}
+.page-guide .guide-list li{word-break:keep-all;overflow-wrap:break-word}
 .page-guide .guide-table th{overflow-wrap:anywhere}
 .page-guide .guide-table td>div{white-space:pre-line}
 .page-guide .state-section,.page-guide #state-frame{width:380px;max-width:100%}
