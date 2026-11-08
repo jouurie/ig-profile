@@ -55,7 +55,8 @@
     const ul = make('ul', 'guide-list');
     items.forEach(raw => {
       const note = /^\s*↳/.test(raw), line = raw.replace(/^\s*↳[\s\u00a0]*/, ''), item = make(note ? 'p' : 'li', note ? 'guide-subnote' : '');
-      if (line.includes('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.')) { labeledText(item, line.replace('하단 [ ⭐ 출력 가이던스 ]를 참조하세요.', '')); item.append(disclosureLink('출력 가이던스', 'guide-output')); }
+      const reference = line.match(/(?:하단\s*)?\[\s*⭐?\s*출력 가이던스\s*\]/);
+      if (reference) { labeledText(item, line.slice(0, reference.index)); item.append(disclosureLink('출력 가이던스', 'guide-output'), document.createTextNode(line.slice(reference.index + reference[0].length))); }
       else if (line.includes('하단 [ ⭐ 모델 추천 ]을 참고하세요.')) { labeledText(item, line.replace('권장 예산 · 모델 조합:', '권장 예산:').replace('하단 [ ⭐ 모델 추천 ]을 참고하세요.', '')); item.append(disclosureLink('추천 설정값', 'guide-recommended')); }
       else labeledText(item, line);
       if (note && ul.lastElementChild) ul.lastElementChild.append(item); else ul.append(item);
