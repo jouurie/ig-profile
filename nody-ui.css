@@ -33,7 +33,7 @@ nav[aria-label=구성]{flex-wrap:nowrap}nav[aria-label=구성] label{display:inl
 
 /* Optional guidance uses the established ELYN pink palette. */
 #guide .i3w.is-optional{border-color:#ffb7d4}
-#guide .i3w.is-optional>.ig-guide-subtitle,#guide .i3w.is-optional .i3x{border-bottom-color:#ffb7d4;background:#fff0f7}
+#guide .i3w.is-optional>.ig-guide-subtitle,#guide .i3w.is-optional .i3x{border-bottom-color:#ffb7d4;background:transparent}
 #guide .i3w.is-optional .i3y{border-color:#ffb7d4;background:#fff0f7}
 #guide .i3w.is-optional .i42{border-color:#ffb7d4}
 

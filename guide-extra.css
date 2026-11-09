@@ -149,7 +149,7 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 
 /* Optional guidance uses the established ELYN pink palette. */
 .page-guide .copy-card.is-optional{border-color:#ffb7d4}
-.page-guide .copy-card.is-optional .copy-card-header{border-bottom-color:#ffb7d4;background:#fff0f7}
+.page-guide .copy-card.is-optional .copy-card-header{border-bottom-color:#ffb7d4;background:transparent}
 .page-guide .copy-card.is-optional .copy-content{border-color:#ffb7d4}
 
 /* model-highlight-scope */
