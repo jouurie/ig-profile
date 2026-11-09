@@ -158,7 +158,7 @@
     } else if (active === 'recommended') {
       panel.append(settingsPath('채팅방 설정 → 대화'));
       panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
-      panel.append(make('p', 'guide-note', "응답 품질은 답변 전에 점검하는 항목 수입니다. 노디 안내 기준 낮음은 3개, 보통은 4개, 높음은 5개이며, 모델 자체의 추론 예산과 같은 수치로 볼 수는 없습니다. 설정과 앞선 대화를 더 챙기도록 모델 공통으로 높음을 권장합니다. 답변이 느려지고 캐시 사용량이 늘 수 있습니다."));
+      panel.append(make('p', 'guide-note', '높음은 답변이 느려지고 캐시 사용량이 늘 수 있습니다.'));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n지문 별표 쓰기: 끔"));
       const guidance = tableBlock('출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용\n분량 · 리듬: 선택 적용'); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
@@ -213,7 +213,6 @@
       settings.append(tableBlock('모델별 추론값\n' + rowsFromBlock(blocks[2]).map(row => row.label + ': ' + row.value).join('\n')), tableBlock(blocks[3]));
       const settingsNotes = rowsFromBlock(blocks[4]).filter(row => row.label);
       settings.append(tableBlock('설정 참고\n' + settingsNotes.map(row => row.label + ': ' + row.value).join('\n'))); panel.append(settings);
-      panel.append(make('p', 'guide-note', '모델별 추론값이 공통 기본값보다 우선합니다.'));
       const outputGuide = card('출력 가이던스'); outputGuide.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(outputGuide);
       panel.append(tableBlock('응답 설정\n사칭 방지: OFF'));
       panel.append(settingsPath('기억 탭 → 세부 조정 → 추가 요약 지침'));

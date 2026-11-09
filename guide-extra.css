@@ -164,3 +164,8 @@ a.guide-inline-link[href="#guide-output"]{white-space:nowrap}
 .page-guide p.guide-note,.page-guide p.guide-subnote,.page-guide .guide-list .guide-subnote,.page-guide .guide-table small{font-size:var(--guide-note-size);font-weight:400;line-height:1.65;margin-top:5px}
 .page-guide p.guide-subnote,.page-guide .guide-list .guide-subnote{margin-left:1em;padding-left:0}
 .page-guide :is(.guide-subnote,.guide-note) :is(a,strong,span){font-size:inherit;line-height:inherit}
+
+/* Guide heading roles, 2026-11-09. */
+main :is(.guide-card,.guide-model-section)>h3{font-size:14px}
+
+main .guide-table-disclosure>summary{font-size:14px}
