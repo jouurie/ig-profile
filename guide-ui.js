@@ -169,7 +169,7 @@
       panel.append(settingsPath('채팅방 설정 → 기억'));
       panel.append(tableBlock("대화 기억 범위\n최근 대화: 5턴"));
       const memorySettings=tableBlock("장기기억 설정\n요약 주기: 5턴\n요약 글자수: 6,000자\n자동으로 요약하기: 켬"); panel.append(memorySettings);
-      appendTableLink(memorySettings,'요약 방식',disclosureLink('기억 지침', 'guide-memory'));
+      appendTableLink(memorySettings,'요약 방식',disclosureLink('기억 지침 내용과 입력 위치', 'guide-memory'));
       panel.append(make('p', 'guide-note', '1턴은 내 말과 캐릭터 답변 한 쌍입니다. 최근 대화는 원문으로 기억할 범위이고, 요약 주기는 장기기억을 갱신할 간격입니다. 원문 비용을 줄이려면 최근 대화부터 조절하세요.'));
       panel.append(make('p', 'guide-note', '요약 주기가 짧을수록 장기기억을 더 자주 갱신합니다. 요약 글자수는 6,000자로 시작하세요. 대화가 길어져 기억할 내용이 많아지면 요약 글자수를 늘리세요.'));
     } else if (active === 'models') {
@@ -213,10 +213,9 @@
       settings.append(tableBlock('모델별 추론값\n' + rowsFromBlock(blocks[2]).map(row => row.label + ': ' + row.value).join('\n')), tableBlock(blocks[3]));
       const settingsNotes = rowsFromBlock(blocks[4]).filter(row => row.label);
       settings.append(tableBlock('설정 참고\n' + settingsNotes.map(row => row.label + ': ' + row.value).join('\n'))); panel.append(settings);
-      const outputGuide = card('출력 가이던스'); outputGuide.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(outputGuide);
+      const outputGuide = card('출력 가이던스', '', 'guide-reference-card'); outputGuide.append(disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(outputGuide);
       panel.append(tableBlock('응답 설정\n사칭 방지: OFF'));
-      panel.append(settingsPath('기억 탭 → 세부 조정 → 추가 요약 지침'));
-      const memoryGuide = card('추가 요약 지침'); memoryGuide.append(disclosureLink('기억 지침', 'guide-memory')); panel.append(memoryGuide);
+      const memoryGuide = card('추가 요약 지침', '', 'guide-reference-card'); memoryGuide.append(disclosureLink('기억 지침 내용과 입력 위치', 'guide-memory')); panel.append(memoryGuide);
     },
     models() {
       if (!platformSection('settings', '모델 추천')) return;
@@ -269,8 +268,7 @@
       fields.querySelector('summary').textContent = '상태값 · ' + rows.length + '개 항목';
       const referenceSlot = document.getElementById('status-reference-slot');
       if (referenceSlot) referenceSlot.replaceChildren(fields); else panel.append(fields);
-      const previewChoice = document.querySelector('#status [data-state-platform="' + platform + '"]');
-      if (previewChoice?.getAttribute('aria-pressed') !== 'true') previewChoice?.click();
+      window.dispatchEvent(new CustomEvent('guide-status-platform',{detail:platform}));
     },
     transfer() {
       if (!platformSection('recovery', '채팅방 이전 안내')) return;
@@ -339,18 +337,12 @@
     document.getElementById('status-reference-slot')?.replaceChildren();
     active = key; panel.style.minHeight=''; panel.replaceChildren(); buttons.forEach(b => { const selected = b.dataset.guideItem === key; b.setAttribute('aria-selected', String(selected)); b.tabIndex = selected ? 0 : -1; });
     const selected = buttons.find(b => b.dataset.guideItem === key); panel.setAttribute('aria-labelledby', selected.id); renderers[key](); packSettingTables(); foldLongTables();
-    const state = $('#status'); if (state) state.hidden = key !== 'status'; if (focus) selected.focus();
+    const state = $('#status'); if (state) state.hidden = key !== 'status' || !platformSelections.status; if (focus) selected.focus();
   }
   tabBar.addEventListener('keydown', e => {
     const index = choices.findIndex(choice => choice[0] === active); let next = index;
     if (e.key === 'ArrowRight') next = (index + 1) % choices.length; else if (e.key === 'ArrowLeft') next = (index + choices.length - 1) % choices.length; else if (e.key === 'Home') next = 0; else if (e.key === 'End') next = choices.length - 1; else return;
     e.preventDefault(); select(choices[next][0], true);
-  });
-  $('#status')?.addEventListener('click', event => {
-    const choice = event.target.closest('[data-state-platform]');
-    if (choice && active === 'status' && platformSelections.status !== choice.dataset.statePlatform) {
-      platformSelections.status = choice.dataset.statePlatform; select('status');
-    }
   });
   select('progress');
 })();
