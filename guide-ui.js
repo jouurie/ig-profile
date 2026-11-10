@@ -157,8 +157,8 @@
       settingsList(budget, ["로어북은 키워드가 나올 때만 꺼내 쓰는 설정입니다.","로어북 예산은 한 번의 답변에 가져올 수 있는 로어북 내용의 글자수 한도이며, 캐시 금액이 아닙니다.","내용이 예산 한도로 잘리지 않도록 최대로 설정하는 것을 권장합니다. 예산을 늘리면 더 많은 설정을 담는 대신 매 턴 캐시 사용량도 늘 수 있습니다.","권장 예산: 하단 [ ⭐ 모델 추천 ]을 참고하세요."]); panel.append(budget);
     } else if (active === 'recommended') {
       panel.append(settingsPath('채팅방 설정 → 대화'));
-      panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n응답 품질: 높음\n로어북 예산: 50,000자\n출력 속도: 즉시"));
-      panel.append(make('p', 'guide-note', '높음은 답변이 느려지고 캐시 사용량이 늘 수 있습니다.'));
+      panel.append(tableBlock("답변\n출력량: 길게\n최대 출력량: 6,000토큰\n추론 조절: 최대 권장\n로어북 예산: 50,000자\n출력 속도: 즉시"));
+      panel.append(make('p', 'guide-note', '응답 속도와 캐시 사용량이 부담되면 꼼꼼히로 낮춰 사용하세요.'));
       panel.append(tableBlock("추천 답변 문체\n지문 표기: 안 씀\n인칭: 3인칭\n시제: 과거"));
       panel.append(tableBlock("문체\n지문 별표 쓰기: 끔"));
       const guidance = tableBlock('출력 가이던스\n역할극 유지: 적용\n관계 진행: 적용\n분량 · 리듬: 선택 적용'); appendTableLink(guidance,'입력 위치',disclosureLink('가이던스 내용과 입력 위치', 'guide-output')); panel.append(guidance);
