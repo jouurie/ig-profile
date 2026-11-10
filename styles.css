@@ -245,3 +245,5 @@ main :is(.world-lead,.guide-card,.npc-intro,.prose)>p+p:not(.guide-note):not(.gu
  .page-guide #guide-tabs .guide-nav-items button{width:100%}
  .page-guide #guide #guide-panel{grid-column:2;grid-row:1;min-width:0}
 }
+
+@media (min-width:1000px){.page-npc .npc-folders{grid-template-columns:repeat(6,minmax(0,1fr))}}
