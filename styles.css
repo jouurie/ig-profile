@@ -238,3 +238,10 @@ main :is(.world-lead,.guide-card,.npc-intro,.prose)>p+p:not(.guide-note):not(.gu
 .page-world .world-ideas>h3{margin:0 0 var(--ig-heading-gap)}
 .page-world .world-idea-card>h4{margin-bottom:var(--ig-subheading-gap)}
 #npc-detail>h3{margin:0 0 var(--ig-subheading-gap)}
+@media(min-width:1000px){
+ .page-guide #guide{display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px;align-items:start}
+ .page-guide #guide #guide-tabs.guide-topic-tabs{grid-column:1;grid-row:1;grid-template-columns:minmax(0,1fr);gap:18px;padding:0 16px 0 0;margin:0;border-bottom:0;border-right:2px solid var(--ink)}
+ .page-guide #guide-tabs .guide-nav-items{flex-direction:column;align-items:stretch}
+ .page-guide #guide-tabs .guide-nav-items button{width:100%}
+ .page-guide #guide #guide-panel{grid-column:2;grid-row:1;min-width:0}
+}
