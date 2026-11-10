@@ -1,0 +1,43 @@
+{
+  "dir": "..",
+  "files": [
+    "styles.css",
+    "profile-detail.css",
+    "npc-extra.css",
+    "guide-extra.css",
+    "motion.css",
+    "music-player.css",
+    "delight.css",
+    "fonts.css",
+    "frame-shell.css",
+    "opening-preview.css",
+    "index.html"
+  ],
+  "out": "refresh-type.css",
+  "breakpoint": 700,
+  "wide": {
+    "9": 11.5,
+    "10": 12.5,
+    "11": 13.5,
+    "12": 14.5,
+    "13": 15.5,
+    "14": 16.5,
+    "15": 17.5,
+    "16": 18.5,
+    "18": 21,
+    "32": 44
+  },
+  "narrow": {
+    "9": 10.5,
+    "10": 11.5,
+    "11": 12.5,
+    "12": 13.5,
+    "13": 14,
+    "14": 15,
+    "15": 16,
+    "16": 17,
+    "18": 19,
+    "32": 34
+  },
+  "skip": []
+}

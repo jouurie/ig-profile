@@ -1,0 +1,65 @@
+/* 2026-11 refresh. refresh-type.css(글자 크기 재매김) 다음, 맨 뒤에 불러온다.
+   1) 글자 계층: 화면 제목 › 구역 제목 › 카드 제목 › 소제목 › 본문 › 주석을 크기·굵기·장식으로 가른다.
+   2) 넓은 화면(1040px 이상) 배치: 프로필 창, 세계관, 도입부, 가이드, 플레이리스트.
+   3) 새 그림 자리(.image-slot). */
+
+/* ---------- 1. 글자 계층 ---------- */
+/* 화면 제목: 창 제목줄처럼 굵게, 분홍 밑줄 */
+.page-masthead{padding:28px 0 24px}
+.page-masthead>span{letter-spacing:3px}
+.page-masthead h1{display:table;margin:8px 0 10px;padding:0 4px 2px 0;font-weight:800;line-height:1.25;
+  background:linear-gradient(transparent 62%,var(--pink) 62% 92%,transparent 92%)}
+.page-masthead p{color:var(--ink);max-width:46em}
+
+/* 구역 제목: 하트 머리표 + 굵은 글씨 + 창틀 선 */
+.section-heading{align-items:center;border-top:2px solid var(--ink)}
+.section-heading h2{font-weight:800;letter-spacing:.02em;line-height:1.3}
+.section-heading>span{color:var(--muted)}
+
+/* 카드 제목(h3) › 소제목(h4) */
+.guide-card>h3,.world-card>h3,.world-ideas>h3,#profile-panel h3,.profile-detail-title{font-weight:800;line-height:1.4}
+.guide-card h4,.world-card h4,.world-idea-card h4{font-weight:800}
+
+/* 본문은 먹색, 주석만 흐리게 */
+.guide-list,.guide-list li,.guide-card p,.world-card p,.world-idea-card p,#profile-panel dd,.npc-copy p{color:var(--ink)}
+.guide-note,.muted,.guide-card .guide-note{color:var(--muted)}
+
+@media(min-width:701px){
+  .page-masthead h1{font-size:42px}
+  .section-heading{padding-block:10px}
+  .section-heading h2{font-size:22px}
+  .npc .section-heading h2{font-size:22px}
+  .guide-card>h3,.world-card>h3,.world-ideas>h3{font-size:19px}
+  #profile-panel h3,.profile-detail-title{font-size:18px}
+  .guide-card h4,.world-card h4,.world-idea-card h4{font-size:15px}
+  .guide-nav-title{font-size:14px;letter-spacing:.04em}
+  body{line-height:1.7}
+}
+@media(max-width:700px){
+  .page-masthead h1{font-size:30px}
+  .section-heading h2{font-size:18px}
+  .guide-card>h3,.world-card>h3,.world-ideas>h3{font-size:17px}
+  .guide-card h4,.world-card h4,.world-idea-card h4{font-size:14px}
+}
+
+/* ---------- 3. 새 그림 자리 ---------- */
+.image-slot{display:grid;align-content:center;justify-items:center;gap:8px;margin:0;padding:16px;text-align:center;
+  border:1px dashed var(--edge);border-radius:4px;
+  background:repeating-linear-gradient(135deg,transparent 0 9px,rgba(189,213,255,.45) 9px 10px),var(--white)}
+.image-slot>b{font:700 11px/1.4 monospace;letter-spacing:2px;color:var(--muted)}
+.image-slot>span{max-width:24em;font-size:12.5px;line-height:1.7;color:var(--ink);word-break:keep-all}
+
+/* ---------- 2. 넓은 화면 배치 ---------- */
+@media(min-width:1040px){
+  /* 세계관: 머리글과 방 그림을 나란히 */
+  .world-intro{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:stretch;margin-bottom:24px}
+  .world-intro>.world-lead{margin:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+  .world-room-photo{min-height:220px;box-shadow:3px 3px 0 var(--pink)}
+  .world-room-photo>img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px}
+  .world-lead p{font-size:17.5px;line-height:1.8}
+}
+@media(max-width:1039px){
+  .world-intro{display:grid;gap:14px;margin-bottom:18px}
+  .world-room-photo{min-height:150px}
+  .world-room-photo>img{display:block;width:100%;height:auto;border-radius:3px}
+}

@@ -1,0 +1,446 @@
+/* 자동 생성: tools/type-remap.cjs. 손으로 고치지 말 것.
+   기존 규칙과 같은 선택자·같은 조건으로 글자 크기만 다시 매긴다.
+   넓은 화면(701px 이상) 표: {"9":11.5,"10":12.5,"11":13.5,"12":14.5,"13":15.5,"14":16.5,"15":17.5,"16":18.5,"18":21,"32":44}
+   좁은 화면 표: {"9":10.5,"10":11.5,"11":12.5,"12":13.5,"13":14,"14":15,"15":16,"16":17,"18":19,"32":34} */
+/* styles.css */
+@media(min-width:701px){
+body{font-size:15.5px}
+.brand{font-size:18.5px}
+nav a{font-size:14.5px}
+.platforms button{font-size:12.5px}
+.titlebar{font-size:13.5px}
+.eyebrow{font-size:13.5px}
+.hero h1{font-size:44px}
+.hero-copy p{font-size:16.5px}
+.intro-toolbar{font-size:14.5px}
+.tags{font-size:13.5px}
+.section-heading h2{font-size:16.5px}
+.section-heading>span{font-size:13.5px}
+.portrait-slot{font-size:12.5px}
+figcaption{font-size:13.5px}
+.notebook p{font-size:13.5px}
+.notebook small{font-size:12.5px}
+.tabs button{font-size:13.5px}
+#profile-panel{font-size:14.5px}
+#profile-panel h3{font-size:14.5px}
+.relation-label{font-size:13.5px}
+.relation-copy{font-size:16.5px}
+.records-heading{font-size:12.5px}
+.records-heading span{font-size:12.5px}
+.record-toggle{font-size:12.5px}
+.record-front b{font-size:13.5px}
+.record-flip{font-size:12.5px}
+.record-back{font-size:13.5px}
+.opening-card small{font-size:11.5px}
+.opening-card b{font-size:13.5px}
+.opening-card .hint{font-size:11.5px}
+.opening-detail{font-size:13.5px}
+.opening-detail button{font-size:12.5px}
+.npc h2{font-size:15.5px}
+.npc-folder{font-size:14.5px}
+#npc-detail{font-size:13.5px}
+#npc-detail h3{font-size:15.5px}
+#command-feedback{font-size:12.5px}
+.guide>details>summary{font-size:14.5px}
+.guide summary span{font-size:12.5px}
+#guide-panel{font-size:14.5px}
+#guide-panel h3{font-size:15.5px}
+.player h3{font-size:15.5px}
+.player p{font-size:13.5px}
+.player small{font-size:11.5px}
+.player-controls a{font-size:12.5px}
+.track-button:before{font-size:12.5px}
+.track-button b{font-size:12.5px}
+.track-button small{font-size:11.5px}
+footer{font-size:13.5px}
+.npc-photo-button{font-size:12.5px}
+.npc-photo-change{font-size:11.5px}
+.photo-close{font-size:13.5px}
+.page-masthead>span{font-size:12.5px}
+.page-masthead h1{font-size:36px}
+.page-masthead p{font-size:14.5px}
+footer{font-size:12.5px}
+.page-npc .npc-intro{font-size:14.5px}
+.guide-topic-tabs button{font-size:14.5px}
+.guide-card{font-size:14.5px}
+.guide-card h3{font-size:16.5px}
+.guide-card h4{font-size:13.5px}
+.guide-note{font-size:13.5px}
+.setting-metric span{font-size:13.5px}
+.setting-metric strong{font-size:22.5px}
+.guide-disclosure>summary{font-size:14.5px}
+.guide-table{font-size:13.5px}
+.guide-table small{font-size:12.5px}
+.settings-path{font-size:13.5px}
+.copy-content{font-size:13.5px}
+.copy-button{font-size:12.5px}
+.play-ideas{font-size:14.5px}
+.command-explainer{font-size:13.5px}
+.command-explainer code{font-size:13.5px}
+.guide-link{font-size:13.5px}
+.world-lead{font-size:16.5px}
+.world-number{font-size:40.5px}
+.world-ideas h3{font-size:17.5px}
+.intro-toolbar .intro-toggle{font-size:14.5px}
+.intro-toolbar .intro-panel{font-size:14.5px}
+.page-world .world-card h4{font-size:14.5px}
+.page-world .world-idea-card h4{font-size:14.5px}
+.page-world .world-idea-card p{font-size:14.5px}
+.page-starts .opening-card small{font-size:12.5px}
+.page-starts .opening-card b{font-size:16.5px}
+.page-starts .opening-card .hint{font-size:13.5px}
+.platform-option strong{font-size:18.5px}
+.platform-option span{font-size:12.5px}
+.page-index .window-close{font-size:21px}
+.character-switcher > summary{font-size:13.5px}
+.character-switch-mark{font-size:17.5px}
+.character-switch-row{font-size:14.5px}
+.character-switch-row small{font-size:12.5px}
+.status-reference>summary{font-size:14.5px}
+.status-reference .guide-note{font-size:14px}
+.status-reference .status-field-table th,.status-reference .status-field-table td{font-size:14px}
+.status-reference .status-value-kind{font-size:13px}
+.status-reference .copy-content{font-size:13.5px}
+.page-guide #status>.section-heading,.page-guide #status .status-reference>summary{font-size:15.5px}
+.page-guide #status>.section-heading h2{font-size:15.5px}
+.page-guide #status .status-reference>summary::before{font-size:13.5px}
+.page-guide #status .status-field-table tbody th code{font-size:13px}
+}
+@media(max-width:700px){
+body{font-size:14px}
+.brand{font-size:17px}
+nav a{font-size:13.5px}
+.platforms button{font-size:11.5px}
+.titlebar{font-size:12.5px}
+.eyebrow{font-size:12.5px}
+.hero h1{font-size:34px}
+.hero-copy p{font-size:15px}
+.intro-toolbar{font-size:13.5px}
+.tags{font-size:12.5px}
+.section-heading h2{font-size:15px}
+.section-heading>span{font-size:12.5px}
+.portrait-slot{font-size:11.5px}
+figcaption{font-size:12.5px}
+.notebook p{font-size:12.5px}
+.notebook small{font-size:11.5px}
+.tabs button{font-size:12.5px}
+#profile-panel{font-size:13.5px}
+#profile-panel h3{font-size:13.5px}
+.relation-label{font-size:12.5px}
+.relation-copy{font-size:15px}
+.records-heading{font-size:11.5px}
+.records-heading span{font-size:11.5px}
+.record-toggle{font-size:11.5px}
+.record-front b{font-size:12.5px}
+.record-flip{font-size:11.5px}
+.record-back{font-size:12.5px}
+.opening-card small{font-size:10.5px}
+.opening-card b{font-size:12.5px}
+.opening-card .hint{font-size:10.5px}
+.opening-detail{font-size:12.5px}
+.opening-detail button{font-size:11.5px}
+.npc h2{font-size:14px}
+.npc-folder{font-size:13.5px}
+#npc-detail{font-size:12.5px}
+#npc-detail h3{font-size:14px}
+#command-feedback{font-size:11.5px}
+.guide>details>summary{font-size:13.5px}
+.guide summary span{font-size:11.5px}
+#guide-panel{font-size:13.5px}
+#guide-panel h3{font-size:14px}
+.player h3{font-size:14px}
+.player p{font-size:12.5px}
+.player small{font-size:10.5px}
+.player-controls a{font-size:11.5px}
+.track-button:before{font-size:11.5px}
+.track-button b{font-size:11.5px}
+.track-button small{font-size:10.5px}
+footer{font-size:12.5px}
+.npc-photo-button{font-size:11.5px}
+.npc-photo-change{font-size:10.5px}
+.photo-close{font-size:12.5px}
+.page-masthead>span{font-size:11.5px}
+.page-masthead h1{font-size:28.5px}
+.page-masthead p{font-size:13.5px}
+footer{font-size:11.5px}
+.page-npc .npc-intro{font-size:13.5px}
+.guide-topic-tabs button{font-size:13.5px}
+.guide-card{font-size:13.5px}
+.guide-card h3{font-size:15px}
+.guide-card h4{font-size:12.5px}
+.guide-note{font-size:12.5px}
+.setting-metric span{font-size:12.5px}
+.setting-metric strong{font-size:20px}
+.guide-disclosure>summary{font-size:13.5px}
+.guide-table{font-size:12.5px}
+.guide-table small{font-size:11.5px}
+.settings-path{font-size:12.5px}
+.copy-content{font-size:12.5px}
+.copy-button{font-size:11.5px}
+.play-ideas{font-size:13.5px}
+.command-explainer{font-size:12.5px}
+.command-explainer code{font-size:12.5px}
+.guide-link{font-size:12.5px}
+.world-lead{font-size:15px}
+.world-number{font-size:32px}
+.world-ideas h3{font-size:16px}
+.intro-toolbar .intro-toggle{font-size:13.5px}
+.intro-toolbar .intro-panel{font-size:13.5px}
+.page-world .world-card h4{font-size:13.5px}
+.page-world .world-idea-card h4{font-size:13.5px}
+.page-world .world-idea-card p{font-size:13.5px}
+.page-starts .opening-card small{font-size:11.5px}
+.page-starts .opening-card b{font-size:15px}
+.page-starts .opening-card .hint{font-size:12.5px}
+.platform-option strong{font-size:17px}
+.platform-option span{font-size:11.5px}
+.page-index .window-close{font-size:19px}
+.character-switcher > summary{font-size:12.5px}
+.character-switch-mark{font-size:16px}
+.character-switch-row{font-size:13.5px}
+.character-switch-row small{font-size:11.5px}
+.status-reference>summary{font-size:13.5px}
+.status-reference .guide-note{font-size:13px}
+.status-reference .status-field-table th,.status-reference .status-field-table td{font-size:13px}
+.status-reference .status-value-kind{font-size:12px}
+.status-reference .copy-content{font-size:12.5px}
+.page-guide #status>.section-heading,.page-guide #status .status-reference>summary{font-size:14px}
+.page-guide #status>.section-heading h2{font-size:14px}
+.page-guide #status .status-reference>summary::before{font-size:12.5px}
+.page-guide #status .status-field-table tbody th code{font-size:12px}
+}
+@media(max-width:700px){.eyebrow{font-size:10.5px}}
+@media(max-width:700px){.hero h1{font-size:29.5px}}
+@media(max-width:700px){.hero-copy p{font-size:12.5px}}
+@media(max-width:700px){.hero-copy button{font-size:12.5px}}
+@media(max-width:700px){.notebook p{font-size:10.5px}}
+@media(max-width:700px){.notebook small{font-size:10.5px}}
+@media(max-width:700px){.tabs button{font-size:11.5px}}
+@media(max-width:700px){#profile-panel{font-size:12.5px}}
+@media(max-width:700px){.record-front b{font-size:11.5px}}
+@media(max-width:700px){.record-doc{font-size:10.5px}}
+@media(max-width:700px){.record-back{font-size:12.5px}}
+@media(max-width:700px){.section-heading>span{font-size:11.5px}}
+@media(max-width:700px){.tags{font-size:11.5px}}
+@media(max-width:700px){.intro-toolbar{font-size:12.5px}}
+@media(max-width:430px){.hero-copy .eyebrow{font-size:11.5px}}
+@media(max-width:430px){.hero-copy h1{font-size:26.5px}}
+@media(max-width:430px){.hero-copy p{font-size:12.5px}}
+@media(max-width:430px){.notebook p{font-size:12.5px}}
+@media(max-width:430px){.notebook small{font-size:11.5px}}
+@media(max-width:430px){#profile-panel{font-size:13.5px}}
+@media(max-width:430px){.tabs button{font-size:12.5px}}
+@media(max-width:430px){.player small{font-size:10.5px}}
+@media(max-width:430px){.player h3{font-size:13.5px}}
+@media(max-width:430px){.track-button b{font-size:11.5px}}
+@media(max-width:430px){.section-heading h2{font-size:14px}}
+@media(max-width:700px){.page-masthead h1{font-size:24.5px}}
+@media(max-width:700px){.setting-metric strong{font-size:16px}}
+@media(max-width:700px){.guide-topic-tabs button{font-size:12.5px}}
+@media(max-width:700px){.world-lead{font-size:13.5px}}
+@media(max-width:700px){.world-number{font-size:25.5px}}
+@media(max-width:430px){.page-npc .npc-intro{font-size:12.5px}}
+@media(max-width:430px){.setting-metric strong{font-size:14px}}
+@media(max-width:430px){.setting-metric span{font-size:11.5px}}
+@media(max-width:430px){.guide-table{font-size:11.5px}}
+@media(max-width:430px){.intro-toolbar .intro-toggle{font-size:12.5px}}
+@media(max-width:700px){.page-starts .opening-card b{font-size:13.5px}}
+@media(max-width:700px){.page-starts .opening-card .hint{font-size:11.5px}}
+@media(max-width:650px){.status-reference .status-field-table tbody th,.status-reference .status-field-table tbody td{font-size:12.5px}}
+/* profile-detail.css */
+@media(min-width:701px){
+#profile-panel .profile-detail{font-size:14.5px}
+#profile-panel .profile-detail-title{font-size:16.5px}
+#profile-panel .profile-fact dt{font-size:14.5px}
+#profile-panel .profile-fact dd{font-size:14.5px}
+#profile-panel .profile-group-title{font-size:14.5px}
+#profile-panel .profile-relation-label{font-size:13.5px}
+#profile-panel .profile-relation-copy{font-size:14.5px}
+}
+@media(max-width:700px){
+#profile-panel .profile-detail{font-size:13.5px}
+#profile-panel .profile-detail-title{font-size:15px}
+#profile-panel .profile-fact dt{font-size:13.5px}
+#profile-panel .profile-fact dd{font-size:13.5px}
+#profile-panel .profile-group-title{font-size:13.5px}
+#profile-panel .profile-relation-label{font-size:12.5px}
+#profile-panel .profile-relation-copy{font-size:13.5px}
+}
+@media(max-width:430px){#profile-panel .profile-detail{font-size:13.5px}}
+/* npc-extra.css */
+@media(min-width:701px){
+#npc-detail .npc-name{font-size:20px}
+.npc-trait{font-size:12.5px}
+.npc-original{font-size:14.5px}
+.npc-note-label{font-size:12.5px}
+#npc-detail .npc-note p{font-size:14.5px}
+.page-npc .npc-folder{font-size:14.5px}
+}
+@media(max-width:700px){
+#npc-detail .npc-name{font-size:18px}
+.npc-trait{font-size:11.5px}
+.npc-original{font-size:13.5px}
+.npc-note-label{font-size:11.5px}
+#npc-detail .npc-note p{font-size:13.5px}
+.page-npc .npc-folder{font-size:13.5px}
+}
+@media(max-width:430px){#npc-detail .npc-name{font-size:16px}}
+@media(max-width:700px){.page-npc .npc-folder{font-size:12.5px}}
+/* guide-extra.css */
+@media(min-width:701px){
+.page-guide .settings-platform-badge{font-size:12.5px}
+.page-guide .settings-platforms button{font-size:14.5px}
+.page-guide .settings-platform-title{font-size:18.5px}
+.page-guide #guide-panel h3{font-size:17.5px}
+.page-guide #guide-panel>.guide-disclosure>summary{font-size:18.5px}
+.page-guide .disclosure-body>.guide-disclosure>summary{font-size:15.5px}
+.page-guide .guide-table th{font-size:14.5px}
+.page-guide .guide-table td{font-size:14.5px}
+.page-guide .guide-table small{font-size:13.5px}
+.page-guide .guide-instructions p{font-size:14.5px}
+.page-guide .settings-path li{font-size:13.5px}
+.page-guide .settings-path li+li::before{font-size:20px}
+.page-guide #guide-panel .copy-card-name h3{font-size:17.5px}
+.page-guide .copy-field-label{font-size:12.5px}
+.page-guide .copy-card-badge{font-size:15.5px}
+.page-guide .copy-card-badge.is-optional{font-size:13.5px}
+.page-guide .copy-card .copy-button{font-size:13.5px}
+.page-guide .copy-content{font-size:14.5px}
+.page-guide #guide-panel .guide-model-section>h3{font-size:15.5px}
+.page-guide .model-flow-arrow{font-size:17.5px}
+.page-guide .guide-list .guide-subnote,.page-guide p.guide-subnote{font-size:13.5px}
+.page-guide .command-platform-label{font-size:12.5px}
+.page-guide .command-description{font-size:14.5px}
+.page-guide .guide-nav-title{font-size:14.5px}
+.page-guide #guide-tabs .guide-nav-items button{font-size:13.5px}
+.page-guide .guide-model-notes{font-size:13.5px}
+.page-guide .guide-model-notes h4{font-size:13.5px}
+.page-guide #guide-panel .guide-table-disclosure>summary{font-size:15.5px}
+.page-guide #guide-panel .guide-model-section>h3,.page-guide #guide-panel .guide-table-disclosure>summary{font-size:16.5px}
+.page-guide .guide-card>h3,.page-guide .guide-model-section>h3{font-size:18.5px}
+.page-guide .guide-table :is(th,td){font-size:15.5px}
+main :is(.guide-card,.guide-model-section)>h3{font-size:16.5px}
+main .guide-table-disclosure>summary{font-size:16.5px}
+.page-guide #guide-panel .settings-path::before{font-size:13.5px}
+.page-guide #guide-panel .settings-path li{font-size:15.5px}
+.page-guide #guide-panel .guide-card>h3{font-size:16.5px}
+.page-guide #guide-panel .guide-model-section>h3,
+.page-guide #guide-panel .guide-table-disclosure>summary{font-size:16.5px}
+.page-guide #guide-panel :is(p.guide-note,p.guide-subnote,.guide-table small){font-size:13.5px}
+.page-guide #guide-panel .guide-model-notes h4{font-size:13.5px}
+.page-guide #guide-panel .copy-card-name h3{font-size:16.5px}
+}
+@media(max-width:700px){
+.page-guide .settings-platform-badge{font-size:11.5px}
+.page-guide .settings-platforms button{font-size:13.5px}
+.page-guide .settings-platform-title{font-size:17px}
+.page-guide #guide-panel h3{font-size:16px}
+.page-guide #guide-panel>.guide-disclosure>summary{font-size:17px}
+.page-guide .disclosure-body>.guide-disclosure>summary{font-size:14px}
+.page-guide .guide-table th{font-size:13.5px}
+.page-guide .guide-table td{font-size:13.5px}
+.page-guide .guide-table small{font-size:12.5px}
+.page-guide .guide-instructions p{font-size:13.5px}
+.page-guide .settings-path li{font-size:12.5px}
+.page-guide .settings-path li+li::before{font-size:18px}
+.page-guide #guide-panel .copy-card-name h3{font-size:16px}
+.page-guide .copy-field-label{font-size:11.5px}
+.page-guide .copy-card-badge{font-size:14px}
+.page-guide .copy-card-badge.is-optional{font-size:12.5px}
+.page-guide .copy-card .copy-button{font-size:12.5px}
+.page-guide .copy-content{font-size:13.5px}
+.page-guide #guide-panel .guide-model-section>h3{font-size:14px}
+.page-guide .model-flow-arrow{font-size:16px}
+.page-guide .guide-list .guide-subnote,.page-guide p.guide-subnote{font-size:12.5px}
+.page-guide .command-platform-label{font-size:11.5px}
+.page-guide .command-description{font-size:13.5px}
+.page-guide .guide-nav-title{font-size:13.5px}
+.page-guide #guide-tabs .guide-nav-items button{font-size:12.5px}
+.page-guide .guide-model-notes{font-size:12.5px}
+.page-guide .guide-model-notes h4{font-size:12.5px}
+.page-guide #guide-panel .guide-table-disclosure>summary{font-size:14px}
+.page-guide #guide-panel .guide-model-section>h3,.page-guide #guide-panel .guide-table-disclosure>summary{font-size:15px}
+.page-guide .guide-card>h3,.page-guide .guide-model-section>h3{font-size:17px}
+.page-guide .guide-table :is(th,td){font-size:14px}
+main :is(.guide-card,.guide-model-section)>h3{font-size:15px}
+main .guide-table-disclosure>summary{font-size:15px}
+.page-guide #guide-panel .settings-path::before{font-size:12.5px}
+.page-guide #guide-panel .settings-path li{font-size:14px}
+.page-guide #guide-panel .guide-card>h3{font-size:15px}
+.page-guide #guide-panel .guide-model-section>h3,
+.page-guide #guide-panel .guide-table-disclosure>summary{font-size:15px}
+.page-guide #guide-panel :is(p.guide-note,p.guide-subnote,.guide-table small){font-size:12.5px}
+.page-guide #guide-panel .guide-model-notes h4{font-size:12.5px}
+.page-guide #guide-panel .copy-card-name h3{font-size:15px}
+}
+@media(max-width:430px){.page-guide #guide-panel>.guide-disclosure>summary{font-size:16px}}
+@media(max-width:430px){.page-guide .copy-content{font-size:12.5px}}
+@media(max-width:430px){.page-guide .guide-table th,.page-guide .guide-table td{font-size:12.5px}}
+@media(max-width:430px){.page-guide .guide-nav-title{font-size:12.5px}}
+@media(max-width:430px){.page-guide #guide-tabs .guide-nav-items button{font-size:11.5px}}
+@media(max-width:650px){.page-guide .guide-table-disclosure>summary::after{font-size:12.5px}}
+@media(max-width:650px){.page-guide #guide-panel .guide-table-disclosure>summary::after{font-size:12.5px}}
+/* music-player.css */
+@media(min-width:701px){
+.page-music .player h3{font-size:15.5px}
+.page-music .player #track-artist{font-size:13.5px}
+.page-music .player-controls button{font-size:21px}
+.page-music .player-controls #track-play{font-size:18.5px}
+.page-music .track-timeline{font-size:12.5px}
+.page-music .track-volume{font-size:12.5px}
+.page-music #track-repeat{font-size:12.5px}
+.page-music .player .track-original{font-size:13.5px}
+.page-music .player #player-status{font-size:13.5px}
+.page-music #track-list .track-button b{font-size:16.5px}
+.page-music #track-list .track-button small{font-size:14.5px}
+.player-function-tip{font-size:14.5px}
+.page-music #track-list .track-button::before{font-size:16.5px}
+}
+@media(max-width:700px){
+.page-music .player h3{font-size:14px}
+.page-music .player #track-artist{font-size:12.5px}
+.page-music .player-controls button{font-size:19px}
+.page-music .player-controls #track-play{font-size:17px}
+.page-music .track-timeline{font-size:11.5px}
+.page-music .track-volume{font-size:11.5px}
+.page-music #track-repeat{font-size:11.5px}
+.page-music .player .track-original{font-size:12.5px}
+.page-music .player #player-status{font-size:12.5px}
+.page-music #track-list .track-button b{font-size:15px}
+.page-music #track-list .track-button small{font-size:13.5px}
+.player-function-tip{font-size:13.5px}
+.page-music #track-list .track-button::before{font-size:15px}
+}
+/* delight.css */
+@media(min-width:701px){
+.ig-ribbon-track{font-size:10.5px}
+}
+@media(max-width:700px){
+.ig-ribbon-track{font-size:9.5px}
+}
+/* frame-shell.css */
+@media(min-width:701px){
+.ig-image-close{font-size:13.5px}
+.ig-image-close{font-size:31px}
+}
+@media(max-width:700px){
+.ig-image-close{font-size:12.5px}
+.ig-image-close{font-size:25.5px}
+}
+/* opening-preview.css */
+@media(min-width:701px){
+.ig-opening-preview-head h2{font-size:27.5px}
+.ig-opening-preview-close{font-size:31px}
+.ig-opening-preview-prose{font-size:18.5px}
+.page-starts .ig-opening-card > .ig-opening-preview-button{font-size:12.5px}
+}
+@media(max-width:700px){
+.ig-opening-preview-head h2{font-size:23.5px}
+.ig-opening-preview-close{font-size:25.5px}
+.ig-opening-preview-prose{font-size:17px}
+.page-starts .ig-opening-card > .ig-opening-preview-button{font-size:11.5px}
+}
+/* index.html */
+@container tag-list (max-width:440px){#intro .balanced-tags>.tag-row>.kw-chip{font-size:12.5px}}
+@container tag-list (max-width:320px){#intro .balanced-tags>.tag-row>.kw-chip{font-size:12px}}
+@container tag-list (max-width:280px){#intro .balanced-tags>.tag-row>.kw-chip{font-size:11.5px}}
