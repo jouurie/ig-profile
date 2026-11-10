@@ -121,7 +121,15 @@
 
   const world = $('#world-content');
   if (world) {
-    const lead = make('div', 'world-lead'); paragraphs(lead, source('세계관')); world.append(lead);
+    const lead = make('div', 'world-lead'); paragraphs(lead, source('세계관'));
+    // 새 그림 자리: content.js 의 IG_IMAGE_SLOTS.worldRoom.src 가 비어 있으면 설명 글이 대신 나온다.
+    const roomSlot = (window.IG_IMAGE_SLOTS || {}).worldRoom;
+    if (roomSlot) {
+      const intro = make('div', 'world-intro'), figure = make('figure', roomSlot.src ? 'world-room-photo' : 'world-room-photo image-slot');
+      if (roomSlot.src) { const img = make('img'); img.src = roomSlot.src; img.alt = roomSlot.alt; img.width = 1536; img.height = 1024; img.loading = 'lazy'; img.decoding = 'async'; figure.append(img); }
+      else { figure.setAttribute('role', 'img'); figure.setAttribute('aria-label', roomSlot.alt + ' (그림 준비 중)'); figure.append(make('b', '', 'IMAGE · 3:2'), make('span', '', roomSlot.note)); }
+      intro.append(lead, figure); world.append(intro);
+    } else world.append(lead);
     const grid = make('div', 'world-grid');
     ['이결의 방', '생활 돌봄', '숨은 기록', '가족 그림자'].forEach((name, i) => {
       const article = card(name, '', 'world-card'); article.prepend(make('span', 'world-number', '0' + (i + 1)));
