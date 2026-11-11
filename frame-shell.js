@@ -292,3 +292,96 @@
     display(active);
   });
 })();
+/* Short, one-shot accents on the existing reading surfaces. */
+(() => {
+  const install = () => {
+    if (!window.IG_FRAME_CONTENT) return;
+    const main = document.querySelector('main');
+    if (!main || !window.IntersectionObserver || !Element.prototype.animate) return;
+
+    const observed = new Map();
+    const seen = (window.parent.IG_CHAPTER_ACCENTS ||= new Set());
+    const groups = [["rule",".page-masthead, .section-heading"],["label",".page-masthead > span, .section-heading > span, .window-caption"]];
+    const routeKey = () => location.pathname;
+    const ease = 'cubic-bezier(.22,.61,.36,1)';
+
+    function play(element, frames, duration, delay, kind) {
+      if (document.hidden) return;
+      const animation = element.animate(frames, { duration, delay, easing: ease, fill: 'backwards' });
+      animation.id = 'chapter-accent-' + kind;
+    }
+
+    function line(host) {
+      const rule = document.createElement('span');
+      rule.setAttribute('aria-hidden', 'true');
+      rule.setAttribute('data-chapter-accent-line', '');
+      if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+      Object.assign(rule.style, {
+        position: 'absolute', display: 'block', insetInlineStart: '0',
+        insetBlockEnd: '-1px', inlineSize: 'min(42px, 16%)', blockSize: '2px',
+        background: 'var(--ink)', pointerEvents: 'none', transformOrigin: 'left center'
+      });
+      host.append(rule);
+      return rule;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      visible.forEach((entry, index) => {
+        const host = entry.target;
+        const record = observed.get(host);
+        if (!record) return;
+        observer.unobserve(host);
+        observed.delete(host);
+        const first = !seen.has(record.key);
+        seen.add(record.key);
+        const delay = Math.min(index * 38, 114);
+        if (record.kind === 'rule') {
+          const rule = line(host);
+          if (first) play(rule, [
+            { opacity: .2, transform: 'scaleX(.14)' },
+            { opacity: 1, transform: 'scaleX(1)' }
+          ], 260, delay, 'rule');
+          return;
+        }
+        if (!first) return;
+        if (record.kind === 'card') {
+          play(host, [{ opacity: .76, translate: '0 10px' }, { opacity: 1, translate: '0 0' }], 245, delay + 48, 'card');
+        } else {
+          play(host, [{ opacity: .58 }, { opacity: 1 }], 190, delay + 55, 'label');
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: .03 });
+
+    const registered = new WeakSet();
+    function scan() {
+      for (const host of observed.keys()) {
+        if (host.isConnected) continue;
+        observer.unobserve(host);
+        observed.delete(host);
+      }
+      for (const [kind, selector] of groups) {
+        const counts = new Map();
+        main.querySelectorAll(selector).forEach(host => {
+          const route = routeKey(host);
+          const index = counts.get(route) || 0;
+          counts.set(route, index + 1);
+          if (registered.has(host) || host.closest('a,button,summary,[role="button"]')) return;
+          if (kind === 'card' && host.querySelector('a,button,summary,[role="button"],[tabindex],[data-image-viewer]')) return;
+          registered.add(host);
+          observed.set(host, { kind, key: route + ':' + kind + ':' + index });
+          observer.observe(host);
+        });
+      }
+    }
+
+    scan();
+    new MutationObserver(changes => {
+      if (changes.some(change => [...change.addedNodes, ...change.removedNodes]
+        .some(node => node.nodeType === 1 && !node.hasAttribute('data-chapter-accent-line')))) scan();
+    }).observe(main, { childList: true, subtree: true });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install, { once: true });
+  else install();
+})();
