@@ -84,7 +84,8 @@
 
 /* Inside world cards, subheadings use plain bold text rather than a second label box. */
 /* Original world label boxes are retained; only their text weight changes. */
-.page-world .world-card h4,.page-world .world-idea-card h4{font-weight:400;background:var(--white)}
+.page-world .world-card h4{font-weight:400;background:var(--white)}
+.page-world .world-idea-card > h4{font-weight:400;background:var(--bluepaper);outline:1px solid var(--ink)}
 
 /* Width derived from the existing RECORDS bottom and the uncropped portrait ratio. */
 @media(min-width:1040px){
