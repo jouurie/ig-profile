@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="190" height="134" viewBox="0 0 190 134" fill="none">
+  <title>Cassette tape</title>
+  <g stroke="#20152f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="18" width="172" height="99" rx="8" fill="#ffb7d4"/>
+    <rect x="20" y="28" width="150" height="58" rx="5" fill="#ffffff"/>
+    <path d="M95 40C92 38 88 35 89 32C90 29 94 30 95 32C97 29 101 30 101 33C101 36 98 38 95 40Z" fill="#ffb7d4" stroke-width="1.2"/>
+    <rect x="38" y="46" width="114" height="30" rx="15" fill="#fff0f7"/>
+    <path d="M72 51H118V71H72Z" fill="#20152f" stroke="none"/>
+    <path d="M79 51L83 71M107 51L111 71" stroke="#fff0f7" stroke-width="2"/>
+    <circle cx="54" cy="61" r="11" fill="#ffffff"/>
+    <circle cx="136" cy="61" r="11" fill="#ffffff"/>
+    <path d="M54 50V55M54 67V72M43 61H48M60 61H65M136 50V55M136 67V72M125 61H130M142 61H147"/>
+    <circle cx="54" cy="61" r="4" fill="#ffb7d4"/>
+    <circle cx="136" cy="61" r="4" fill="#ffb7d4"/>
+    <path d="M52 107L60 91H130L138 107Z" fill="#fff0f7"/>
+    <rect x="66" y="98" width="10" height="5" rx="1" fill="#20152f" stroke="none"/>
+    <rect x="114" y="98" width="10" height="5" rx="1" fill="#20152f" stroke="none"/>
+    <circle cx="17" cy="26" r="2" fill="#fff0f7" stroke-width="1"/>
+    <circle cx="173" cy="26" r="2" fill="#fff0f7" stroke-width="1"/>
+  </g>
+</svg>

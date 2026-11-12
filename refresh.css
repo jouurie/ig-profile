@@ -107,8 +107,18 @@ html.ig-frame-content{overflow-y:auto}
 #profile-panel :is(.profile-group-title,.profile-relation-label),.npc-note-label,.npc-trait{font-weight:400}
 
 /* Requested contrast for progression cards; parent card colors remain unchanged. */
-.page-world #world-content .world-idea-card{border:1px solid var(--ink)}
+.page-world #world-content .world-idea-card{border:1px solid var(--ink);background:var(--bluepaper)}
 /* Portraits fit their adjacent text on desktop; mobile retains its existing dimensions. */
 @media(min-width:1040px){.page-npc .npc-preview{grid-template-columns:var(--npc-portrait-column,240px) minmax(0,1fr)}.page-npc .npc-intro{align-self:start}}
 /* A faint line separates complete introduction paragraphs, not sentences. */
 .page-index #intro-copy.prose>p+p{border-top:1px solid color-mix(in srgb,var(--ink) 15%,transparent);padding-top:10px}
+
+/* Keep the two existing genre tag rows readable on mobile. */
+@media (max-width: 700px) {
+  .page-index .tags.balanced-tags { flex-direction: column; flex-wrap: nowrap; gap: 5px; }
+  .page-index .tags.balanced-tags > .tag-row { flex-wrap: nowrap; gap: 4px; }
+  .page-index .tags.balanced-tags > .tag-row > span {
+    font-size: clamp(9.5px, calc(2.85vw + .38px), 11.5px);
+    padding-inline: clamp(3px, calc(2.85vw - 6.12px), 5px);
+  }
+}
