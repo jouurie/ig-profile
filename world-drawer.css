@@ -1,0 +1,37 @@
+.world-drawer {
+  min-width: 0;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  background: var(--bluepaper);
+  color: var(--ink);
+}
+@media (min-width: 1040px) {
+  .world-intro:has(> .world-drawer) { row-gap: 12px; }
+  .world-drawer { grid-column: 2; }
+}
+.world-drawer > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 11px;
+  border-radius: 4px;
+  cursor: pointer;
+  list-style: none;
+}
+.world-drawer > summary::-webkit-details-marker { display: none; }
+.world-drawer > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: -3px; }
+@media (hover: hover) and (pointer: fine) {
+  .world-drawer > summary:hover { background: var(--blue); }
+}
+.world-drawer-name { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.world-drawer-icon { display: inline-grid; flex: none; place-items: center; width: 17px; height: 12px; border: 1px solid var(--ink); border-radius: 2px; }
+.world-drawer-icon::after { content: ""; width: 5px; height: 1px; background: var(--ink); }
+.world-drawer-action { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.world-drawer[open] > summary { background: var(--pinkpaper); }
+.world-drawer-open, .world-drawer[open] .world-drawer-closed { display: none; }
+.world-drawer[open] .world-drawer-open { display: inline; }
+.world-drawer-reveal { border-top: 1px solid var(--blue); border-radius: 0 0 4px 4px; background: var(--white); }
+.world-drawer-reveal img { display: block; width: 100%; height: auto; aspect-ratio: 2.35; object-fit: cover; object-position: 50% 62%; }
+.world-drawer-reveal p { margin: 0; padding: 9px 11px 10px; font-size: 13.5px; line-height: 1.65; word-break: keep-all; }

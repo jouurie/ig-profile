@@ -41,10 +41,9 @@
           const main = document.querySelector('main');
           if (!target || !main) return;
           const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--route-start-gap')) || 0;
-          main.style.minHeight = '';
-          const offset = target.getBoundingClientRect().top - main.getBoundingClientRect().top;
-          main.style.minHeight = Math.ceil(Math.max(0, offset) + innerHeight - gap) + 'px';
-          scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + scrollY - gap), behavior: 'instant' });
+          main.style.minHeight = '0px';
+
+          scrollTo({ top: document.body.classList.contains('page-world') ? 0 : Math.max(0, target.getBoundingClientRect().top + scrollY - gap), behavior: 'instant' });
         });
       }
       document.addEventListener('click', event => {
@@ -292,6 +291,7 @@
     display(active);
   });
 })();
+
 /* Short, one-shot accents on the existing reading surfaces. */
 (() => {
   const install = () => {

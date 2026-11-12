@@ -31,3 +31,46 @@
   #profile-panel .profile-detail-group{padding:9px}
   #profile-panel .profile-relation{padding:12px}
 }
+
+/* A small file left between the introduction and the profile folder. */
+.arrival-note {
+  width: min(100%, 34rem);
+  margin: 0 0 20px;
+  border: 1px solid var(--edge);
+  border-radius: 5px;
+  background: var(--pinkpaper);
+  color: var(--ink);
+}
+.arrival-note > summary {
+  min-height: 44px;
+  padding: 11px 14px;
+  border-radius: 4px;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 22px;
+  cursor: pointer;
+}
+.arrival-note > summary::marker { color: var(--ink); }
+.arrival-note > summary:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .arrival-note > summary:hover { background: var(--pink); }
+}
+.arrival-note > summary:active { background: var(--pink); }
+.arrival-note > dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 8px 14px;
+  margin: 0;
+  padding: 11px 14px 12px;
+  border-top: 1px solid var(--pink);
+  background: var(--white);
+  border-radius: 0 0 4px 4px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+.arrival-note dt { font-weight: 700; }
+.arrival-note dd { margin: 0; overflow-wrap: anywhere; }
