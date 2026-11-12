@@ -253,7 +253,7 @@ main :is(.world-lead,.guide-card,.npc-intro,.prose)>p+p:not(.guide-note):not(.gu
 .site-shell main > .page-masthead > h1 { margin: 8px 0 10px; padding: 0 4px 2px 0; font-size: 42px; font-weight: 800; line-height: 1.25; }
 .site-shell main > .page-masthead > span:first-child { font-size: 12.5px; letter-spacing: 3px; }
 .site-shell main > .page-masthead > p { margin-block: 4px 0; font-size: 14.5px; line-height: 1.6; }
-.site-shell main :is(#profile, #start, #npc, #playlist) > .section-heading { box-sizing: border-box; min-height: 51.6px; padding-block: 10px; margin-bottom: 14px; align-items: center; }
+.site-shell main :is(#profile, #start, #npc, #playlist) > .section-heading { box-sizing: border-box; min-height: 51.6px; padding-block: 10px; margin-bottom: 14px; align-items: center; border-top: 1px solid var(--blue); }
 .site-shell main :is(#profile, #start, #npc, #playlist) > .section-heading > h2 { font-size: 22px; font-weight: 800; line-height: 1.3; letter-spacing: .02em; }
 .site-shell main :is(#profile, #start, #npc, #playlist) > .section-heading > span:not([data-chapter-accent-line]) { font-size: 13.5px; line-height: 1.7; }
 .site-shell main :is(.page-masthead, .section-heading) > [data-chapter-accent-line] { visibility: hidden; }
