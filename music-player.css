@@ -86,7 +86,8 @@
   body.page-music #track-list .track-button::before { font-size: 13.5px; }
 }
 @media (max-width: 560px) {
-  .page-music .music-layout { gap: 14px; }
+  .page-music .music-layout { gap: 14px; row-gap: 28px; }
+  .page-music #track-list { row-gap: 3px; }
   .page-music .player { grid-template-rows: 142px 30px 20px 48px 30px 30px auto; }
   .page-music .player-controls { margin-block: 4px; }
 }
