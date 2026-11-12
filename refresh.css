@@ -107,7 +107,7 @@ html.ig-frame-content{overflow-y:auto}
 #profile-panel :is(.profile-group-title,.profile-relation-label),.npc-note-label,.npc-trait{font-weight:400}
 
 /* Requested contrast for progression cards; parent card colors remain unchanged. */
-.page-world #world-content .world-idea-card{border:1px solid var(--ink);background:var(--bluepaper)}
+.page-world #world-content .world-idea-card{border:1px solid var(--ink)}
 /* Portraits fit their adjacent text on desktop; mobile retains its existing dimensions. */
 @media(min-width:1040px){.page-npc .npc-preview{grid-template-columns:var(--npc-portrait-column,240px) minmax(0,1fr)}.page-npc .npc-intro{align-self:start}}
 /* A faint line separates complete introduction paragraphs, not sentences. */
