@@ -427,19 +427,6 @@ main .guide-table-disclosure>summary{font-size:15px}
 .ig-image-close{font-size:12.5px}
 .ig-image-close{font-size:25.5px}
 }
-/* opening-preview.css */
-@media(min-width:701px){
-.ig-opening-preview-head h2{font-size:27.5px}
-.ig-opening-preview-close{font-size:31px}
-.ig-opening-preview-prose{font-size:18.5px}
-.page-starts .ig-opening-card > .ig-opening-preview-button{font-size:12.5px}
-}
-@media(max-width:700px){
-.ig-opening-preview-head h2{font-size:23.5px}
-.ig-opening-preview-close{font-size:25.5px}
-.ig-opening-preview-prose{font-size:17px}
-.page-starts .ig-opening-card > .ig-opening-preview-button{font-size:11.5px}
-}
 /* index.html */
 @container tag-list (max-width:440px){#intro .balanced-tags>.tag-row>.kw-chip{font-size:12.5px}}
 @container tag-list (max-width:320px){#intro .balanced-tags>.tag-row>.kw-chip{font-size:12px}}

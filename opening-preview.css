@@ -6,19 +6,34 @@
 .site-shell .ig-opening-card > .ig-opening-photo-button:is([data-ig-hover]) { background: transparent; }@media (hover:hover) and (pointer:fine){.site-shell .ig-opening-card > .ig-opening-photo-button:is(:hover) { background: transparent; }}@media (hover:none),(pointer:coarse),(pointer:none){.site-shell .ig-opening-card > .ig-opening-photo-button:is(:active) { background: transparent; }}
 .ig-opening-card .ig-opening-photo-button:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
 .page-starts .ig-opening-card:last-child .ig-opening-photo-button { inset: 0 0 0 auto; width: 39%; height: 100%; }
-.ig-opening-preview { box-sizing: border-box; width: min(770px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: clamp(20px, 4vw, 36px); border: 1px solid var(--blue); border-radius: 5px; background: var(--bg); color: var(--ink); font: inherit; overflow-y: auto; scrollbar-color: var(--pink) var(--bluepaper); }
+.ig-opening-preview { box-sizing: border-box; width: min(770px, calc(100% - 32px)); max-height: calc(100dvh - 32px); margin: auto; --opening-inset: clamp(20px, 4vw, 36px); padding: 0; border: 1px solid var(--blue); border-radius: 5px; background: var(--bg); color: var(--ink); font: inherit; overflow: hidden; scrollbar-color: var(--pink) var(--bluepaper); }
 .ig-opening-preview::backdrop { background: rgba(32,21,47,.7); }
-.ig-opening-preview-head { display: flex; align-items: flex-start; flex-wrap: nowrap; gap: 16px; margin: 0 0 24px; padding: 0; }
+.ig-opening-preview[open] { display: flex; flex-direction: column; }
+.ig-opening-preview-head { display: flex; flex: none; align-items: center; gap: 8px; margin: 0; padding: 8px 6px 8px var(--opening-inset); border-bottom: 1px solid var(--blue); }
+.ig-opening-preview-content { min-height: 0; padding: 12px var(--opening-inset) var(--opening-inset); overflow-y: auto; overscroll-behavior: contain; }
 .ig-opening-preview-head h2 { flex: 1; margin: 0; font-size: 22px; line-height: 1.5; }
-.ig-opening-preview-close { flex: none; width: 44px; min-height: 44px; padding: 0; background: var(--pinkpaper); font: inherit; font-size: 24px; line-height: 1; }
-@media (hover:hover) and (pointer:fine){.ig-opening-preview-close:hover { background: var(--pink); color: var(--ink); }}@media (hover:none),(pointer:coarse),(pointer:none){.ig-opening-preview-close:active { background: var(--pink); color: var(--ink); }}
+.ig-opening-preview-close:focus-visible { outline: 1px solid var(--blue); outline-offset: 1px; }
+.ig-opening-preview-close { flex: none; width: 44px; height: 44px; padding: 0; background: var(--opening-close-fill, var(--pinkpaper)); font: inherit; font-size: 22px; line-height: 1; }
+@media (hover:hover) and (pointer:fine){.ig-opening-preview-close:hover { --opening-close-fill: var(--pink); color: var(--ink); }}
+@media (hover:none),(pointer:coarse),(pointer:none){.ig-opening-preview-close:active { --opening-close-fill: var(--pink); color: var(--ink); }}
 .ig-opening-preview-prose { max-width: 75ch; white-space: pre-wrap; overflow-wrap: anywhere; word-break: keep-all; font-size: 16px; line-height: 1.9; }
 .ig-opening-user { padding: 0 .12em; background: #e9dcff; color: inherit; font-weight: inherit; border-radius: 2px; text-decoration: none; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .ig-opening-photo-preview { width: min(1020px, calc(100% - 32px)); }
 .ig-opening-photo-crop { width: 100%; aspect-ratio: 3 / 2; background-size: 200% 400%; background-repeat: no-repeat; }
 @media(hover:hover)  and (pointer:fine){ .ig-opening-card:hover { background-color: var(--pinkpaper); color: var(--ink); } .ig-opening-card:nth-child(even):hover { background-color: var(--bluepaper); } }@media (hover:none),(pointer:coarse),(pointer:none){.ig-opening-card:active { background-color: var(--pinkpaper); color: var(--ink); }.ig-opening-card:nth-child(even):active { background-color: var(--bluepaper); }}
 @media(max-width:700px) { .page-starts .ig-opening-card:last-child .ig-opening-photo-button { width: 47%; } }
-@media(max-width:600px) { .ig-opening-preview { width: calc(100% - 20px); max-height: calc(100dvh - 20px); padding: 20px; } }
+@media(max-width:700px) {
+  .ig-opening-preview { --opening-inset: 16px; }
+  .ig-opening-preview-head { padding: 5px 2px 5px var(--opening-inset); }
+  .ig-opening-preview-content { padding-top: 9px; }
+  .ig-opening-preview-head h2 { font-size: 18px; }
+  .ig-opening-preview-close { position: relative; isolation: isolate; border-color: transparent; background: transparent; font-size: 18px; }
+  .ig-opening-preview-close::before { content: ""; position: absolute; inset: 5px; z-index: -1; border: 1px solid var(--edge); border-radius: inherit; background: var(--opening-close-fill, var(--pinkpaper)); }
+  .ig-opening-preview-close:focus-visible { outline: none; }
+  .ig-opening-preview-close:focus-visible::before { outline: 1px solid var(--blue); outline-offset: 1px; }
+  .ig-opening-preview-prose { font-size: 14px; line-height: 1.8; }
+}
+@media(max-width:600px) { .ig-opening-preview { width: calc(100% - 20px); max-height: calc(100dvh - 20px); } }
 
 .ig-opening-component { display:block; width:100%; min-height:160px; height:640px; border:0; margin:12px 0; }
 
@@ -26,3 +41,20 @@
 .page-starts .ig-opening-card > .ig-opening-preview-button:is(:focus-visible){background:var(--pink);border-color:var(--pink);color:var(--ink)}@media (hover:hover) and (pointer:fine){.page-starts .ig-opening-card > .ig-opening-preview-button:is(:hover){background:var(--pink);border-color:var(--pink);color:var(--ink)}}@media (hover:none),(pointer:coarse),(pointer:none){.page-starts .ig-opening-card > .ig-opening-preview-button:is(:active){background:var(--pink);border-color:var(--pink);color:var(--ink)}}
 
 @media(max-width:700px){.page-starts .ig-opening-card > .ig-opening-preview-button{top:10px;right:10px}}
+
+/* Give image-led scene cards an evenly inset title, divider, and description. */
+.page-starts #opening-list > .opening-card { --scene-line: var(--blue); --scene-inset: 12px; gap: 0; }
+.page-starts #opening-list > .opening-card:is(:nth-child(4n+2), :nth-child(4n+3)):not(:last-child) { --scene-line: var(--pink); }
+.page-starts #opening-list > .opening-card:not(:last-child) { display: grid; grid-template-columns: minmax(0, 1fr); justify-content: stretch; align-content: start; height: auto; padding: 0 var(--scene-inset) var(--scene-inset); }
+.page-starts #opening-list > .opening-card:not(:last-child)::before { position: relative; inset: auto; width: calc(100% + 2 * var(--scene-inset)); margin-inline: calc(-1 * var(--scene-inset)); }
+.page-starts #opening-list > .opening-card:not(:last-child) > small { position: absolute; top: var(--scene-inset); left: var(--scene-inset); margin: 0; }
+.page-starts #opening-list > .opening-card:not(:last-child) > b { margin-top: var(--scene-inset); }
+.page-starts #opening-list > .opening-card > :is(b, .hint) { min-width: 0; word-break: keep-all; }
+.page-starts #opening-list > .opening-card > .hint { box-sizing: border-box; width: 100%; margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--scene-line); }
+.page-starts #opening-list > .opening-card:not(:last-child) > .ig-opening-photo-button { height: auto; aspect-ratio: 3 / 2; }
+@media (max-width: 700px) { .page-starts #opening-list > .opening-card { --scene-inset: 10px; } }
+@media (max-width: 375px) {
+  .page-starts #opening-list > .opening-card:not(:last-child) > .hint { min-height: calc(3.2em + 6px); }
+  .page-starts #opening-list > .opening-card:not(:last-child) > small { left: 4px; padding-inline: 4px; }
+  .page-starts #opening-list > .opening-card:not(:last-child) > .ig-opening-preview-button { right: 4px; }
+}
