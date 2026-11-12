@@ -142,7 +142,8 @@ body{background-image:linear-gradient(#bdd5ff30 1px,transparent 1px),linear-grad
 .page-index main{padding-top:var(--ig-page-start-gap)}
 
 /* Record backs keep their original copy and gain a small matching document motif. */
-#record-list > .record-toggle{container-type:inline-size}
+#record-list > .record-toggle{container-type:inline-size;border-color:var(--blue)}
+#record-list > .record-toggle:nth-child(2){border-color:var(--pink)}
 #record-list .record-back{position:relative}
 #record-list .record-art{display:none;position:absolute;right:0;top:50%;width:24px;height:31.2px;transform:translateY(-50%);color:var(--muted);pointer-events:none}
 #record-list .record-art-accent{stroke:var(--blue)}
