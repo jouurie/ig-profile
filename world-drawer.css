@@ -1,37 +1,82 @@
-.world-drawer {
-  min-width: 0;
-  border: 1px solid var(--blue);
-  border-radius: 5px;
-  background: var(--bluepaper);
-  color: var(--ink);
-}
-@media (min-width: 1040px) {
-  .world-intro:has(> .world-drawer) { row-gap: 12px; }
-  .world-drawer { grid-column: 2; }
-}
-.world-drawer > summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 44px;
-  padding: 8px 11px;
-  border-radius: 4px;
+/* Investigation uses the same room-photo slot on desktop and mobile. */
+.world-room-investigate {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  box-shadow: none;
+  perspective: 850px;
   cursor: pointer;
-  list-style: none;
 }
-.world-drawer > summary::-webkit-details-marker { display: none; }
-.world-drawer > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: -3px; }
-@media (hover: hover) and (pointer: fine) {
-  .world-drawer > summary:hover { background: var(--blue); }
+.world-room-investigate:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.world-room-flip {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 480ms cubic-bezier(.22,.75,.25,1);
 }
-.world-drawer-name { display: flex; align-items: center; gap: 8px; font-weight: 700; }
-.world-drawer-icon { display: inline-grid; flex: none; place-items: center; width: 17px; height: 12px; border: 1px solid var(--ink); border-radius: 2px; }
-.world-drawer-icon::after { content: ""; width: 5px; height: 1px; background: var(--ink); }
-.world-drawer-action { color: var(--muted); font-size: 13px; white-space: nowrap; }
-.world-drawer[open] > summary { background: var(--pinkpaper); }
-.world-drawer-open, .world-drawer[open] .world-drawer-closed { display: none; }
-.world-drawer[open] .world-drawer-open { display: inline; }
-.world-drawer-reveal { border-top: 1px solid var(--blue); border-radius: 0 0 4px 4px; background: var(--white); }
-.world-drawer-reveal img { display: block; width: 100%; height: auto; aspect-ratio: 2.35; object-fit: cover; object-position: 50% 62%; }
-.world-drawer-reveal p { margin: 0; padding: 9px 11px 10px; font-size: 13.5px; line-height: 1.65; word-break: keep-all; }
+.world-room-investigate[aria-pressed="true"] .world-room-flip { transform: rotateY(180deg); }
+.world-room-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+.world-room-face img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.world-room-front img { object-fit: contain; }
+.world-room-back { transform: rotateY(180deg); }
+.world-room-question {
+  position: absolute;
+  left: 19%;
+  top: 64%;
+  width: clamp(24px, 4vw, 32px);
+  height: auto;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+}
+.world-room-question circle {
+  fill: var(--ink);
+  stroke: var(--pink);
+  stroke-width: 1.8;
+  animation: world-room-question-pulse 1700ms ease-in-out infinite;
+}
+.world-room-question path { fill: none; stroke: var(--white); stroke-width: 2.4; stroke-linecap: round; }
+.world-room-investigate[aria-pressed="true"] .world-room-question circle { animation-play-state: paused; }
+@keyframes world-room-question-pulse { 50% { opacity: .5; } }
+.world-room-caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 10px 5px 5px;
+  background: linear-gradient(transparent, var(--ink));
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.world-room-back-arrow {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  color: var(--white);
+  font-size: 16px;
+  line-height: 1;
+}
+@media (max-width: 700px) {
+  .page-world .world-intro { gap: 0; }
+  .page-world .world-intro > .world-lead { padding-bottom: 24px; }
+  .page-world .world-room-photo { width: 56%; max-width: 200px; min-height: 0; justify-self: end; margin: -12px 10px 0 0; position: relative; z-index: 1; }
+  .page-world .world-room-investigate { height: auto; }
+  .world-room-caption { font-size: 12px; }
+}

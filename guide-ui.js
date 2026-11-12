@@ -126,12 +126,23 @@
     const roomSlot = (window.IG_IMAGE_SLOTS || {}).worldRoom;
     if (roomSlot) {
       const intro = make('div', 'world-intro'), figure = make('figure', roomSlot.src ? 'world-room-photo' : 'world-room-photo image-slot');
-      if (roomSlot.src) { const img = make('img'); img.src = roomSlot.src; img.alt = roomSlot.alt; img.width = 1536; img.height = 1024; img.loading = 'lazy'; img.decoding = 'async'; figure.append(img); }
+      const investigation = $('#world-room-investigation');
+      if (roomSlot.src && investigation) {
+        const card = investigation.content.firstElementChild.cloneNode(true);
+        card.querySelector('.world-room-original').src = roomSlot.src;
+        const front = card.querySelector('.world-room-front'), back = card.querySelector('.world-room-back');
+        card.addEventListener('click', () => {
+          const revealed = card.getAttribute('aria-pressed') !== 'true';
+          card.setAttribute('aria-pressed', String(revealed));
+          front.setAttribute('aria-hidden', String(revealed));
+          back.setAttribute('aria-hidden', String(!revealed));
+          if (revealed) card.setAttribute('aria-describedby', 'world-room-device-caption');
+          else card.removeAttribute('aria-describedby');
+        });
+        figure.append(card);
+      } else if (roomSlot.src) { const img = make('img'); img.src = roomSlot.src; img.alt = roomSlot.alt; img.width = 1536; img.height = 1024; img.loading = 'lazy'; img.decoding = 'async'; figure.append(img); }
       else { figure.setAttribute('role', 'img'); figure.setAttribute('aria-label', roomSlot.alt + ' (그림 준비 중)'); figure.append(make('b', '', 'IMAGE · 3:2'), make('span', '', roomSlot.note)); }
-      intro.append(lead, figure);
-      const drawer = $('#world-drawer-template');
-      if (roomSlot.src && drawer) intro.append(drawer.content.cloneNode(true));
-      world.append(intro);
+      intro.append(lead, figure); world.append(intro);
     } else world.append(lead);
     const grid = make('div', 'world-grid');
     ['이결의 방', '생활 돌봄', '숨은 기록', '가족 그림자'].forEach((name, i) => {
